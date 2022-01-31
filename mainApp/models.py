@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Form(models.Model):
     uid = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     fid = models.CharField(max_length=50, null=True)
@@ -8,3 +9,21 @@ class Form(models.Model):
     description = models.CharField(max_length=100, null=True)
     domains = models.CharField(max_length=200, null=True)
     form_status = models.BooleanField()
+
+    def __str__(self):
+        return self.fid
+
+
+class Trainee(models.Model):
+    fid = models.CharField(max_length=50, null=True)
+    trainee_name = models.CharField(max_length=50, null=True)
+    trainee_email = models.CharField(max_length=50, primary_key=True)
+    trainee_age = models.IntegerField(null=True)
+    trainee_college = models.CharField(max_length=50, null=True)
+    trainee_cgpa = models.FloatField(null=True)
+    trainee_hsc = models.FloatField(null=True)
+    trainee_ssc = models.FloatField(null=True)
+    trainee_domain = models.CharField(max_length=50, null=True)
+
+    def __str__(self):
+        return self.trainee_email

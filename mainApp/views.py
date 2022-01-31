@@ -36,7 +36,28 @@ def tforms(request, fid):
     if request.method == "GET":
         data = tform_utils.getDataForTform(fid)
         if(len(data) == 0):
-            return render(request,'mainApp/error.html', {'msg': 'Form Does not Exist'})
+            return render(request, 'mainApp/error.html', {'msg': 'Form Does not Exist'})
 
         params = {'data': data}
-        return render(request, 'mainApp/tform.html', params)
+
+    if request.method == "POST":
+        res = tform_utils.saveDataForTform(
+            fid,
+            request.POST.get("name"),
+            request.POST.get("email"),
+            request.POST.get("age"),
+            request.POST.get("college"),
+            request.POST.get("cgpa"),
+            request.POST.get("hsc"),
+            request.POST.get("ssc"),
+            request.POST.get("domain"),
+        )
+        if res == -1:
+            return render(request, 'mainApp/error.html', {"msg": "Form Already Submitted"})
+
+        if res:
+            return render(request, 'mainApp/success.html', {"msg": "Form Submitted Successfully"})
+        else:
+            return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Form !!!"})
+
+    return render(request, 'mainApp/tform.html', params)

@@ -15,7 +15,7 @@
     <p>{{ data.description }}</p>
     <br />
     <br />
-    <form action="" method="post">
+    <form method="post">
         {% csrf_token %}
         <label for="name">Name: </label>
         <input type="text" name="name" id="name" />
@@ -26,7 +26,7 @@
         <br /><br />
 
         <label for="age">Age: </label>
-        <input type="number" name="age" id="age" min="2" max="3" />
+        <input type="number" name="age" id="age" min="15" max="100" />
         <br /><br />
 
         <label for="college">School/College: </label>
@@ -48,7 +48,7 @@
         <label for="domain">Domain: </label><br>
 
         {% for domain in data.domains %}
-        <input type="radio" name={{ domain }} id={{ domain }} value={{domain}} />
+        <input type="radio" name="domain" id="domain" value={{domain}} />
         <label for={{domain}}>{{domain}}</label>
         <br>
         {% endfor %}
@@ -58,7 +58,9 @@
         <input type="file" name="resume" id="resume">
         <br><br>
 
-        <input type="submit" value="Submit">
+        <a href="{% url 'tform' data.fid %}">
+            <input type="submit" value="Submit">
+        </a>
     </form>
 </body>
 
