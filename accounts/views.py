@@ -6,7 +6,7 @@ from .forms import CreateUserForm
 
 def registerPage(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('/tms/')
     else:
         form = CreateUserForm()
 
