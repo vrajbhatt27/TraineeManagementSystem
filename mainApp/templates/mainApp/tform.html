@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>T-Form</title>
+</head>
+
+<body>
+    <center>
+        <h1>{{ data.company }}</h1>
+    </center>
+    <p>{{ data.description }}</p>
+    <br />
+    <br />
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="name">Name: </label>
+        <input type="text" name="name" id="name" />
+        <br /><br />
+
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" />
+        <br /><br />
+
+        <label for="age">Age: </label>
+        <input type="number" name="age" id="age" min="2" max="3" />
+        <br /><br />
+
+        <label for="college">School/College: </label>
+        <input type="text" name="college" id="college" />
+        <br /><br />
+
+        <label for="cgpa">CGPA: </label>
+        <input type="number" name="cgpa" id="cgpa" min="1" max="10" step=".01" />
+        <br /><br />
+
+        <label for="hsc">% HSC: </label>
+        <input type="number" name="hsc" id="hsc" min="1" max="100" step=".01" />
+        <br /><br />
+
+        <label for="ssc">% SSC: </label>
+        <input type="number" name="ssc" id="ssc" min="1" max="100" step=".01" />
+        <br /><br />
+
+        <label for="domain">Domain: </label><br>
+
+        {% for domain in data.domains %}
+        <input type="radio" name={{ domain }} id={{ domain }} value={{domain}} />
+        <label for={{domain}}>{{domain}}</label>
+        <br>
+        {% endfor %}
+
+        <br>
+        <label for="resume">Resume: </label>
+        <input type="file" name="resume" id="resume">
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

@@ -2,7 +2,7 @@ from datetime import datetime
 
 from ..models import Form
 
-def setNewForm(user, description, domains):
+def setBaseForm(user, description, domains):
     res = False
     userId = user.id
     fid = None
@@ -13,7 +13,7 @@ def setNewForm(user, description, domains):
 
     # Generating date
     date = str(d.month) + "/" + str(d.year)
-    
+
     # Generating fid
     fid = str(userId) + d.strftime("%Y%m%d%H%M%S%f")
 
@@ -27,3 +27,4 @@ def setNewForm(user, description, domains):
         print("Error in creating Form")
 
     return res
+    
