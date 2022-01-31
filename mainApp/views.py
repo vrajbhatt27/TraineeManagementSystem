@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Form
 from .code import newForm, tform_utils
+from .code.hashid_utils import encrypt, decrypt
 
 
 @login_required(login_url='login')
@@ -26,7 +27,7 @@ def home(request):
         mylist.append({
             'date': form.date,
             'description': form.description,
-            'url': form.fid,
+            'url': encrypt(form.fid),
             'form_status': form.form_status,
         })
     return render(request, 'mainApp/home.html', {'forms': mylist})

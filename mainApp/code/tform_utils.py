@@ -1,9 +1,10 @@
 from ..models import Form, Trainee
+from .hashid_utils import encrypt, decrypt
 
 
 def getDataForTform(fid):
     try:
-        form = Form.objects.get(fid=fid)
+        form = Form.objects.get(fid=decrypt(fid))
         domain_lst = form.domains.split('\r\n')
         data = {
             'description': form.description,
@@ -25,6 +26,7 @@ def saveDataForTform(fid, trainee_name, trainee_email, trainee_age, trainee_coll
         return -1
 
     try:
+        fid = decrypt(fid)
         trainee = Trainee(fid=fid, trainee_name=trainee_name, trainee_email=trainee_email, trainee_college=trainee_college,
                           trainee_age=trainee_age, trainee_cgpa=trainee_cgpa, trainee_hsc=trainee_hsc, trainee_ssc=trainee_ssc, trainee_domain=trainee_domain)
 
