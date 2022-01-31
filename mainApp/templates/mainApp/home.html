@@ -73,8 +73,14 @@
     <div class="head-container">
         <!-- Here User name will be shown -->
         <h1>Hello, User. Welcome to TMS</h1>
-        <!-- Button For New Form -->
-        <button id="newForm" class="myBtn">New Form</button>
+        <div class="buttons">
+            <!-- Button For New Form -->
+            <button id="newForm" class="myBtn">New Form</button>
+            <!-- Logout Button -->
+            <a href="{% url 'logout' %}">
+                <input type="button" value="Logout" class="myBtn">
+            </a>
+        </div>
     </div>
 
     <!-- The Modal for New Form -->
