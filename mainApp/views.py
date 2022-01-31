@@ -2,6 +2,7 @@ import email
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from .models import Form
 from .code import newForm
 
 
@@ -19,4 +20,13 @@ def home(request):
             else:
                 return redirect('mainApp/error.html')
 
-    return render(request, 'mainApp/home.html')
+    formList = Form.objects.filter(uid=request.user)
+    mylist = []
+    for form in formList:
+        mylist.append({
+            'date': form.date,
+            'description': form.description,
+            'url': form.fid,
+            'form_status': form.form_status,
+        })
+    return render(request, 'mainApp/home.html', {'forms': mylist})

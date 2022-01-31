@@ -65,6 +65,15 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+
+        .form-card {
+            margin: 10px;
+            padding: 10px;
+            background-color: lightblue;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
     </style>
     <title>tms: home</title>
 </head>
@@ -107,6 +116,15 @@
         </div>
     </div>
 
+
+    {% for form in forms %}
+    <div class="form-card">
+        <h3>Date: {{ form.date }}</h3>
+        <p>Date: {{ form.description }}</p>
+        <h4>Url: {{ form.url }}</h4>
+        <p>Url: {{ form.form_status }}</p>
+    </div>
+    {% endfor %}
 </body>
 
 <script>
