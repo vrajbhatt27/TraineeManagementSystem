@@ -12,7 +12,7 @@
             justify-content: space-between;
         }
 
-        .myBtn {
+        .buttons .myBtn {
             margin: 20px;
             padding: 10px;
             background-color: blue;
@@ -94,6 +94,11 @@
             cursor: pointer;
         }
 
+        .modal .myBtn {
+            padding: 10px;
+            background-color: blue;
+            color: white;
+        }
 
         .form-card {
             margin: 10px;
@@ -159,14 +164,30 @@
         <!-- Modal content comment -->
         <div class="modal-content">
             <span class="close" onclick="emailModal.style.display = 'none'">&times;</span>
-            <form method="POST" action="">
+            <form method="POST" action="sendEmail/">
                 {% csrf_token %}
                 <input type="hidden" name="email_utility" value="True">
-                <label for="email">Email: </label> <br>
-                <input type="text" name="email" id="email">
+                <label for="email_heading">Email Heading: </label>
+                <input type="text" name="email_heading" id="email_heading">
                 <br>
                 <br>
-                <input type="submit" value="Create" class="myBtn">
+                <label for="email_body">Email Body: </label> <br>
+                <textarea name="email_body" id="email_body" cols="30" rows="10"></textarea>
+                <br>
+                <br>
+                <hr>
+                <label for="receipnt">To: </label>
+                <input type="text" name="receipnt" id="receipnt">
+                <br>
+                <br>
+                <b>OR</b> <br><br>
+                <label for="csv_file">Upload: </label>
+                <input type="file" name="csv_file" id="csv_file"> <br>
+                <br>
+                <b>OR</b> <br><br>
+                <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
+                <br>
+                <input type="submit" value="Send__" class="myBtn">
             </form>
         </div>
     </div>
@@ -221,12 +242,11 @@
                 <button id="tdetails" class="myBtn">Trainee Details</button>
             </a>
             <br>
-            <a href="#">
-                <button id="email_utility" class="myBtn"
-                    onclick="emailModal.style.display='block';session('{{ form.fid }}');">
-                    Email
-                </button>
-            </a><br>
+            <button id="email_utility" class="myBtn"
+                onclick="emailModal.style.display='block';session('{{ form.fid }}');">
+                Email
+            </button>
+            <br>
             <button id="offerletter_utility" class="myBtn" onclick="offerletterModal.style.display='block'">
                 Offer Letter
             </button> <br>
@@ -247,7 +267,7 @@
 
     function session( fid )
     {
-        $.get('setSession/'+fid+'/', function(data){});
+        $.get( 'setSession/' + fid + '/', function ( data ) { } );
     }
 </script>
 

@@ -9,4 +9,5 @@ urlpatterns = [
     path('traineeDetails/', views.tdetails, name='tdetails'),
     path('delTrainee/<temail>/', views.delTrainee, name='delTrainee'),
     path('setSession/<fid>/', views.setSession, name='setSession'),
+    path('sendEmail/', views.sendEmail, name='sendEmail'),
 ]

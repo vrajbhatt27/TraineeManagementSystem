@@ -1,3 +1,4 @@
+from turtle import pen
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -89,7 +90,37 @@ def delTrainee(request, temail):
     return redirect('tdetails')
 
 
+@login_required(login_url='login')
 def setSession(request, fid):
     request.session['fid_for_utility'] = fid
+    print(".............................")
     print(request.session['fid_for_utility'])
+    print(".............................")
     return HttpResponse('')
+
+
+@login_required(login_url='login')
+def sendEmail(request):
+    if request.method == 'POST':
+        email_head = request.POST.get('email_heading')
+        email_body = request.POST.get('email_body')
+        receipnt = request.POST.get('receipnt')
+        csv_file = request.POST.get('csv_file')
+        send_to_all = request.POST.get('all')
+
+        if receipnt != '':
+            print("--------------------------------")
+            print(receipnt)
+            print("--------------------------------")
+
+        if csv_file != '':
+            print("--------------------------------")
+            print(csv_file)
+            print("--------------------------------")
+
+        if send_to_all != None:
+            print("--------------------------------")
+            print("Send To All: " + send_to_all)
+            print("--------------------------------")
+
+    return redirect('home')
