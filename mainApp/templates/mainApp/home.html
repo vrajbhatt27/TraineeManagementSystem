@@ -42,8 +42,35 @@
             /* Black w/ opacity */
         }
 
-        /* Modal Content */
+        /* Modal Content for newForm*/
         #newFormModal .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* Modal Content for email utility*/
+        #emailModal .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* Modal Content for offerletter utility*/
+        #offerletterModal .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* Modal Content for certificate utility*/
+        #certificateModal .modal-content {
             background-color: #fefefe;
             margin: auto;
             padding: 20px;
@@ -93,7 +120,7 @@
         <h1>Hello, {{request.user}}. Welcome to TMS</h1>
         <div class="buttons">
             <!-- Button For New Form -->
-            <button id="newForm" class="myBtn">New Form</button>
+            <button id="newForm" class="myBtn" onclick="newFormModal.style.display='block'">New Form</button>
             <!-- Logout Button -->
             <a href="{% url 'logout' %}">
                 <input type="button" value="Logout" class="myBtn">
@@ -106,7 +133,7 @@
 
         <!-- Modal content -->
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" onclick="newFormModal.style.display = 'none'">&times;</span>
             <form method="POST" action="">
                 {% csrf_token %}
                 <input type="hidden" name="newForm" value="True">
@@ -125,7 +152,61 @@
         </div>
     </div>
 
+    <!-- The Modal for email utility -->
+    <div id="emailModal" class="modal">
 
+        <!-- Modal content comment -->
+        <div class="modal-content">
+            <span class="close" onclick="emailModal.style.display = 'none'">&times;</span>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="hidden" name="email_utility" value="True">
+                <label for="email">Email: </label> <br>
+                <input type="text" name="email" id="email">
+                <br>
+                <br>
+                <input type="submit" value="Create" class="myBtn">
+            </form>
+        </div>
+    </div>
+
+    <!-- The Modal for offerletter utility -->
+    <div id="offerletterModal" class="modal">
+    
+        <!-- Modal content comment -->
+        <div class="modal-content">
+            <span class="close" onclick="offerletterModal.style.display = 'none'">&times;</span>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="hidden" name="offerletter_utility" value="True">
+                <label for="offerletter">Offerletter: </label> <br>
+                <input type="text" name="offerletter" id="offerletter">
+                <br>
+                <br>
+                <input type="submit" value="Create" class="myBtn">
+            </form>
+        </div>
+    </div>
+
+    <!-- The Modal for certificate utility -->
+    <div id="certificateModal" class="modal">
+    
+        <!-- Modal content comment -->
+        <div class="modal-content">
+            <span class="close" onclick="certificateModal.style.display = 'none'">&times;</span>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="hidden" name="certificate_utility" value="True">
+                <label for="certificate">Certificate: </label> <br>
+                <input type="text" name="certificate" id="certificate">
+                <br>
+                <br>
+                <input type="submit" value="Create" class="myBtn">
+            </form>
+        </div>
+    </div>
+
+    <!-- Form Cards-->
     {% for form in forms %}
     <div class="form-card">
         <div class="card-data">
@@ -137,9 +218,13 @@
         <div class="card-buttons">
             <a href="{% url 'toTdetails' form.fid %}"><button id="tdetails" class="myBtn">Trainee Details</button></a>
             <br>
-            <button id="email_utility" class="myBtn">Email</button> <br>
-            <button id="offerletter_utility" class="myBtn">Offer Letter</button> <br>
-            <button id="certificate_utility" class="myBtn">Certificate</button> <br>
+            <button id="email_utility" class="myBtn" onclick="emailModal.style.display='block'">Email</button> <br>
+            <button id="offerletter_utility" class="myBtn" onclick="offerletterModal.style.display='block'">
+                Offer Letter
+            </button> <br>
+            <button id="certificate_utility" class="myBtn" onclick="certificateModal.style.display='block'">
+                Certificate
+            </button> <br>
         </div>
     </div>
     {% endfor %}
@@ -147,34 +232,47 @@
 
 <script>
     // Get the modal
-    var modal = document.getElementById( "newFormModal" );
+    var newFormModal = document.getElementById( "newFormModal" );
+    var emailModal = document.getElementById( "emailModal" );
+    var offerletterModal = document.getElementById( "offerletterModal" );
+    var certificateModal = document.getElementById( "certificateModal" );
+</script>
+
+</html>
+
+
+<!-- 
+
+<script>
+    // Get the modal
+    var newFormModal = document.getElementById( "newFormModal" );
 
     // Get the button that opens the modal
-    var btn = document.getElementById( "newForm" );
+    var newFormBtn = document.getElementById( "newForm" );
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName( "close" )[ 0 ];
+    var newFormSpan = document.getElementsByClassName( "close" )[ 0 ];
 
     // When the user clicks the button, open the modal 
-    btn.onclick = function ()
+    newFormBtn.onclick = function ()
     {
-        modal.style.display = "block";
+        newFormModal.style.display = "block";
     }
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function ()
+    newFormSpan.onclick = function ()
     {
-        modal.style.display = "none";
+        newFormModal.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function ( event )
     {
-        if ( event.target == modal )
+        if ( event.target == newFormModal )
         {
-            modal.style.display = "none";
+            newFormModal.style.display = "none";
         }
     }
 </script>
 
-</html>
+ -->
