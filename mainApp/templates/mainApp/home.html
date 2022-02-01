@@ -135,7 +135,8 @@
             <p>Url: {{ form.form_status }}</p>
         </div>
         <div class="card-buttons">
-            <button id="tdetails" class="myBtn">Trainee Details</button> <br>
+            <a href="{% url 'toTdetails' form.fid %}"><button id="tdetails" class="myBtn">Trainee Details</button></a>
+            <br>
             <button id="email_utility" class="myBtn">Email</button> <br>
             <button id="offerletter_utility" class="myBtn">Offer Letter</button> <br>
             <button id="certificate_utility" class="myBtn">Certificate</button> <br>

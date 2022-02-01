@@ -1,16 +1,15 @@
-import email
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from .models import Form
-from .code import newForm, tform_utils
+from .code import newForm, tform_utils, tdetails_utils
 from .code.hashid_utils import encrypt, decrypt
 
 
 @login_required(login_url='login')
 def home(request):
-    # print("-------------------")
-    # print(request.user.id)
     if request.method == 'POST':
         if request.POST["newForm"] == "True":
             description = request.POST.get('description')
@@ -29,6 +28,7 @@ def home(request):
             'description': form.description,
             'url': encrypt(form.fid),
             'form_status': form.form_status,
+            'fid': form.fid,
         })
     return render(request, 'mainApp/home.html', {'forms': mylist})
 
@@ -62,3 +62,21 @@ def tforms(request, fid):
             return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Form !!!"})
 
     return render(request, 'mainApp/tform.html', params)
+
+
+def toTdetails(request, fid):
+    request.session['fid'] = fid
+    return HttpResponseRedirect(reverse('tdetails'))
+
+
+def tdetails(request):
+    tdata = tdetails_utils.getTraineeData(request.session["fid"])
+    fdata = tdetails_utils.getFormData(request.session["fid"])
+    if len(tdata) == 0 or len(fdata) == 0:
+        return render(request, 'mainApp/error.html', {"msg": "Can't get Trainee Data"})
+
+    params = {
+        'tdata': tdata,
+        'fdata': fdata
+    }
+    return render(request, 'mainApp/traineeDetails.html', params)
