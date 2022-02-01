@@ -6,6 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        .head-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .myBtn {
+            margin: 30px;
+            margin-right: 100px;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+        }
+
         .trainee-table {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
@@ -38,9 +51,16 @@
 </head>
 
 <body>
-    <h1>Trainee Details For Batch of : {{ fdata.date }}</h1>
-    <p><b>{{ fdata.description }}</b></p>
-    <br>
+    <div class="head-container">
+        <div class="details">
+            <h1>Trainee Details For Batch of : {{ fdata.date }}</h1>
+            <p><b>{{ fdata.description }}</b></p>
+            <br>
+        </div>
+        <div class="logout-button">
+            <a href="{% url 'home' %}"><button class="myBtn">Back</button></a>
+        </div>
+    </div>
     <div id='table'>
         <table class='trainee-table'>
             <thead>
@@ -67,11 +87,12 @@
                     <td>{{ data.thsc }}</td>
                     <td>{{ data.tssc }}</td>
                     <td>{{ data.tdomain }}</td>
-                    <td><a href="#">Del</a></td>
+                    <td><a href="{% url 'delTrainee' data.temail %}">Del</a></td>
                 </tr>
             </tbody>
             {% endfor %}
         </table>
     </div>
 </body>
+
 </html>

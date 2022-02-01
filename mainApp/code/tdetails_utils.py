@@ -36,4 +36,15 @@ def getFormData(fid):
         print(e)
     
     return data[0]
-        
+
+def delete_trainee(temail, fid):
+    res = False
+    try:
+        trainee = Trainee.objects.get(trainee_email=temail, fid=fid)
+        trainee.delete()
+        res = True
+    except Exception as e:
+        print(">>>>>>>>>>>>>>>>Error In Deleting")
+        print(e)
+
+    return res

@@ -64,15 +64,26 @@ def tforms(request, fid):
     return render(request, 'mainApp/tform.html', params)
 
 
+@login_required(login_url='login')
 def toTdetails(request, fid):
     request.session['fid'] = fid
     return HttpResponseRedirect(reverse('tdetails'))
 
 
+@login_required(login_url='login')
 def tdetails(request):
     tdata = tdetails_utils.getTraineeData(request.session["fid"])
     fdata = tdetails_utils.getFormData(request.session["fid"])
-    if len(tdata) == 0 or len(fdata) == 0:
+    if len(fdata) == 0:
         return render(request, 'mainApp/error.html', {"msg": "Can't get Trainee Data"})
 
     return render(request, 'mainApp/traineeDetails.html', {"tdata": tdata,"fdata": fdata})
+
+
+@login_required(login_url='login')
+def delTrainee(request, temail):
+    res = tdetails_utils.delete_trainee(temail, request.session["fid"])
+    if not res:
+        return render(request, 'mainApp/error.html', {"msg": "Error in Deleting Trainee"})
+
+    return redirect('tdetails')
