@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <style>
         .head-container {
             display: flex;
@@ -172,7 +173,7 @@
 
     <!-- The Modal for offerletter utility -->
     <div id="offerletterModal" class="modal">
-    
+
         <!-- Modal content comment -->
         <div class="modal-content">
             <span class="close" onclick="offerletterModal.style.display = 'none'">&times;</span>
@@ -190,7 +191,7 @@
 
     <!-- The Modal for certificate utility -->
     <div id="certificateModal" class="modal">
-    
+
         <!-- Modal content comment -->
         <div class="modal-content">
             <span class="close" onclick="certificateModal.style.display = 'none'">&times;</span>
@@ -216,9 +217,16 @@
             <p>Url: {{ form.form_status }}</p>
         </div>
         <div class="card-buttons">
-            <a href="{% url 'toTdetails' form.fid %}"><button id="tdetails" class="myBtn">Trainee Details</button></a>
+            <a href="{% url 'toTdetails' form.fid %}">
+                <button id="tdetails" class="myBtn">Trainee Details</button>
+            </a>
             <br>
-            <button id="email_utility" class="myBtn" onclick="emailModal.style.display='block'">Email</button> <br>
+            <a href="#">
+                <button id="email_utility" class="myBtn"
+                    onclick="emailModal.style.display='block';session('{{ form.fid }}');">
+                    Email
+                </button>
+            </a><br>
             <button id="offerletter_utility" class="myBtn" onclick="offerletterModal.style.display='block'">
                 Offer Letter
             </button> <br>
@@ -230,12 +238,17 @@
     {% endfor %}
 </body>
 
-<script>
+<script type="text/javascript">
     // Get the modal
     var newFormModal = document.getElementById( "newFormModal" );
     var emailModal = document.getElementById( "emailModal" );
     var offerletterModal = document.getElementById( "offerletterModal" );
     var certificateModal = document.getElementById( "certificateModal" );
+
+    function session( fid )
+    {
+        $.get('setSession/'+fid+'/', function(data){});
+    }
 </script>
 
 </html>

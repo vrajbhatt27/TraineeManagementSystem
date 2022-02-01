@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -77,7 +77,7 @@ def tdetails(request):
     if len(fdata) == 0:
         return render(request, 'mainApp/error.html', {"msg": "Can't get Trainee Data"})
 
-    return render(request, 'mainApp/traineeDetails.html', {"tdata": tdata,"fdata": fdata})
+    return render(request, 'mainApp/traineeDetails.html', {"tdata": tdata, "fdata": fdata})
 
 
 @login_required(login_url='login')
@@ -87,3 +87,9 @@ def delTrainee(request, temail):
         return render(request, 'mainApp/error.html', {"msg": "Error in Deleting Trainee"})
 
     return redirect('tdetails')
+
+
+def setSession(request, fid):
+    request.session['fid_for_utility'] = fid
+    print(request.session['fid_for_utility'])
+    return HttpResponse('')
