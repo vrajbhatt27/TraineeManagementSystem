@@ -21,8 +21,8 @@ def getDataForTform(fid):
 
 def saveDataForTform(fid, trainee_name, trainee_email, trainee_age, trainee_college, trainee_cgpa, trainee_hsc, trainee_ssc, trainee_domain):
     res = False
-    
-    if Trainee.objects.filter(trainee_email=trainee_email).exists():
+
+    if Trainee.objects.filter(trainee_email=trainee_email, fid=decrypt(fid)).exists():
         return -1
 
     try:

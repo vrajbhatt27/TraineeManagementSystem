@@ -73,6 +73,15 @@
             background-color: lightblue;
             border: 2px solid black;
             border-radius: 10px;
+            display: inline-flex;
+            justify-content: space-evenly;
+        }
+
+        .form-card .myBtn {
+            margin: 5px 20px;
+            padding: 7px 10px;
+            background-color: blue;
+            color: white;
         }
     </style>
     <title>tms: home</title>
@@ -119,10 +128,18 @@
 
     {% for form in forms %}
     <div class="form-card">
-        <h3>Date: {{ form.date }}</h3>
-        <p>Description: {{ form.description }}</p>
-        <h4>Url: {{ form.url }}</h4>
-        <p>Url: {{ form.form_status }}</p>
+        <div class="card-data">
+            <h3>Date: {{ form.date }}</h3>
+            <p>Description: {{ form.description }}</p>
+            <h4>Url: {{ form.url }}</h4>
+            <p>Url: {{ form.form_status }}</p>
+        </div>
+        <div class="card-buttons">
+            <button id="tdetails" class="myBtn">Trainee Details</button> <br>
+            <button id="email_utility" class="myBtn">Email</button> <br>
+            <button id="offerletter_utility" class="myBtn">Offer Letter</button> <br>
+            <button id="certificate_utility" class="myBtn">Certificate</button> <br>
+        </div>
     </div>
     {% endfor %}
 </body>
