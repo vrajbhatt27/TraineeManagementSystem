@@ -75,8 +75,4 @@ def tdetails(request):
     if len(tdata) == 0 or len(fdata) == 0:
         return render(request, 'mainApp/error.html', {"msg": "Can't get Trainee Data"})
 
-    params = {
-        'tdata': tdata,
-        'fdata': fdata
-    }
-    return render(request, 'mainApp/traineeDetails.html', params)
+    return render(request, 'mainApp/traineeDetails.html', {"tdata": tdata,"fdata": fdata})

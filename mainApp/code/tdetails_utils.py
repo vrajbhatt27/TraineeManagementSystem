@@ -35,5 +35,5 @@ def getFormData(fid):
         print("!!!!!!!!!!!!!!!!!!!>", "Can't get form data")
         print(e)
     
-    return data
+    return data[0]
         
