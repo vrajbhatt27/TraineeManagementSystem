@@ -161,10 +161,10 @@
     <!-- The Modal for email utility -->
     <div id="emailModal" class="modal">
 
-        <!-- Modal content comment -->
+        <!-- Modal content -->
         <div class="modal-content">
             <span class="close" onclick="emailModal.style.display = 'none'">&times;</span>
-            <form method="POST" action="sendEmail/">
+            <form method="POST" action="sendEmail/" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="email_utility" value="True">
                 <label for="email_heading">Email Heading: </label>

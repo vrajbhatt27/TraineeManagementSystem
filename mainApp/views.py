@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from turtle import pen
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -105,7 +106,7 @@ def sendEmail(request):
         email_head = request.POST.get('email_heading')
         email_body = request.POST.get('email_body')
         receipnt = request.POST.get('receipnt')
-        csv_file = request.POST.get('csv_file')
+        csv_file = request.FILES.get('csv_file')
         send_to_all = request.POST.get('all')
 
         if receipnt != '':
@@ -113,9 +114,8 @@ def sendEmail(request):
             print("Done")
 
         if csv_file != '':
-            print("--------------------------------")
-            print(csv_file)
-            print("--------------------------------")
+            email_utils.sendToFile(csv_file, email_head, email_body)
+            print('Send TO File Content :)')
 
         if send_to_all != None:
             email_utils.sendToAll(email_head, email_body,

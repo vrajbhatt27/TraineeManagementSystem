@@ -1,3 +1,4 @@
+import csv
 from ctypes import resize
 from django.conf import settings
 from django.core.mail import send_mail
@@ -17,6 +18,7 @@ def sendToReceipnt(to, head, body):
         print("!!!!!!!!!!!!>Error In sending Mail to Receipnt")
         print(e)
 
+
 def sendToAll(head, body, fid):
     data = []
     recipient_list = []
@@ -35,13 +37,13 @@ def sendToAll(head, body, fid):
         print(e)
         return res
 
-    for cnt,d in enumerate(data, 0):
+    for cnt, d in enumerate(data, 0):
         message = ''
         message = body.replace("*name*", d['name'])
         message = message.replace("*domain*", d['domain'])
         subject = head
         email_from = settings.EMAIL_HOST_USER
-        recipient = [recipient_list[cnt],]
+        recipient = [recipient_list[cnt], ]
         print("-----------------------------")
         print(head)
         print(message)
@@ -54,5 +56,33 @@ def sendToAll(head, body, fid):
             print(e)
         print("-----------------------------")
 
-    
-        
+
+def sendToFile(file, head, body):
+    file = file.read().decode().splitlines()
+    reader = csv.reader(file)
+    data = []
+    for row in reader:
+        data.append({
+            'name': row[0],
+            'email': row[1],
+            'domain': row[2],
+        })
+
+    for d in data:
+        message = ''
+        message = body.replace("*name*", d['name'])
+        message = message.replace("*domain*", d['domain'])
+        subject = head
+        email_from = settings.EMAIL_HOST_USER
+        recipient = [d['email'], ]
+        print("-----------------------------")
+        print(head)
+        print(message)
+        try:
+            x = send_mail(subject, message, email_from, recipient)
+            print("$$$$$$$$$$$$$$$$")
+            print(x)
+        except Exception as e:
+            print("!!!!!!!!!!!!>Error In sending Mail to Receipnt")
+            print(e)
+        print("-----------------------------")
