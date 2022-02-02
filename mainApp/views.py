@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .models import Form
-from .code import newForm, tform_utils, tdetails_utils
+from .code import newForm, tform_utils, tdetails_utils, email_utils
 from .code.hashid_utils import encrypt, decrypt
 
 
@@ -109,9 +109,8 @@ def sendEmail(request):
         send_to_all = request.POST.get('all')
 
         if receipnt != '':
-            print("--------------------------------")
-            print(receipnt)
-            print("--------------------------------")
+            email_utils.sendToReceipnt(receipnt, email_head, email_body)
+            print("Done")
 
         if csv_file != '':
             print("--------------------------------")
@@ -119,8 +118,6 @@ def sendEmail(request):
             print("--------------------------------")
 
         if send_to_all != None:
-            print("--------------------------------")
-            print("Send To All: " + send_to_all)
-            print("--------------------------------")
-
+            email_utils.sendToAll(email_head, email_body,
+                                  request.session['fid_for_utility'])
     return redirect('home')
