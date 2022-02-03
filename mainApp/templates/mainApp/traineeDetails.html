@@ -19,14 +19,14 @@
             color: white;
         }
 
-        .logout-button{
+        .logout-button {
             display: inline;
         }
-        
-        .download-button{
+
+        .download-button {
             display: inline;
         }
-        
+
         .trainee-table {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
@@ -54,7 +54,6 @@
             background-color: #04AA6D;
             color: white;
         }
-
     </style>
     <title>Trainee Details</title>
 </head>
@@ -74,7 +73,7 @@
                 <a href="{% url 'home' %}"><button class="myBtn">Back</button></a>
             </div>
         </div>
-        
+
     </div>
     <div id='table'>
         <table class='trainee-table'>
@@ -88,6 +87,7 @@
                     <th>HSC</th>
                     <th>SSC</th>
                     <th>Domain</th>
+                    <th>Resume</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -102,6 +102,11 @@
                     <td>{{ data.thsc }}</td>
                     <td>{{ data.tssc }}</td>
                     <td>{{ data.tdomain }}</td>
+                    {% if data.tresume == None%}
+                    <td></td>
+                    {% else %}
+                    <td><a href={{ data.tresume }}>Link</a></td>
+                    {% endif %}
                     <td><a href="{% url 'delTrainee' data.temail %}">Del</a></td>
                 </tr>
             </tbody>

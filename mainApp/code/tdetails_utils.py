@@ -14,6 +14,7 @@ def getTraineeData(fid):
                 'thsc': t.trainee_hsc,
                 'tssc': t.trainee_ssc,
                 'tdomain': t.trainee_domain,
+                'tresume': t.trainee_resume,
             })
     except Exception as e:
         print("!!!!!!!!!!!!!!!!!!!>", "Can't get trainee data")

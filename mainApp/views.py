@@ -59,6 +59,7 @@ def tforms(request, fid):
             request.POST.get("hsc"),
             request.POST.get("ssc"),
             request.POST.get("domain"),
+            request.POST.get("resume"),
         )
         if res == -1:
             return render(request, 'mainApp/error.html', {"msg": "Form Already Submitted"})
@@ -161,7 +162,7 @@ def download_csv(request):
         return render(request, 'mainApp/error.html', {"msg": "No Trainee Present."})
 
     fields = ['Name', 'Email', 'Age', 'College',
-              'CGPA', 'HSC', 'SSC', 'Domain']
+              'CGPA', 'HSC', 'SSC', 'Domain', 'Resume']
     rows = []
 
     for t in data:
@@ -174,10 +175,8 @@ def download_csv(request):
             t['thsc'],
             t['tssc'],
             t['tdomain'],
+            t['tresume'],
         ])
-
-    print(fields)
-    print(rows)
 
     # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse('')
