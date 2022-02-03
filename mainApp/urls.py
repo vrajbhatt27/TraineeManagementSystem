@@ -11,4 +11,5 @@ urlpatterns = [
     path('setSession/<fid>/', views.setSession, name='setSession'),
     path('sendEmail/', views.sendEmail, name='sendEmail'),
     path('toogleUrlStatus/<fid>/', views.urlStatusToogle, name='urlStatusToogle'),
+    path('gcsv/', views.download_csv, name='gcsv'),
 ]

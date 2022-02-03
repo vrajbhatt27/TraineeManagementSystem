@@ -9,6 +9,7 @@ from .models import Form
 from .code import newForm, tform_utils, tdetails_utils, email_utils
 from .code.hashid_utils import encrypt, decrypt
 from django.contrib import messages
+import csv
 
 
 @login_required(login_url='login')
@@ -150,3 +151,40 @@ def sendEmail(request):
 def urlStatusToogle(request, fid):
     newForm.toogleUrlStatus(fid)
     return HttpResponse('')
+
+
+@login_required(login_url='login')
+def download_csv(request):
+    data = tdetails_utils.getTraineeData(request.session["fid"])
+
+    if len(data) == 0:
+        return render(request, 'mainApp/error.html', {"msg": "No Trainee Present."})
+
+    fields = ['Name', 'Email', 'Age', 'College',
+              'CGPA', 'HSC', 'SSC', 'Domain']
+    rows = []
+
+    for t in data:
+        rows.append([
+            t['tname'],
+            t['temail'],
+            t['tage'],
+            t['tcollege'],
+            t['tcgpa'],
+            t['thsc'],
+            t['tssc'],
+            t['tdomain'],
+        ])
+
+    print(fields)
+    print(rows)
+
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse('')
+    response['Content-Disposition'] = 'attachment; filename=data.csv'
+    # Create the CSV writer using the HttpResponse as the "file"
+    writer = csv.writer(response)
+    writer.writerow(fields)
+    writer.writerows(rows)
+
+    return response
