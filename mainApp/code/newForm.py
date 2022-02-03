@@ -34,3 +34,15 @@ def toogleUrlStatus(fid):
     form = Form.objects.get(fid=fid)
     form.form_status = not form.form_status
     form.save()
+
+def deleteForm(fid):
+    res = False
+    try:
+        form = Form.objects.get(fid=fid)
+        form.delete()
+        res = True
+    except Exception as e:
+        print(">>>>>>>>>>>>>>>>Error In Deleting Form")
+        print(e)
+
+    return res

@@ -187,3 +187,12 @@ def download_csv(request):
     writer.writerows(rows)
 
     return response
+
+
+@login_required(login_url='login')
+def delForm(request, fid):
+    res = newForm.deleteForm(fid)
+    if not res:
+        return render(request, 'mainApp/error.html', {"msg": "Error in Deleting Form"})
+
+    return redirect('home')
