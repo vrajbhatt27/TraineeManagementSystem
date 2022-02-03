@@ -8,5 +8,13 @@
 </head>
 <body>
     <h1>{{msg}}</h1>
+
+    {% if list %}
+    <ol>
+        {% for email in list %}
+        <li>{{email}}</li>
+        {% endfor %}
+    </ol>
+    {% endif %}
 </body>
 </html>

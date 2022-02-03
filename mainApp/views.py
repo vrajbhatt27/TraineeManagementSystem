@@ -8,6 +8,7 @@ from django.urls import reverse
 from .models import Form
 from .code import newForm, tform_utils, tdetails_utils, email_utils
 from .code.hashid_utils import encrypt, decrypt
+from django.contrib import messages
 
 
 @login_required(login_url='login')
@@ -20,7 +21,7 @@ def home(request):
             if res:
                 return redirect('home')
             else:
-                return redirect('mainApp/error.html', {'msg': 'Something Went Wrong !!!'})
+                return render(request,'mainApp/error.html', {'msg': 'Something Went Wrong !!!'})
 
     formList = Form.objects.filter(uid=request.user)
     mylist = []
@@ -94,9 +95,6 @@ def delTrainee(request, temail):
 @login_required(login_url='login')
 def setSession(request, fid):
     request.session['fid_for_utility'] = fid
-    print(".............................")
-    print(request.session['fid_for_utility'])
-    print(".............................")
     return HttpResponse('')
 
 
@@ -106,18 +104,38 @@ def sendEmail(request):
         email_head = request.POST.get('email_heading')
         email_body = request.POST.get('email_body')
         receipnt = request.POST.get('receipnt')
-        csv_file = request.FILES.get('csv_file')
+        csv_file = request.POST.get('csv_file')
         send_to_all = request.POST.get('all')
 
         if receipnt != '':
-            email_utils.sendToReceipnt(receipnt, email_head, email_body)
-            print("Done")
+            res = email_utils.sendToReceipnt(receipnt, email_head, email_body)
+            if res:
+                messages.success(request, f'Email to {receipnt} Sent Successfully.')
+            else:
+                return render(request, 'mainApp/error.html', {"msg": "Error in sending Email."})
 
         if csv_file != '':
-            email_utils.sendToFile(csv_file, email_head, email_body)
-            print('Send TO File Content :)')
+            myFile = request.FILES.get('csv_file')
+            failed_list = email_utils.sendToFile(myFile, email_head, email_body)
+            if len(failed_list) == 0:
+                messages.success(
+                    request, 'All Emails Sent Successfully.')
+            else:
+                return render(request, 'mainApp/error.html', {"msg": "Error in sending Email.", 
+                    "list": failed_list})
 
         if send_to_all != None:
-            email_utils.sendToAll(email_head, email_body,
+            failed_list = email_utils.sendToAll(email_head, email_body,
                                   request.session['fid_for_utility'])
+            
+            if failed_list == -1:
+                return render(request, 'mainApp/error.html', {"msg": "Error in retrieving trainee details"})
+
+            if len(failed_list) == 0:
+                messages.success(
+                    request, 'All Emails Sent Successfully.')
+            else:
+                return render(request, 'mainApp/error.html', {"msg": "Error in sending Email.",
+                                                              "list": failed_list})
+
     return redirect('home')

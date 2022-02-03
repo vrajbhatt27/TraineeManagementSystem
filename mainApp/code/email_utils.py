@@ -10,57 +10,55 @@ def sendToReceipnt(to, head, body):
     message = body
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [to, ]
+    res = False
     try:
-        x = send_mail(subject, message, email_from, recipient_list)
-        print("$$$$$$$$$$$$$$$$")
-        print(x)
+        send_mail(subject, message, email_from, recipient_list)
+        res = True
     except Exception as e:
         print("!!!!!!!!!!!!>Error In sending Mail to Receipnt")
         print(e)
 
+    return res
+
 
 def sendToAll(head, body, fid):
     data = []
-    recipient_list = []
-    res = False
+    failed_list = []
     try:
         trainee_list = Trainee.objects.filter(fid=fid)
         for trainee in trainee_list:
             data.append({
                 'name': trainee.trainee_name,
                 'domain': trainee.trainee_domain,
+                'email': trainee.trainee_email,
             })
-
-            recipient_list.append(trainee.trainee_email)
     except Exception as e:
         print("!!!!!!!!!!!!>Error In getting data for sending email to all")
         print(e)
-        return res
+        return -1
 
-    for cnt, d in enumerate(data, 0):
+    for d in data:
         message = ''
         message = body.replace("*name*", d['name'])
         message = message.replace("*domain*", d['domain'])
         subject = head
         email_from = settings.EMAIL_HOST_USER
-        recipient = [recipient_list[cnt], ]
-        print("-----------------------------")
-        print(head)
-        print(message)
+        recipient = [d['email'], ]
         try:
-            x = send_mail(subject, message, email_from, recipient)
-            print("$$$$$$$$$$$$$$$$")
-            print(x)
+            send_mail(subject, message, email_from, recipient)
         except Exception as e:
             print("!!!!!!!!!!!!>Error In sending Mail to Receipnt")
             print(e)
-        print("-----------------------------")
+            failed_list.append(d['email'])
+
+    return failed_list
 
 
 def sendToFile(file, head, body):
     file = file.read().decode().splitlines()
     reader = csv.reader(file)
     data = []
+    failed_list = []
     for row in reader:
         data.append({
             'name': row[0],
@@ -75,14 +73,11 @@ def sendToFile(file, head, body):
         subject = head
         email_from = settings.EMAIL_HOST_USER
         recipient = [d['email'], ]
-        print("-----------------------------")
-        print(head)
-        print(message)
         try:
-            x = send_mail(subject, message, email_from, recipient)
-            print("$$$$$$$$$$$$$$$$")
-            print(x)
+            send_mail(subject, message, email_from, recipient)
         except Exception as e:
             print("!!!!!!!!!!!!>Error In sending Mail to Receipnt")
             print(e)
-        print("-----------------------------")
+            failed_list.append(d['email'])
+
+    return failed_list

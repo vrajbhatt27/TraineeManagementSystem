@@ -43,6 +43,44 @@
             /* Black w/ opacity */
         }
 
+        /* The Alert Modal (background) */
+        .alert-modal {
+            display: block;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content for alertModal*/
+        #alertModal .modal-content {
+            background-color: green;
+            color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
         /* Modal Content for newForm*/
         #newFormModal .modal-content {
             background-color: #fefefe;
@@ -83,6 +121,12 @@
         .close {
             color: #aaaaaa;
             float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #alertModal .close {
+            color: white;
             font-size: 28px;
             font-weight: bold;
         }
@@ -134,6 +178,20 @@
         </div>
     </div>
 
+    {% if messages %}
+    {% for message in messages %}
+    <!-- The Modal for Alert Modal -->
+    <div id="alertModal" class="alert-modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            {{message}}
+            <span class="close" onclick="alertModal.style.display = 'none'">&times;</span>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <br><br>
     <!-- The Modal for New Form -->
     <div id="newFormModal" class="modal">
 
@@ -264,6 +322,7 @@
     var emailModal = document.getElementById( "emailModal" );
     var offerletterModal = document.getElementById( "offerletterModal" );
     var certificateModal = document.getElementById( "certificateModal" );
+    var alertModal = document.getElementById( "alertModal" );
 
     function session( fid )
     {
