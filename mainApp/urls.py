@@ -10,4 +10,5 @@ urlpatterns = [
     path('delTrainee/<temail>/', views.delTrainee, name='delTrainee'),
     path('setSession/<fid>/', views.setSession, name='setSession'),
     path('sendEmail/', views.sendEmail, name='sendEmail'),
+    path('toogleUrlStatus/<fid>/', views.urlStatusToogle, name='urlStatusToogle'),
 ]

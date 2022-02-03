@@ -5,6 +5,9 @@ from .hashid_utils import encrypt, decrypt
 def getDataForTform(fid):
     try:
         form = Form.objects.get(fid=decrypt(fid))
+        if form.form_status == False:
+            return -1
+
         domain_lst = form.domains.split('\r\n')
         data = {
             'description': form.description,

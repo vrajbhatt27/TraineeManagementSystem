@@ -2,6 +2,7 @@ from datetime import datetime
 
 from ..models import Form
 
+
 def setBaseForm(user, description, domains):
     res = False
     userId = user.id
@@ -27,4 +28,9 @@ def setBaseForm(user, description, domains):
         print("Error in creating Form")
 
     return res
-    
+
+
+def toogleUrlStatus(fid):
+    form = Form.objects.get(fid=fid)
+    form.form_status = not form.form_status
+    form.save()

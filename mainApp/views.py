@@ -21,7 +21,7 @@ def home(request):
             if res:
                 return redirect('home')
             else:
-                return render(request,'mainApp/error.html', {'msg': 'Something Went Wrong !!!'})
+                return render(request, 'mainApp/error.html', {'msg': 'Something Went Wrong !!!'})
 
     formList = Form.objects.filter(uid=request.user)
     mylist = []
@@ -39,6 +39,9 @@ def home(request):
 def tforms(request, fid):
     if request.method == "GET":
         data = tform_utils.getDataForTform(fid)
+        if(data == -1):
+            return render(request, 'mainApp/error.html', {'msg': 'Form is Closed'})
+
         if(len(data) == 0):
             return render(request, 'mainApp/error.html', {'msg': 'Form Does not Exist'})
 
@@ -110,24 +113,26 @@ def sendEmail(request):
         if receipnt != '':
             res = email_utils.sendToReceipnt(receipnt, email_head, email_body)
             if res:
-                messages.success(request, f'Email to {receipnt} Sent Successfully.')
+                messages.success(
+                    request, f'Email to {receipnt} Sent Successfully.')
             else:
                 return render(request, 'mainApp/error.html', {"msg": "Error in sending Email."})
 
         if csv_file != '':
             myFile = request.FILES.get('csv_file')
-            failed_list = email_utils.sendToFile(myFile, email_head, email_body)
+            failed_list = email_utils.sendToFile(
+                myFile, email_head, email_body)
             if len(failed_list) == 0:
                 messages.success(
                     request, 'All Emails Sent Successfully.')
             else:
-                return render(request, 'mainApp/error.html', {"msg": "Error in sending Email.", 
-                    "list": failed_list})
+                return render(request, 'mainApp/error.html', {"msg": "Error in sending Email.",
+                                                              "list": failed_list})
 
         if send_to_all != None:
             failed_list = email_utils.sendToAll(email_head, email_body,
-                                  request.session['fid_for_utility'])
-            
+                                                request.session['fid_for_utility'])
+
             if failed_list == -1:
                 return render(request, 'mainApp/error.html', {"msg": "Error in retrieving trainee details"})
 
@@ -139,3 +144,9 @@ def sendEmail(request):
                                                               "list": failed_list})
 
     return redirect('home')
+
+
+@login_required(login_url='login')
+def urlStatusToogle(request, fid):
+    newForm.toogleUrlStatus(fid)
+    return HttpResponse('')
