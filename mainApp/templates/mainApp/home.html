@@ -82,6 +82,21 @@
             justify-content: space-between;
         }
 
+        /* Modal Content for alertModal*/
+        #spinModal .modal-content {
+            background-color: grey;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
         /* Modal Content for newForm*/
         #newFormModal .modal-content {
             background-color: #fefefe;
@@ -265,6 +280,41 @@
         }
 
         /* CSS for copy text ends here */
+
+        /* CSS for Spin Loader Starts here */
+        #spinModal .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            /* Safari */
+            animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* CSS for Spin Loader ends here */
     </style>
     <title>tms: home</title>
 </head>
@@ -295,6 +345,16 @@
     </div>
     {% endfor %}
     {% endif %}
+
+    <!-- Modal for loading spinner -->
+    <div id="spinModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="loader"></div>
+            <br>
+            <b>Sending Email, Please Wait...</b>
+        </div>
+    </div>
 
     <br><br>
     <!-- The Modal for New Form -->
@@ -352,7 +412,7 @@
                 <br><br>
                 <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
                 <br>
-                <input type="submit" value="Send" class="myBtn">
+                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();">
             </form>
         </div>
     </div>
@@ -389,7 +449,7 @@
                 <br><br>
                 <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
                 <br>
-                <input type="submit" value="Send" class="myBtn">
+                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();">
             </form>
         </div>
     </div>
@@ -417,7 +477,7 @@
                 <br><br>
                 <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
                 <br>
-                <input type="submit" value="Send" class="myBtn">
+                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();">
             </form>
         </div>
     </div>
@@ -488,6 +548,15 @@
     var offerletterModal = document.getElementById( "offerletterModal" );
     var certificateModal = document.getElementById( "certificateModal" );
     var alertModal = document.getElementById( "alertModal" );
+
+    function spinLoader()
+    {
+        var spinModal = document.getElementById( "spinModal" );
+        spinModal.style.display = 'block';
+        emailModal.style.display = 'none';
+        offerletterModal.style.display = 'none';
+        certificateModal.style.display = 'none';
+    }
 
     function session( fid )
     {
