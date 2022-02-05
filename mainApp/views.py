@@ -209,7 +209,7 @@ def generateCertificate(request):
         if name != '':
             res = other_utils.certificate_utility(
                 request.session["fid_for_utility"], name, domain, email)
-            
+
             if len(res) == 0:
                 messages.success(
                     request, f'Certificate to {name} Sent Successfully.')
@@ -217,7 +217,8 @@ def generateCertificate(request):
                 return render(request, 'mainApp/error.html', {"msg": "Error in sending Certificate."})
 
         if send_to_all != None:
-            failed_list = other_utils.certificate_utility(request.session["fid_for_utility"], all=True)
+            failed_list = other_utils.certificate_utility(
+                request.session["fid_for_utility"], all=True)
 
             if failed_list == -1:
                 return render(request, 'mainApp/error.html', {"msg": "Error in retrieving trainee details"})
@@ -228,11 +229,13 @@ def generateCertificate(request):
             else:
                 return render(request, 'mainApp/error.html', {"msg": "Error in sending Certificates.", "list": failed_list})
 
-
     return redirect('home')
+
 
 def generateOfferLetter(request):
     if request.method == "POST":
+        cname = request.POST.get("cname")
+        hr = request.POST.get('hrName')
         name = request.POST.get("name")
         domain = request.POST.get('domain')
         email = request.POST.get('email')
@@ -240,7 +243,7 @@ def generateOfferLetter(request):
 
         if name != '':
             res = other_utils.offerletter_utility(
-                request.session["fid_for_utility"], name, domain, email)
+                request.session["fid_for_utility"], cname, hr, name, domain, email)
 
             if len(res) == 0:
                 messages.success(
@@ -249,7 +252,8 @@ def generateOfferLetter(request):
                 return render(request, 'mainApp/error.html', {"msg": "Error in sending Offerletter."})
 
         if send_to_all != None:
-            failed_list = other_utils.offerletter_utility(request.session["fid_for_utility"], all=True)
+            failed_list = other_utils.offerletter_utility(
+                request.session["fid_for_utility"], cname, hr, all=True)
 
             if failed_list == -1:
                 return render(request, 'mainApp/error.html', {"msg": "Error in retrieving trainee details"})
@@ -259,5 +263,5 @@ def generateOfferLetter(request):
                     request, 'All Offerletters Sent Successfully.')
             else:
                 return render(request, 'mainApp/error.html', {"msg": "Error in sending Offerletters.", "list": failed_list})
-        
+
     return redirect('home')

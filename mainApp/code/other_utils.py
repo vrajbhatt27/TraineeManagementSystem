@@ -13,22 +13,30 @@ from mainApp.models import Trainee
 
 
 class PDF(FPDF):
+    cname = ''
+    line_len = 5
+
+    def setCname(self, cname):
+        self.cname = cname
+        self.line_len += len(self.cname)
+
     def header(self):
-        self.image(staticfiles_storage.path('logo.jpeg'), 10, 8, 25)
+        self.set_fill_color(265, 165, 0)
+        self.rect(0, 0, 250, 20, style='F')
         self.set_font('times', 'B', 24)
-        self.ln(10)
+        self.ln(25)
         self.cell(80)
-        self.cell(30, 12, 'Company Name', border=0, ln=True, align='C')
-        self.cell(30, 10, '___________________________________________________________________________________________________',
-                  border=0, ln=True, align='C')
+        self.cell(30, 0, self.cname, border=0, ln=True, align='C')
+        self.cell(80)
+        self.cell(30, 10, '_'*self.line_len, border=0, ln=True, align='C')
         self.ln(20)
 
     def footer(self):
-        self.set_y(-15)
-        self.set_font('helvetica', 'I', 10)
-        self.cell(0, 10, f'Page {self.page_no()}/{{nb}}', align='C')
+        self.set_fill_color(265, 165, 0)
+        self.rect(0, 260, 250, 20, style='F')
 
-def offerletter_utility(fid, name='', domain='', to='', all=False):
+
+def offerletter_utility(fid, cname, hr, name='', domain='', to='', all=False):
     path = os.path.join(settings.BASE_DIR, 'media', fid)
     failed_list = []
     try:
@@ -53,54 +61,59 @@ def offerletter_utility(fid, name='', domain='', to='', all=False):
             return -1
 
         for d in data:
-            pdf_path = generateLetter(path, d['name'], d['domain'])
+            pdf_path = generateLetter(path, cname, hr, d['name'], d['domain'])
             with open(pdf_path, 'rb') as f:
                 pdf_file = f.read()
 
             res = sendEmailWithAttachment(
-                'Regarding Offer Letter', 
-                f'Congratulations, you are selected as {d["domain"]} intern. Your offerletter is attached with this mail', 
-                d['email'], 
-                pdf_file, 
+                'Regarding Offer Letter',
+                f'Congratulations, you are selected as {d["domain"]} intern. Your offer letter is attached with this mail',
+                d['email'],
+                pdf_file,
                 'offerletter.pdf'
-                )
-            
+            )
+
             if not res:
                 failed_list.append(d['email'])
 
     else:
-        pdf_path = generateLetter(path, name, domain)
+        pdf_path = generateLetter(path, cname, hr, name, domain)
         with open(pdf_path, 'rb') as f:
             pdf_file = f.read()
-        
+
         res = sendEmailWithAttachment(
             'Regarding Offer Letter',
-            f'Congratulations, you are selected as {domain} intern. Your offerletter is attached with this mail',
+            f'Congratulations, you are selected as {domain} intern. Your offer letter is attached with this mail',
             to,
             pdf_file,
             'offerletter.pdf'
         )
         if not res:
             failed_list.append(to)
-        
+
     shutil.rmtree(path)
     return failed_list
 
-def generateLetter(path, name, domain):
+
+def generateLetter(path, cname, hr, name, domain):
     pdf = PDF('P', 'mm', 'Letter')
-    pdf.set_auto_page_break(auto=True, margin=15)
+    pdf.setCname(cname)
+    # pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
     pdf.set_font('helvetica', '', 16)
 
     pdf.cell(0, 10, f'Dear {name}, ', ln=True)
     pdf.cell(
-        0, 10, f'We are glad to offer you the position of {domain} Intern at our Company. ', ln=True)
+        0, 10, f'We are glad to offer you the position of {domain} Intern at our Company.', ln=True)
     pdf.cell(
         0, 10, f'You will be working on projects using {domain}. Lets learn together!', ln=True)
     pdf.cell(20, 10, 'Dummy text........................  ', ln=True)
-    pdf.ln(140)
-    pdf.cell(20, 10, 'With Regards,  ', ln=True)
-    pdf.cell(20, 10, 'Guide name ', ln=True)
+    pdf.ln(110)
+    pdf.cell(20, 10, 'With Regards,', ln=True)
+    pdf.set_font('times', 'B', 16)
+    pdf.cell(20, 8, hr, ln=True)
+    pdf.cell(20, 8, 'HR Department', ln=True)
+    pdf.cell(20, 8, cname, ln=True)
 
     pdf_path = os.path.join(path, '{}.pdf'.format(name))
     pdf.output(pdf_path)
@@ -135,7 +148,7 @@ def certificate_utility(fid, name='', domain='', to='', all=False):
         for d in data:
             pdf = generateCerti(path, d['name'])
             res = sendEmailWithAttachment('Internship Certificate',
-                                    f'The certificate for your {d["domain"]} internship is attached with this mail.', d['email'], pdf, 'certificate.pdf')
+                                          f'The certificate for your {d["domain"]} internship is attached with this mail.', d['email'], pdf, 'certificate.pdf')
             if not res:
                 failed_list.append(d['email'])
 
@@ -149,7 +162,7 @@ def certificate_utility(fid, name='', domain='', to='', all=False):
 
         if not res:
             failed_list.append(to)
-        
+
     shutil.rmtree(path)
     return failed_list
 

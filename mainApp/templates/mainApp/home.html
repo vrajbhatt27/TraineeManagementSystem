@@ -366,6 +366,15 @@
             <form method="POST" action="generateOfferLetter/">
                 {% csrf_token %}
                 <input type="hidden" name="offerletter_utility" value="True">
+                <label for="cname">Company Name: </label> <br>
+                <input type="text" name="cname" id="cname">
+                <br>
+                <br>
+                <label for="hrName">HR Name: </label> <br>
+                <input type="text" name="hrName" id="hrName">
+                <br>
+                <br>
+                <hr>
                 <label for="name">Name: </label> <br>
                 <input type="text" name="name" id="name">
                 <br>
