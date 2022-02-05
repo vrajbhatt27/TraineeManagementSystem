@@ -226,8 +226,38 @@ def generateCertificate(request):
                 messages.success(
                     request, 'All Certificates Sent Successfully.')
             else:
-                return render(request, 'mainApp/error.html', {"msg": "Error in sending Certificates.",
-                                                              "list": failed_list})
+                return render(request, 'mainApp/error.html', {"msg": "Error in sending Certificates.", "list": failed_list})
 
 
+    return redirect('home')
+
+def generateOfferLetter(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        domain = request.POST.get('domain')
+        email = request.POST.get('email')
+        send_to_all = request.POST.get('all')
+
+        if name != '':
+            res = other_utils.offerletter_utility(
+                request.session["fid_for_utility"], name, domain, email)
+
+            if len(res) == 0:
+                messages.success(
+                    request, f'Offerletter to {name} Sent Successfully.')
+            else:
+                return render(request, 'mainApp/error.html', {"msg": "Error in sending Offerletter."})
+
+        if send_to_all != None:
+            failed_list = other_utils.offerletter_utility(request.session["fid_for_utility"], all=True)
+
+            if failed_list == -1:
+                return render(request, 'mainApp/error.html', {"msg": "Error in retrieving trainee details"})
+
+            if len(failed_list) == 0:
+                messages.success(
+                    request, 'All Offerletters Sent Successfully.')
+            else:
+                return render(request, 'mainApp/error.html', {"msg": "Error in sending Offerletters.", "list": failed_list})
+        
     return redirect('home')

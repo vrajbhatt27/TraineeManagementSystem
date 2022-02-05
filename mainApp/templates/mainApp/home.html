@@ -363,7 +363,7 @@
         <!-- Modal content comment -->
         <div class="modal-content">
             <span class="close" onclick="offerletterModal.style.display = 'none'">&times;</span>
-            <form method="POST" action="">
+            <form method="POST" action="generateOfferLetter/">
                 {% csrf_token %}
                 <input type="hidden" name="offerletter_utility" value="True">
                 <label for="name">Name: </label> <br>
@@ -372,6 +372,9 @@
                 <br>
                 <label for="domain">Domain: </label> <br>
                 <input type="text" name="domain" id="domain">
+                <br><br>
+                <label for="email">Email: </label> <br>
+                <input type="email" name="email" id="email">
                 <br><br>
                 <b>-----------------------------OR-----------------------------</b>
                 <br><br>
