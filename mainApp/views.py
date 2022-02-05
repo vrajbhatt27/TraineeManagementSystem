@@ -207,12 +207,27 @@ def generateCertificate(request):
         send_to_all = request.POST.get('all')
 
         if name != '':
-            other_utils.certificate_utility(
+            res = other_utils.certificate_utility(
                 request.session["fid_for_utility"], name, domain, email)
+            
+            if len(res) == 0:
+                messages.success(
+                    request, f'Certificate to {name} Sent Successfully.')
+            else:
+                return render(request, 'mainApp/error.html', {"msg": "Error in sending Certificate."})
 
         if send_to_all != None:
-            other_utils.certificate_utility(request.session["fid_for_utility"], all=True)
-            print('----'*10)
-            print("Send To All Done")
+            failed_list = other_utils.certificate_utility(request.session["fid_for_utility"], all=True)
+
+            if failed_list == -1:
+                return render(request, 'mainApp/error.html', {"msg": "Error in retrieving trainee details"})
+
+            if len(failed_list) == 0:
+                messages.success(
+                    request, 'All Certificates Sent Successfully.')
+            else:
+                return render(request, 'mainApp/error.html', {"msg": "Error in sending Certificates.",
+                                                              "list": failed_list})
+
 
     return redirect('home')

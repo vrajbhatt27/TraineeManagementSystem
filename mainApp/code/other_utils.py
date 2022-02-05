@@ -12,7 +12,8 @@ from mainApp.models import Trainee
 
 def certificate_utility(fid, name='', domain='', to='', all=False):
     path = os.path.join(settings.BASE_DIR, 'media', fid)
-    
+    failed_list = []
+
     try:
         os.mkdir(path)
     except Exception as e:
@@ -36,17 +37,25 @@ def certificate_utility(fid, name='', domain='', to='', all=False):
 
         for d in data:
             pdf = generateCerti(path, d['name'])
-            sendEmailWithAttachment('Internship Certificate',
+            res = sendEmailWithAttachment('Internship Certificate',
                                     f'The certificate for your {d["domain"]} internship is attached with this mail.', d['email'], pdf)
-    else:
-        #Generating 
-        pdf = generateCerti(path, name)
-        
-        # sending email
-        sendEmailWithAttachment('Internship Certificate',
-                                f'The certificate for your {domain} internship is attached with this mail.', to, pdf)
+            if not res:
+                failed_list.append(d['email'])
 
+    else:
+        # Generating
+        pdf = generateCerti(path, name)
+
+        # sending email
+        res = sendEmailWithAttachment('Internship Certificate',
+                                      f'The certificate for your {domain} internship is attached with this mail.', to, pdf)
+
+        if not res:
+            failed_list.append(to)
+        
     shutil.rmtree(path)
+    return failed_list
+
 
 def sendEmailWithAttachment(subject, body, to, file):
     res = False
@@ -67,11 +76,12 @@ def sendEmailWithAttachment(subject, body, to, file):
 
     return res
 
+
 def generateCerti(path, name):
     url = staticfiles_storage.path('certificate.jpg')
     img_path = os.path.join(path, '{}.jpg'.format(name))
 
-    #generating certi
+    # generating certi
     font = ImageFont.truetype('arial.ttf', 60)
     font2 = ImageFont.truetype('arial.ttf', 40)
 
@@ -84,7 +94,7 @@ def generateCerti(path, name):
     img.save(img_path)
     img.close()
 
-    #Converting to pdf
+    # Converting to pdf
     img = Image.open(img_path)
     pdf = img2pdf.convert(img.filename)
 
