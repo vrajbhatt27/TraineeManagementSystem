@@ -343,14 +343,16 @@
                 <input type="text" name="receipnt" id="receipnt">
                 <br>
                 <br>
-                <b>OR</b> <br><br>
+                <b>-----------------------------OR-----------------------------</b>
+                <br><br>
                 <label for="csv_file">Upload: </label>
                 <input type="file" name="csv_file" id="csv_file"> <br>
                 <br>
-                <b>OR</b> <br><br>
+                <b>-----------------------------OR-----------------------------</b>
+                <br><br>
                 <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
                 <br>
-                <input type="submit" value="Send__" class="myBtn">
+                <input type="submit" value="Send" class="myBtn">
             </form>
         </div>
     </div>
@@ -364,11 +366,18 @@
             <form method="POST" action="">
                 {% csrf_token %}
                 <input type="hidden" name="offerletter_utility" value="True">
-                <label for="offerletter">Offerletter: </label> <br>
-                <input type="text" name="offerletter" id="offerletter">
+                <label for="name">Name: </label> <br>
+                <input type="text" name="name" id="name">
                 <br>
                 <br>
-                <input type="submit" value="Create" class="myBtn">
+                <label for="domain">Domain: </label> <br>
+                <input type="text" name="domain" id="domain">
+                <br><br>
+                <b>-----------------------------OR-----------------------------</b>
+                <br><br>
+                <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
+                <br>
+                <input type="submit" value="Send" class="myBtn">
             </form>
         </div>
     </div>
@@ -379,14 +388,24 @@
         <!-- Modal content comment -->
         <div class="modal-content">
             <span class="close" onclick="certificateModal.style.display = 'none'">&times;</span>
-            <form method="POST" action="">
+            <form method="POST" action="generateCertificate/">
                 {% csrf_token %}
                 <input type="hidden" name="certificate_utility" value="True">
-                <label for="certificate">Certificate: </label> <br>
-                <input type="text" name="certificate" id="certificate">
+                <label for="name">Name: </label> <br>
+                <input type="text" name="name" id="name">
                 <br>
                 <br>
-                <input type="submit" value="Create" class="myBtn">
+                <label for="domain">Domain: </label> <br>
+                <input type="text" name="domain" id="domain">
+                <br><br>
+                <label for="email">Email: </label> <br>
+                <input type="email" name="email" id="email">
+                <br><br>
+                <b>-----------------------------OR-----------------------------</b>
+                <br><br>
+                <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
+                <br>
+                <input type="submit" value="Send" class="myBtn">
             </form>
         </div>
     </div>
@@ -433,10 +452,12 @@
                 Email
             </button>
             <br>
-            <button id="offerletter_utility" class="myBtn" onclick="offerletterModal.style.display='block'">
+            <button id="offerletter_utility" class="myBtn"
+                onclick="offerletterModal.style.display='block';session('{{ form.fid }}');">
                 Offer Letter
             </button> <br>
-            <button id="certificate_utility" class="myBtn" onclick="certificateModal.style.display='block'">
+            <button id="certificate_utility" class="myBtn"
+                onclick="certificateModal.style.display='block';session('{{ form.fid }}');">
                 Certificate
             </button> <br>
             <a href="{% url 'delForm' form.fid %}">
@@ -445,6 +466,7 @@
         </div>
     </div>
     {% endfor %}
+
 </body>
 
 <script type="text/javascript">

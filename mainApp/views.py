@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .models import Form
-from .code import newForm, tform_utils, tdetails_utils, email_utils
+from .code import newForm, tform_utils, tdetails_utils, email_utils, other_utils
 from .code.hashid_utils import encrypt, decrypt
 from django.contrib import messages
 import csv
@@ -194,5 +194,25 @@ def delForm(request, fid):
     res = newForm.deleteForm(fid)
     if not res:
         return render(request, 'mainApp/error.html', {"msg": "Error in Deleting Form"})
+
+    return redirect('home')
+
+
+@login_required(login_url='login')
+def generateCertificate(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        domain = request.POST.get('domain')
+        email = request.POST.get('email')
+        send_to_all = request.POST.get('all')
+
+        if name != '':
+            other_utils.certificate_utility(
+                request.session["fid_for_utility"], name, domain, email)
+
+        if send_to_all != None:
+            other_utils.certificate_utility(request.session["fid_for_utility"], all=True)
+            print('----'*10)
+            print("Send To All Done")
 
     return redirect('home')

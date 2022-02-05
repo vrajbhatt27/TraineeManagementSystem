@@ -13,4 +13,5 @@ urlpatterns = [
     path('toogleUrlStatus/<fid>/', views.urlStatusToogle, name='urlStatusToogle'),
     path('gcsv/', views.download_csv, name='gcsv'),
     path('delForm/<fid>/', views.delForm, name='delForm'),
+    path('generateCertificate/', views.generateCertificate, name='generateCertificate'),
 ]
