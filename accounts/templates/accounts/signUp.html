@@ -16,26 +16,6 @@
 <body>
     <div class="container">
         <div class="black-cover">
-            <!-- Error Messages are here -->
-            {% if form.errors %}
-            <!-- The Modal for Errors -->
-            <div id="errorModal" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <div class="modal-head">
-                        <h2>Errors</h2>
-                        <span class="close" onclick="errorModal.style.display = 'none'">&times;</span>
-                    </div>
-                    <ol>
-                        {% for field in form %} {% for error in field.errors %}
-
-                        <li> {{ error|escape }}</li>
-                        {% endfor %} {% endfor %}
-                    </ol>
-                </div>
-            </div>
-            {% endif %}
-
             <form action="" method="post">
                 {% csrf_token %}
 
@@ -52,6 +32,19 @@
 
                 <label for="password2">Password2: </label>
                 {{form.password2}}
+
+                <!-- Error Messages are here -->
+                {% if form.errors %}
+                <div class="errorMsg">
+                    <ol>
+                        {% for field in form %} {% for error in field.errors %}
+
+                        <li> {{ error|escape }}</li>
+                        {% endfor %} {% endfor %}
+                    </ol>
+                </div>
+                {% endif %}
+
 
                 <input type="submit" name="create user" class="btn" />
                 <span>Already have an account? </span>
