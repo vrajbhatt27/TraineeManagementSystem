@@ -177,7 +177,7 @@ body {
 
 /*!---------------------------------------------------  */
 
-/* CSS For Toogle Switch starts */
+/*! CSS For Toogle Switch starts------------------------- */
 .switch {
   position: relative;
   display: inline-block;
@@ -229,7 +229,6 @@ input:checked + .slider:before {
   transform: translateX(34px);
 }
 
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }
@@ -237,10 +236,9 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+/*!---------------------------------------------------  */
 
-/* CSS for Toogle Switch ends */
-
-/* CSS for Copy Text starts here */
+/*! CSS for Copy Text starts here ---------------------------------- */
 .tooltip {
   position: relative;
   display: inline-block;
@@ -279,39 +277,4 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
-/* CSS for copy text ends here */
-
-/* CSS for Spin Loader Starts here */
-#spinModal .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  /* Safari */
-  animation: spin 2s linear infinite;
-}
-
-/* Safari */
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* CSS for Spin Loader ends here */
+/*!-------------------------------------------------------------------- */
