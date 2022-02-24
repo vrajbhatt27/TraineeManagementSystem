@@ -46,7 +46,7 @@
     <!-- The Modal for Alert Modal -->
     <div id="alertModal" class="alert-modal">
         <!-- Modal content -->
-        <div class="modal-content">
+        <div class="alert-modal-content">
             {{message}}
             <span class="close" onclick="alertModal.style.display = 'none'">&times;</span>
         </div>
@@ -56,7 +56,7 @@
     <!-- Modal for loading spinner -->
     <div id="spinModal" class="modal">
         <!-- Modal content -->
-        <div class="modal-content">
+        <div class="spin-modal-content">
             <div class="loader"></div>
             <br />
             <b>Sending Email, Please Wait...</b>
@@ -71,15 +71,12 @@
             <form method="POST" action="">
                 {% csrf_token %}
                 <input type="hidden" name="newForm" value="True" />
-                <label for="name">Description: </label> <br />
+                <label for="name">Description: </label>
                 <textarea name="description" id="description" cols="40" rows="5"></textarea>
-                <br />
-                <br />
 
-                <label for="domains">Domains: </label> <br />
+
+                <label for="domains">Domains: </label>
                 <textarea name="domains" id="domains" cols="40" rows="5"></textarea>
-                <br />
-                <br />
 
                 <input type="submit" value="Create" class="myBtn" />
             </form>

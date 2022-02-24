@@ -14,14 +14,116 @@
   /* Full width */
   height: 100%;
   /* Full height */
-  overflow: auto;
+  /* overflow: auto; */
   /* Enable scroll if needed */
   background-color: rgb(0, 0, 0);
   /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.9);
   /* Black w/ opacity */
 }
 
+.modal-content {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  background-color: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 45%;
+  left: 50%;
+  height: 400px;
+  width: 800px;
+}
+
+.modal-content form * {
+  font-family: "Roboto Slab", serif;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.modal-content input {
+  display: block;
+  width: 20%;
+  padding: 0 10px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 300;
+  margin-top: 10px;
+}
+
+.modal-content textarea {
+  display: block;
+  width: 20%;
+  padding: 0 2px;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 300;
+  border: none;
+  margin-top: 10px;
+}
+
+::placeholder {
+  color: #e5e5e5;
+}
+
+.modal .myBtn {
+  margin-top: 50px;
+  background-color: #ffffff;
+  color: #080710;
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Modal Content for newForm*/
+#newFormModal .modal-content {
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  /* width: 80%; */
+}
+
+/* Modal Content for email utility*/
+#emailModal .modal-content {
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* Modal Content for offerletter utility*/
+#offerletterModal .modal-content {
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* Modal Content for certificate utility*/
+#certificateModal .modal-content {
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* ! Special Modals----------------------- */
 /* The Alert Modal (background) */
 .alert-modal {
   display: block;
@@ -47,7 +149,7 @@
 }
 
 /* Modal Content for alertModal*/
-#alertModal .modal-content {
+#alertModal .alert-modal-content {
   background-color: green;
   color: white;
   margin: auto;
@@ -61,7 +163,7 @@
 }
 
 /* Modal Content for alertModal*/
-#spinModal .modal-content {
+#spinModal .spin-modal-content {
   background-color: grey;
   margin: auto;
   padding: 20px;
@@ -75,43 +177,9 @@
   align-items: center;
 }
 
-/* Modal Content for newForm*/
-#newFormModal .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
+/* !--------------------------------------- */
 
-/* Modal Content for email utility*/
-#emailModal .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* Modal Content for offerletter utility*/
-#offerletterModal .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* Modal Content for certificate utility*/
-#certificateModal .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* The Close Button */
+/*! The Close Button -------------------------------*/
 .close {
   color: #aaaaaa;
   float: right;
@@ -127,16 +195,11 @@
 
 .close:hover,
 .close:focus {
-  color: #000;
+  color: snow;
   text-decoration: none;
   cursor: pointer;
 }
-
-.modal .myBtn {
-  padding: 10px;
-  background-color: blue;
-  color: white;
-}
+/* !------------------------------------------------- */
 
 /*! CSS for Spin Loader Starts here ----------------------------------- */
 #spinModal .loader {
@@ -172,3 +235,24 @@
 }
 
 /*! CSS for Spin Loader ends here----------------------- */
+
+/*! CSS For scroll bar -------------------------------- */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.13);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 100px;
+  overflow: hidden;
+}
+/* !------------------------------------------------------ */
