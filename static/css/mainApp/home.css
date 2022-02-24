@@ -1,171 +1,143 @@
-.head-container {
-  display: flex;
-  justify-content: space-between;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.buttons .myBtn {
-  margin: 20px;
-  padding: 10px;
-  background-color: blue;
-  color: white;
+:root {
+  --orange: #ff3c00;
+  --varyDarkBlue: hsl(234, 12%, 34%);
+  --grayishBlue: hsl(229, 6%, 66%);
+  --veryLightGray: hsl(0, 0%, 98%);
+  --weight1: 200;
+  --weight2: 400;
+  --weight3: 600;
+  --weight4: 800;
 }
 
-/* The Modal (background) */
-.modal {
-  display: none;
-  /* Hidden by default */
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Sit on top */
-  padding-top: 100px;
-  /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0);
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
+body {
+  font-family: "Roboto Slab", serif;
+  background-color: var(--veryLightGray);
+}
+/*! Curved Div Header------------------------------------------- */
+
+.curved-div {
+  background: #ff3c00;
+  color: #fff;
+  position: relative;
 }
 
-/* The Alert Modal (background) */
-.alert-modal {
+.curved-div svg {
   display: block;
-  /* Hidden by default */
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Sit on top */
-  padding-top: 100px;
-  /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%;
-  /* Full width */
-  height: 100%;
-  /* Full height */
-  overflow: auto;
-  /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0);
-  /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
-  /* Black w/ opacity */
 }
 
-/* Modal Content for alertModal*/
-#alertModal .modal-content {
-  background-color: green;
-  color: white;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  font-size: 20px;
-  font-weight: bold;
+.curved-div .container {
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
 }
 
-/* Modal Content for alertModal*/
-#spinModal .modal-content {
-  background-color: grey;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 30%;
+#welcome {
+  align-self: center;
+}
+
+#greet {
+  margin: 20px;
+}
+
+#logout {
+  width: 50px;
+  height: 50px;
+  margin: 20px;
+  font-size: 40px;
+}
+
+.newFormButton {
+  background-color: blue;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Modal Content for newForm*/
-#newFormModal .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* Modal Content for email utility*/
-#emailModal .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* Modal Content for offerletter utility*/
-#offerletterModal .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* Modal Content for certificate utility*/
-#certificateModal .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-}
-
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-#alertModal .close {
-  color: white;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
   cursor: pointer;
 }
-
-.modal .myBtn {
-  padding: 10px;
-  background-color: blue;
-  color: white;
-}
-
-.form-card {
-  margin: 10px;
-  padding: 10px;
-  background-color: lightblue;
-  border: 2px solid black;
-  border-radius: 10px;
+/*!--------------------------------------------------  */
+/*! Internship Detail Card CSS  */
+.cards-container {
   display: inline-flex;
   justify-content: space-evenly;
 }
 
-.form-card .myBtn {
-  margin: 5px 20px;
-  padding: 7px 10px;
-  background-color: blue;
-  color: white;
+.card {
+  width: 300px;
+  height: 250px;
+  margin: 10px;
+  padding: 10px;
+  border-top: 3px solid var(--orange);
+  border-radius: 5px;
+  box-shadow: 0px 30px 40px -10px var(--grayishBlue);
 }
+
+.card h3 {
+  color: var(--varyDarkBlue);
+  font-weight: var(--weight4);
+  font-size: 20px;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.card p {
+  color: var(--varyDarkBlue);
+  font-weight: var(--weight3);
+}
+
+.card .card-data {
+  height: 100%;
+  margin: 5px;
+  padding: 10px;
+  position: relative;
+}
+
+.card .card-data .card-data-grp {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.card-data .menu-btn {
+  font-size: 25px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.card-data-grp input {
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 100px;
+  font-weight: var(--weight3);
+}
+
+.card .card-utils {
+  margin: 5px;
+  padding: 10px;
+  display: none;
+}
+
+.card .card .utils-btns {
+  margin-top: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*!---------------------------------------------------  */
 
 /* CSS For Toogle Switch starts */
 .switch {
@@ -200,17 +172,17 @@
   width: 25px;
   left: 1px;
   /* bottom: 3px; */
-  background-color: white;
+  background-color: snow;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: blue;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px blue;
 }
 
 input:checked + .slider:before {
