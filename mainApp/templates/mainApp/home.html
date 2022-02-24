@@ -1,321 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{% static 'css/mainApp/home.css' %}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <style>
-        .head-container {
-            display: flex;
-            justify-content: space-between;
-        }
 
-        .buttons .myBtn {
-            margin: 20px;
-            padding: 10px;
-            background-color: blue;
-            color: white;
-        }
-
-        /* The Modal (background) */
-        .modal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Sit on top */
-            padding-top: 100px;
-            /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-        }
-
-        /* The Alert Modal (background) */
-        .alert-modal {
-            display: block;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Sit on top */
-            padding-top: 100px;
-            /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-        }
-
-        /* Modal Content for alertModal*/
-        #alertModal .modal-content {
-            background-color: green;
-            color: white;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            font-size: 20px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Modal Content for alertModal*/
-        #spinModal .modal-content {
-            background-color: grey;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%;
-            font-size: 20px;
-            font-weight: bold;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Modal Content for newForm*/
-        #newFormModal .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        /* Modal Content for email utility*/
-        #emailModal .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        /* Modal Content for offerletter utility*/
-        #offerletterModal .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        /* Modal Content for certificate utility*/
-        #certificateModal .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        /* The Close Button */
-        .close {
-            color: #aaaaaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        #alertModal .close {
-            color: white;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal .myBtn {
-            padding: 10px;
-            background-color: blue;
-            color: white;
-        }
-
-        .form-card {
-            margin: 10px;
-            padding: 10px;
-            background-color: lightblue;
-            border: 2px solid black;
-            border-radius: 10px;
-            display: inline-flex;
-            justify-content: space-evenly;
-        }
-
-        .form-card .myBtn {
-            margin: 5px 20px;
-            padding: 7px 10px;
-            background-color: blue;
-            color: white;
-        }
-
-        /* CSS For Toogle Switch starts */
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 25px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 25px;
-            width: 25px;
-            left: 1px;
-            /* bottom: 3px; */
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-        input:checked+.slider {
-            background-color: #2196F3;
-        }
-
-        input:focus+.slider {
-            box-shadow: 0 0 1px #2196F3;
-        }
-
-        input:checked+.slider:before {
-            -webkit-transform: translateX(33px);
-            -ms-transform: translateX(33px);
-            transform: translateX(34px);
-        }
-
-        /* Rounded sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-
-        /* CSS for Toogle Switch ends */
-
-        /* CSS for Copy Text starts here */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 140px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 150%;
-            left: 50%;
-            margin-left: -75px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        /* CSS for copy text ends here */
-
-        /* CSS for Spin Loader Starts here */
-        #spinModal .loader {
-            border: 16px solid #f3f3f3;
-            border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
-            -webkit-animation: spin 2s linear infinite;
-            /* Safari */
-            animation: spin 2s linear infinite;
-        }
-
-        /* Safari */
-        @-webkit-keyframes spin {
-            0% {
-                -webkit-transform: rotate(0deg);
-            }
-
-            100% {
-                -webkit-transform: rotate(360deg);
-            }
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* CSS for Spin Loader ends here */
-    </style>
     <title>tms: home</title>
 </head>
 
@@ -325,16 +19,17 @@
         <h1>Hello, {{request.user}}. Welcome to TMS</h1>
         <div class="buttons">
             <!-- Button For New Form -->
-            <button id="newForm" class="myBtn" onclick="newFormModal.style.display='block'">New Form</button>
+            <button id="newForm" class="myBtn" onclick="newFormModal.style.display='block'">
+                New Form
+            </button>
             <!-- Logout Button -->
             <a href="{% url 'logout' %}">
-                <input type="button" value="Logout" class="myBtn">
+                <input type="button" value="Logout" class="myBtn" />
             </a>
         </div>
     </div>
 
-    {% if messages %}
-    {% for message in messages %}
+    {% if messages %} {% for message in messages %}
     <!-- The Modal for Alert Modal -->
     <div id="alertModal" class="alert-modal">
         <!-- Modal content -->
@@ -343,141 +38,139 @@
             <span class="close" onclick="alertModal.style.display = 'none'">&times;</span>
         </div>
     </div>
-    {% endfor %}
-    {% endif %}
+    {% endfor %} {% endif %}
 
     <!-- Modal for loading spinner -->
     <div id="spinModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
             <div class="loader"></div>
-            <br>
+            <br />
             <b>Sending Email, Please Wait...</b>
         </div>
     </div>
 
-    <br><br>
+    <br /><br />
     <!-- The Modal for New Form -->
     <div id="newFormModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close" onclick="newFormModal.style.display = 'none'">&times;</span>
             <form method="POST" action="">
                 {% csrf_token %}
-                <input type="hidden" name="newForm" value="True">
-                <label for="name">Description: </label> <br>
+                <input type="hidden" name="newForm" value="True" />
+                <label for="name">Description: </label> <br />
                 <textarea name="description" id="description" cols="40" rows="5"></textarea>
-                <br>
-                <br>
+                <br />
+                <br />
 
-                <label for="domains">Domains: </label> <br>
+                <label for="domains">Domains: </label> <br />
                 <textarea name="domains" id="domains" cols="40" rows="5"></textarea>
-                <br>
-                <br>
+                <br />
+                <br />
 
-                <input type="submit" value="Create" class="myBtn">
+                <input type="submit" value="Create" class="myBtn" />
             </form>
         </div>
     </div>
 
     <!-- The Modal for email utility -->
     <div id="emailModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close" onclick="emailModal.style.display = 'none'">&times;</span>
             <form method="POST" action="sendEmail/" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="hidden" name="email_utility" value="True">
+                <input type="hidden" name="email_utility" value="True" />
                 <label for="email_heading">Email Heading: </label>
-                <input type="text" name="email_heading" id="email_heading">
-                <br>
-                <br>
-                <label for="email_body">Email Body: </label> <br>
+                <input type="text" name="email_heading" id="email_heading" />
+                <br />
+                <br />
+                <label for="email_body">Email Body: </label> <br />
                 <textarea name="email_body" id="email_body" cols="30" rows="10"></textarea>
-                <br>
-                <br>
-                <hr>
+                <br />
+                <br />
+                <hr />
                 <label for="receipnt">To: </label>
-                <input type="text" name="receipnt" id="receipnt">
-                <br>
-                <br>
+                <input type="text" name="receipnt" id="receipnt" />
+                <br />
+                <br />
                 <b>-----------------------------OR-----------------------------</b>
-                <br><br>
+                <br /><br />
                 <label for="csv_file">Upload: </label>
-                <input type="file" name="csv_file" id="csv_file"> <br>
-                <br>
+                <input type="file" name="csv_file" id="csv_file" /> <br />
+                <br />
                 <b>-----------------------------OR-----------------------------</b>
-                <br><br>
-                <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
-                <br>
-                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();">
+                <br /><br />
+                <input type="checkbox" name="all" id="all" value="True" /> Send To All
+                <br />
+                <br />
+                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();" />
             </form>
         </div>
     </div>
 
     <!-- The Modal for offerletter utility -->
     <div id="offerletterModal" class="modal">
-
         <!-- Modal content comment -->
         <div class="modal-content">
             <span class="close" onclick="offerletterModal.style.display = 'none'">&times;</span>
             <form method="POST" action="generateOfferLetter/">
                 {% csrf_token %}
-                <input type="hidden" name="offerletter_utility" value="True">
-                <label for="cname">Company Name: </label> <br>
-                <input type="text" name="cname" id="cname">
-                <br>
-                <br>
-                <label for="hrName">HR Name: </label> <br>
-                <input type="text" name="hrName" id="hrName">
-                <br>
-                <br>
-                <hr>
-                <label for="name">Name: </label> <br>
-                <input type="text" name="name" id="name">
-                <br>
-                <br>
-                <label for="domain">Domain: </label> <br>
-                <input type="text" name="domain" id="domain">
-                <br><br>
-                <label for="email">Email: </label> <br>
-                <input type="email" name="email" id="email">
-                <br><br>
+                <input type="hidden" name="offerletter_utility" value="True" />
+                <label for="cname">Company Name: </label> <br />
+                <input type="text" name="cname" id="cname" />
+                <br />
+                <br />
+                <label for="hrName">HR Name: </label> <br />
+                <input type="text" name="hrName" id="hrName" />
+                <br />
+                <br />
+                <hr />
+                <label for="name">Name: </label> <br />
+                <input type="text" name="name" id="name" />
+                <br />
+                <br />
+                <label for="domain">Domain: </label> <br />
+                <input type="text" name="domain" id="domain" />
+                <br /><br />
+                <label for="email">Email: </label> <br />
+                <input type="email" name="email" id="email" />
+                <br /><br />
                 <b>-----------------------------OR-----------------------------</b>
-                <br><br>
-                <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
-                <br>
-                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();">
+                <br /><br />
+                <input type="checkbox" name="all" id="all" value="True" /> Send To All
+                <br />
+                <br />
+                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();" />
             </form>
         </div>
     </div>
 
     <!-- The Modal for certificate utility -->
     <div id="certificateModal" class="modal">
-
         <!-- Modal content comment -->
         <div class="modal-content">
             <span class="close" onclick="certificateModal.style.display = 'none'">&times;</span>
             <form method="POST" action="generateCertificate/">
                 {% csrf_token %}
-                <input type="hidden" name="certificate_utility" value="True">
-                <label for="name">Name: </label> <br>
-                <input type="text" name="name" id="name">
-                <br>
-                <br>
-                <label for="domain">Domain: </label> <br>
-                <input type="text" name="domain" id="domain">
-                <br><br>
-                <label for="email">Email: </label> <br>
-                <input type="email" name="email" id="email">
-                <br><br>
+                <input type="hidden" name="certificate_utility" value="True" />
+                <label for="name">Name: </label> <br />
+                <input type="text" name="name" id="name" />
+                <br />
+                <br />
+                <label for="domain">Domain: </label> <br />
+                <input type="text" name="domain" id="domain" />
+                <br /><br />
+                <label for="email">Email: </label> <br />
+                <input type="email" name="email" id="email" />
+                <br /><br />
                 <b>-----------------------------OR-----------------------------</b>
-                <br><br>
-                <input type="checkbox" name="all" id="all" value="True"> Send To All <br>
-                <br>
-                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();">
+                <br /><br />
+                <input type="checkbox" name="all" id="all" value="True" /> Send To All
+                <br />
+                <br />
+                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();" />
             </form>
         </div>
     </div>
@@ -488,16 +181,16 @@
         <div class="card-data">
             <h3>Date: {{ form.date }}</h3>
             <p>Description: {{ form.description }}</p>
-            <b>Url: </b> <input type="text" value={{ form.url }} style="width: 75px;" id={{ form.fid }}>
+            <b>Url: </b>
+            <input type="text" value="{{form.url}}" style="width: 75px" id="{{form.fid}}" />
             <div class="tooltip">
                 <a onclick="copyText('{{form.fid}}');" onmouseout="outFunc();">
                     <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-                    <i class="fa fa-copy" style="font-size:24px; margin-left: 5px;"></i>
+                    <i class="fa fa-copy" style="font-size: 24px; margin-left: 5px"></i>
                 </a>
             </div>
             <p>
-                Form Status:
-                {% if form.form_status == True %}
+                Form Status: {% if form.form_status == True %}
                 <b>Open</b>
                 {% else %}
                 <b>Close</b>
@@ -506,10 +199,10 @@
             <label class="switch">
                 {% if form.form_status == True %}
                 <input type="checkbox" name="url_status_cb" id="url_status_cb" checked
-                    onchange="toogleUrlStatus('{{form.fid}}');">
+                    onchange="toogleUrlStatus('{{form.fid}}');" />
                 {% else %}
                 <input type="checkbox" name="url_status_cb" id="url_status_cb"
-                    onchange="toogleUrlStatus('{{form.fid}}');">
+                    onchange="toogleUrlStatus('{{form.fid}}');" />
                 {% endif %}
                 <span class="slider round"></span>
             </label>
@@ -518,27 +211,28 @@
             <a href="{% url 'toTdetails' form.fid %}">
                 <button id="tdetails" class="myBtn">Trainee Details</button>
             </a>
-            <br>
+            <br />
             <button id="email_utility" class="myBtn"
                 onclick="emailModal.style.display='block';session('{{ form.fid }}');">
                 Email
             </button>
-            <br>
+            <br />
             <button id="offerletter_utility" class="myBtn"
                 onclick="offerletterModal.style.display='block';session('{{ form.fid }}');">
                 Offer Letter
-            </button> <br>
+            </button>
+            <br />
             <button id="certificate_utility" class="myBtn"
                 onclick="certificateModal.style.display='block';session('{{ form.fid }}');">
                 Certificate
-            </button> <br>
+            </button>
+            <br />
             <a href="{% url 'delForm' form.fid %}">
-                <i class="fa fa-trash fa-2x" style="margin-left: 50px;color: black;"></i>
+                <i class="fa fa-trash fa-2x" style="margin-left: 50px; color: black"></i>
             </a>
         </div>
     </div>
     {% endfor %}
-
 </body>
 
 <script type="text/javascript">
@@ -552,20 +246,23 @@
     function spinLoader()
     {
         var spinModal = document.getElementById( "spinModal" );
-        spinModal.style.display = 'block';
-        emailModal.style.display = 'none';
-        offerletterModal.style.display = 'none';
-        certificateModal.style.display = 'none';
+        spinModal.style.display = "block";
+        emailModal.style.display = "none";
+        offerletterModal.style.display = "none";
+        certificateModal.style.display = "none";
     }
 
     function session( fid )
     {
-        $.get( 'setSession/' + fid + '/', function ( data ) { } );
+        $.get( "setSession/" + fid + "/", function ( data ) { } );
     }
 
     function toogleUrlStatus( fid )
     {
-        $.get( 'toogleUrlStatus/' + fid + '/', function ( data ) { location.reload(); } );
+        $.get( "toogleUrlStatus/" + fid + "/", function ( data )
+        {
+            location.reload();
+        } );
     }
 
     function copyText( inpId )
@@ -587,40 +284,3 @@
 </script>
 
 </html>
-
-
-<!-- 
-
-<script>
-    // Get the modal
-    var newFormModal = document.getElementById( "newFormModal" );
-
-    // Get the button that opens the modal
-    var newFormBtn = document.getElementById( "newForm" );
-
-    // Get the <span> element that closes the modal
-    var newFormSpan = document.getElementsByClassName( "close" )[ 0 ];
-
-    // When the user clicks the button, open the modal 
-    newFormBtn.onclick = function ()
-    {
-        newFormModal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    newFormSpan.onclick = function ()
-    {
-        newFormModal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function ( event )
-    {
-        if ( event.target == newFormModal )
-        {
-            newFormModal.style.display = "none";
-        }
-    }
-</script>
-
- -->
