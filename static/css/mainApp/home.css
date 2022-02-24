@@ -70,8 +70,9 @@ body {
 /*!--------------------------------------------------  */
 /*! Internship Detail Card CSS  */
 .cards-container {
-  display: inline-flex;
-  justify-content: space-evenly;
+  display: grid;
+  gap: 20px 30px;
+  grid-template-columns: 346px 346px 346px 346px;
 }
 
 .card {
@@ -79,7 +80,7 @@ body {
   height: 250px;
   margin: 10px;
   padding: 10px;
-  border-top: 3px solid var(--orange);
+  border-top: 4px solid var(--orange);
   border-radius: 5px;
   box-shadow: 0px 30px 40px -10px var(--grayishBlue);
 }
@@ -117,24 +118,61 @@ body {
 }
 
 .card-data-grp input {
-  border: 2px solid black;
+  border: 2px solid var(--varyDarkBlue);
   border-radius: 5px;
   width: 100px;
   font-weight: var(--weight3);
+  color: var(--varyDarkBlue);
 }
 
 .card .card-utils {
-  margin: 5px;
-  padding: 10px;
   display: none;
+  position: relative;
 }
 
-.card .card .utils-btns {
-  margin-top: 5px;
+.circle-btn {
+  width: 30px;
+  height: 30px;
+  background-color: blue;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  padding: 5px;
+  font-size: 20px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.cb1 {
+  position: absolute;
+  top: 30px;
+  left: 126px;
+}
+.cb2 {
+  position: absolute;
+  top: 100px;
+  left: 48px;
+}
+.cb3 {
+  position: absolute;
+  top: 100px;
+  left: 212px;
+}
+.cb4 {
+  position: absolute;
+  top: 170px;
+  left: 162px;
+}
+
+.cb5 {
+  position: absolute;
+  top: 170px;
+  left: 88px;
+}
+
+.cb6 {
+  position: absolute;
+  top: 100px;
+  left: 126px;
 }
 
 /*!---------------------------------------------------  */

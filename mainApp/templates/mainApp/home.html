@@ -163,7 +163,7 @@
     <!--! Curved Header Section------------------------------------- -->
     <div class="curved-div">
         <div class="container">
-            <h1 id="greet">Hello, {{request.user}}</h1>
+            <h1 id="greet">Hello, <span style="text-transform: capitalize;">{{request.user}}</span></h1>
             <h1 id="welcome">Welcome To TMS</h1>
             <a href="{% url 'logout' %}" class="a-btn-white">
                 <div id="logout"><i class='fa fa-sign-out'></i></div>
@@ -330,18 +330,18 @@
     <!--!--------------------------------------------------------  -->
 
     <!--! Form Cards---------------------------------------------- -->
-    {% for form in forms %}
     <div class="cards-container">
+        {% for form in forms %}
         <div class="card">
-            <div class="card-data" id="card-details">
+            <div class="card-data" id="card-details-{{form.fid}}">
                 <h3 class="my-30">Internship Details : {{form.date}}</h3>
                 <div class="card-data-grp mt-40">
                     <p class="px-5">URL: </p>
                     <input type="text" value="{{form.url}}" id="{{form.fid}}" class="px-5" />
-                    <div class=" tooltip" class="px-5">
+                    <div class="tooltip" class="px-5">
                         <a onclick="copyText('{{form.fid}}');" onmouseout="outFunc();">
                             <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-                            <i class="fa fa-copy" style="font-size: 24px; margin-left: 5px"></i>
+                            <i class="fa fa-clone" style="font-size: 24px; margin-left: 5px"></i>
                         </a>
                     </div>
                 </div>
@@ -364,49 +364,43 @@
                         <span class="slider round"></span>
                     </label>
                 </div>
-                <div class="menu-btn" onclick="toogle();">
+                <div class="menu-btn" onclick="toogle('{{form.fid}}');">
                     <i class="fa fa-bars" aria-hidden="true"></i>
                 </div>
             </div>
-            <div class="card-utils" id="card-utils">
-                <p class="my">
-                    <a href="{% url 'toTdetails' form.fid %}" class="a-btn-black">
-                        Click Here
-                    </a>
-                    to manage trainees.
-                </p>
-                <p class="my">
-                    <span class="a-btn-black" onclick="emailModal.style.display='block';session('{{ form.fid }}');">
-                        Click Here
-                    </span>
-                    for sending emails.
-                </p>
-                <p class="my">
-                    <span class="a-btn-black"
-                        onclick="offerletterModal.style.display='block';session('{{ form.fid }}');">
-                        Click Here
-                    </span>
-                    for sending offer letters.
-                </p>
-                <p class="my">
-                    <span class="a-btn-black"
-                        onclick="certificateModal.style.display='block';session('{{ form.fid }}');">
-                        Click Here
-                    </span>
-                    for sending certificates.
-                </p>
-                <div class="utils-btns">
-                    <div class="btn" onclick="toogle();">
-                        close
+            <div class="card-utils" id="card-utils-{{form.fid}}">
+                <a href="{% url 'toTdetails' form.fid %}" class="a-btn-white">
+                    <div class="circle-btn cb1">
+                        <i class="fa fa-info" aria-hidden="true"></i>
+
                     </div>
-                    <div class="btn">
-                        <a href="{% url 'delForm' form.fid %}" class="a-btn-white">Delete</a>
+                </a>
+
+                <div class="circle-btn cb2" onclick="emailModal.style.display='block';session('{{ form.fid }}');">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                </div>
+
+                <div class="circle-btn cb3" onclick="offerletterModal.style.display='block';session('{{ form.fid }}');">
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                </div>
+
+                <div class="circle-btn cb4" onclick="certificateModal.style.display='block';session('{{ form.fid }}');">
+                    <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                </div>
+
+                <a href="{% url 'delForm' form.fid %}" class="a-btn-white">
+                    <div class="circle-btn cb5">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </div>
+                </a>
+
+                <div class="circle-btn cb6" onclick="toogle('{{form.fid}}');">
+                    <i class="fa fa-times" aria-hidden="true"></i>
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
     <!--!----------------------------------------------------------- -->
 </body>
 
@@ -417,12 +411,12 @@
     var offerletterModal = document.getElementById( "offerletterModal" );
     var certificateModal = document.getElementById( "certificateModal" );
     var alertModal = document.getElementById( "alertModal" );
-    let card_utils = document.getElementById( 'card-utils' )
-    let card_details = document.getElementById( 'card-details' );
 
     // Function for changing internship details card content.
-    function toogle()
+    function toogle( fid )
     {
+        let card_utils = document.getElementById( 'card-utils-' + fid )
+        let card_details = document.getElementById( 'card-details-' + fid );
         if ( window.getComputedStyle( card_utils ).display == "none" )
         {
             card_details.style.display = "none";
