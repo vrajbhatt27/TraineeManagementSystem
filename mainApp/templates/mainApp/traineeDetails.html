@@ -1,82 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        .head-container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .myBtn {
-            margin: 30px;
-            margin-right: 100px;
-            padding: 10px;
-            background-color: blue;
-            color: white;
-        }
-
-        .logout-button {
-            display: inline;
-        }
-
-        .download-button {
-            display: inline;
-        }
-
-        .trainee-table {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        .trainee-table td,
-        .trainee-table th {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        .trainee-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        .trainee-table tr:hover {
-            background-color: #ddd;
-        }
-
-        .trainee-table th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #04AA6D;
-            color: white;
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="{% static 'css/mainApp/tdetails.css' %}" />
     <title>Trainee Details</title>
 </head>
 
 <body>
     <div class="head-container">
-        <div class="details">
-            <h1>Trainee Details For Batch of : {{ fdata.date }}</h1>
-            <p><b>{{ fdata.description }}</b></p>
-            <br>
+        <div></div>
+        <h1>Trainee Details For Batch of : {{ fdata.date }}</h1>
+        <div class="logout-button">
+            <a href="{% url 'home' %}"><button class="myBtn">Back</button></a>
         </div>
-        <div class="utility-buttons">
-            <div class="download-button">
-                <a href="{% url 'gcsv' %}"><button class="myBtn">Download</button></a>
-            </div>
-            <div class="logout-button">
-                <a href="{% url 'home' %}"><button class="myBtn">Back</button></a>
-            </div>
-        </div>
-
     </div>
-    <div id='table'>
-        <table class='trainee-table'>
+
+    <div class="description">
+        <h2>Description</h2>
+        <p style="margin-top: 10px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium provident
+            similique
+            sit
+            odit quasi hic,
+            excepturi molestias vel? Et deleniti id ea, fugit nostrum necessitatibus dicta quasi eaque officiis magnam!
+        </p>
+    </div>
+
+    <div id="table">
+        <table class="trainee-table">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -105,13 +63,23 @@
                     {% if data.tresume == None%}
                     <td></td>
                     {% else %}
-                    <td><a href={{ data.tresume }}>Link</a></td>
+                    <td><a href="{{ data.tresume }}">Link</a></td>
                     {% endif %}
-                    <td><a href="{% url 'delTrainee' data.temail %}">Del</a></td>
+                    <td class="delete">
+                        <a href="{% url 'delTrainee' data.temail %}">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
             {% endfor %}
         </table>
+    </div>
+
+    <div class="btn-container">
+        <div class="download-button">
+            <a href="{% url 'gcsv' %}"><button class="myBtn">Download</button></a>
+        </div>
     </div>
 </body>
 

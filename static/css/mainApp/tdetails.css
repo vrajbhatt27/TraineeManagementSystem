@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Slab", serif;
+}
+
+a {
+  color: blue;
+}
+
+i {
+  color: black;
+}
+
+.head-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.head-container h1 {
+  margin: 20px;
+  font-size: 40px;
+  text-decoration: underline;
+}
+
+.myBtn {
+  padding: 10px;
+  margin: 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+}
+
+.description {
+  margin: 20px;
+  padding: 10px;
+}
+
+.trainee-table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin: 30px;
+}
+
+.trainee-table td,
+.trainee-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.trainee-table tr:hover {
+  background-color: #ddd;
+}
+
+.trainee-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ff3c00;
+  color: white;
+}
+
+.trainee-table .delete {
+  text-align: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+}
