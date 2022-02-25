@@ -50,3 +50,13 @@ i {
   border-radius: 10px;
   cursor: pointer;
 }
+
+.row-layout-sb {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row-layout {
+  display: flex;
+  justify-content: flex-start;
+}

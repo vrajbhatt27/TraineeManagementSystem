@@ -103,7 +103,6 @@ body {
   margin: 5px;
   padding: 10px;
   position: relative;
-  display: none;
 }
 
 .card .card-data .card-data-grp {
@@ -127,8 +126,7 @@ body {
 }
 
 .card .card-utils {
-  /* display: none; */
-  display: block;
+  display: none;
   position: relative;
 }
 

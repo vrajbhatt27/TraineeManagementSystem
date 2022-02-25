@@ -135,39 +135,45 @@
             <span class="close" onclick="offerletterModal.style.display = 'none'">&times;</span>
             <form method="POST" action="generateOfferLetter/">
                 {% csrf_token %}
-                <div class="form-container">
+                <input type="hidden" name="offerletter_utility" value="True" />
+
+                <div class="row-layout">
                     <div class="form-grp">
-                        <input type="hidden" name="offerletter_utility" value="True" />
                         <label for="cname">Company Name: </label>
                         <input type="text" name="cname" id="cname" placeholder="Company Name" />
+                    </div>
+                    <div class="form-grp">
                         <label for="hrName">HR Name: </label>
                         <input type="text" name="hrName" id="hrName" placeholder="HR Name" />
                     </div>
+                </div>
 
-                    <div class="send-options">
-                        <div class="send-options">
-                            <div class="form-grp">
-                                <label for="name" class="mt-20">Name: </label>
-                                <input type="text" name="name" id="name" placeholder="Trainee Name" />
-                                <br />
-                                <br />
-                                <label for="domain" class="mt-20">Domain: </label>
-                                <input type="text" name="domain" id="domain" placeholder="Trainee Domain" />
-                                <br /><br />
-                                <label for="email" class="mt-20">Email: </label>
+                <div class="hline">
+                    <hr />
+                </div>
 
-                                <input type="email" name="email" id="email" placeholder="Trainee Email" />
-                            </div>
-                            <br>
-                            <p style="text-align: center">-------- OR --------</p>
-                            <br>
-                            <div class="form-grp">
-                                <input type="checkbox" name="all" id="all" value="True" /> Send To All
-                            </div>
-                        </div>
+                <div class="row-layout-sb">
+                    <div class="form-grp">
+                        <label for="name" class="mt-20">Name: </label>
+                        <input type="text" name="name" id="name" placeholder="Trainee Name" />
+                    </div>
+                    <div class="form-grp">
+                        <label for="domain" class="mt-20">Domain: </label>
+                        <input type="text" name="domain" id="domain" placeholder="Trainee Domain" />
+                    </div>
+                    <div class="form-grp">
+                        <label for="email" class="mt-20">Email: </label>
+                        <input type="email" name="email" id="email" placeholder="Trainee Email" />
                     </div>
                 </div>
 
+                <br>
+                <p style="text-align: center">-------- OR --------</p>
+                <br>
+                <input type="checkbox" name="all" id="all" value="True" />
+                <span style="color: white;">
+                    Send To All
+                </span>
                 <input type="submit" value="Send" class="myBtn" onclick="spinLoader();" />
             </form>
         </div>

@@ -41,6 +41,15 @@
   text-align: center;
 }
 
+.modal-content .hline {
+  display: block;
+  height: 1px;
+  width: 80%;
+  border-top: 1px solid #ccc;
+  margin: 30px auto 0 auto;
+  background-color: #fff;
+}
+
 .modal-content form * {
   font-family: "Roboto Slab", serif;
   color: #ffffff;
@@ -132,7 +141,7 @@ input[type="submit"] {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 40%;
+  width: 50%;
 }
 
 /* Modal Content for certificate utility*/
