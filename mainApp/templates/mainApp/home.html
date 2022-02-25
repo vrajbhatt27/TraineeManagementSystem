@@ -67,6 +67,7 @@
     <div id="newFormModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
+            <h2>Create New Form</h2>
             <span class="close" onclick="newFormModal.style.display = 'none'">&times;</span>
             <form method="POST" action="">
                 {% csrf_token %}
@@ -87,33 +88,40 @@
     <div id="emailModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
+            <h2>Send Emails</h2>
             <span class="close" onclick="emailModal.style.display = 'none'">&times;</span>
             <form method="POST" action="sendEmail/" enctype="multipart/form-data">
                 {% csrf_token %}
-                <input type="hidden" name="email_utility" value="True" />
-                <label for="email_heading">Email Heading: </label>
-                <input type="text" name="email_heading" id="email_heading" />
-                <br />
-                <br />
-                <label for="email_body">Email Body: </label> <br />
-                <textarea name="email_body" id="email_body" cols="30" rows="10"></textarea>
-                <br />
-                <br />
-                <hr />
-                <label for="receipnt">To: </label>
-                <input type="text" name="receipnt" id="receipnt" />
-                <br />
-                <br />
-                <b>-----------------------------OR-----------------------------</b>
-                <br /><br />
-                <label for="csv_file">Upload: </label>
-                <input type="file" name="csv_file" id="csv_file" /> <br />
-                <br />
-                <b>-----------------------------OR-----------------------------</b>
-                <br /><br />
-                <input type="checkbox" name="all" id="all" value="True" /> Send To All
-                <br />
-                <br />
+                <div class="form-container">
+                    <div class="form-grp">
+                        <input type="hidden" name="email_utility" value="True" />
+                        <label for="email_heading">Email Heading: </label>
+                        <input type="text" name="email_heading" id="email_heading" placeholder="Subject" />
+
+                        <label for="email_body">Email Body: </label>
+                        <textarea name="email_body" id="email_body" cols="30" rows="10"></textarea>
+                    </div>
+
+                    <div class="send-options">
+                        <div class="form-grp">
+                            <label for="receipnt">To: </label>
+                            <input type="text" name="receipnt" id="receipnt" placeholder="Recipient" />
+                        </div>
+
+                        <p style="text-align: center">-------- OR --------</p>
+
+                        <div class="form-grp">
+                            <label for="csv_file">Upload: </label>
+                            <input type="file" name="csv_file" id="csv_file" />
+                        </div>
+
+                        <p style="text-align: center">-------- OR --------</p>
+
+                        <div class="form-grp">
+                            <input type="checkbox" name="all" id="all" value="True" /> Send To All
+                        </div>
+                    </div>
+                </div>
                 <input type="submit" value="Send" class="myBtn" onclick="spinLoader();" />
             </form>
         </div>
@@ -123,34 +131,43 @@
     <div id="offerletterModal" class="modal">
         <!-- Modal content comment -->
         <div class="modal-content">
+            <h2>Offer Letters</h2>
             <span class="close" onclick="offerletterModal.style.display = 'none'">&times;</span>
             <form method="POST" action="generateOfferLetter/">
                 {% csrf_token %}
-                <input type="hidden" name="offerletter_utility" value="True" />
-                <label for="cname">Company Name: </label> <br />
-                <input type="text" name="cname" id="cname" />
-                <br />
-                <br />
-                <label for="hrName">HR Name: </label> <br />
-                <input type="text" name="hrName" id="hrName" />
-                <br />
-                <br />
-                <hr />
-                <label for="name">Name: </label> <br />
-                <input type="text" name="name" id="name" />
-                <br />
-                <br />
-                <label for="domain">Domain: </label> <br />
-                <input type="text" name="domain" id="domain" />
-                <br /><br />
-                <label for="email">Email: </label> <br />
-                <input type="email" name="email" id="email" />
-                <br /><br />
-                <b>-----------------------------OR-----------------------------</b>
-                <br /><br />
-                <input type="checkbox" name="all" id="all" value="True" /> Send To All
-                <br />
-                <br />
+                <div class="form-container">
+                    <div class="form-grp">
+                        <input type="hidden" name="offerletter_utility" value="True" />
+                        <label for="cname">Company Name: </label>
+                        <input type="text" name="cname" id="cname" placeholder="Company Name" />
+                        <label for="hrName">HR Name: </label>
+                        <input type="text" name="hrName" id="hrName" placeholder="HR Name" />
+                    </div>
+
+                    <div class="send-options">
+                        <div class="send-options">
+                            <div class="form-grp">
+                                <label for="name" class="mt-20">Name: </label>
+                                <input type="text" name="name" id="name" placeholder="Trainee Name" />
+                                <br />
+                                <br />
+                                <label for="domain" class="mt-20">Domain: </label>
+                                <input type="text" name="domain" id="domain" placeholder="Trainee Domain" />
+                                <br /><br />
+                                <label for="email" class="mt-20">Email: </label>
+
+                                <input type="email" name="email" id="email" placeholder="Trainee Email" />
+                            </div>
+                            <br>
+                            <p style="text-align: center">-------- OR --------</p>
+                            <br>
+                            <div class="form-grp">
+                                <input type="checkbox" name="all" id="all" value="True" /> Send To All
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <input type="submit" value="Send" class="myBtn" onclick="spinLoader();" />
             </form>
         </div>
@@ -160,25 +177,24 @@
     <div id="certificateModal" class="modal">
         <!-- Modal content comment -->
         <div class="modal-content">
+            <h2>Certificate</h2>
             <span class="close" onclick="certificateModal.style.display = 'none'">&times;</span>
             <form method="POST" action="generateCertificate/">
                 {% csrf_token %}
                 <input type="hidden" name="certificate_utility" value="True" />
-                <label for="name">Name: </label> <br />
-                <input type="text" name="name" id="name" />
-                <br />
-                <br />
-                <label for="domain">Domain: </label> <br />
-                <input type="text" name="domain" id="domain" />
-                <br /><br />
-                <label for="email">Email: </label> <br />
-                <input type="email" name="email" id="email" />
-                <br /><br />
-                <b>-----------------------------OR-----------------------------</b>
-                <br /><br />
-                <input type="checkbox" name="all" id="all" value="True" /> Send To All
-                <br />
-                <br />
+                <label for="name">Name: </label>
+                <input type="text" name="name" id="name" placeholder="Trainee Name" />
+                <label for="domain">Domain: </label>
+                <input type="text" name="domain" id="domain" placeholder="Trainee Domain" />
+                <label for="email">Email: </label>
+                <input type="email" name="email" id="email" placeholder="Trainee Email" />
+                <br>
+                <p style="text-align: center">-------- OR --------</p>
+                <br>
+                <input type="checkbox" name="all" id="all" value="True" />
+                <span style="color: white;">
+                    Send To All
+                </span>
                 <input type="submit" value="Send" class="myBtn" onclick="spinLoader();" />
             </form>
         </div>
