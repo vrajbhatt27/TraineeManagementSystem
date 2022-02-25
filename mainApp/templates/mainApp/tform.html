@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,63 +6,70 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/mainApp/form.css' %}" />
     <title>T-Form</title>
 </head>
 
 <body>
-    <center>
+    <div class="head-container">
         <h1>{{ data.company }}</h1>
-    </center>
-    <p>{{ data.description }}</p>
-    <br />
-    <br />
-    <form method="post">
-        {% csrf_token %}
-        <label for="name">Name: </label>
-        <input type="text" name="name" id="name" />
-        <br /><br />
+        <p>
+            {{ data.description }}
+        </p>
+    </div>
 
-        <label for="email">Email: </label>
-        <input type="email" name="email" id="email" />
-        <br /><br />
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-grp">
+                <label for="name">Name: </label>
+                <input type="text" name="name" id="name" />
+            </div>
+            <div class="form-grp">
+                <label for="email">Email: </label>
+                <input type="email" name="email" id="email" />
+            </div>
+            <div class="form-grp">
+                <label for="age">Age: </label>
+                <input type="number" name="age" id="age" min="15" max="100" />
+            </div>
+            <div class="form-grp">
+                <label for="college">School/College: </label>
+                <input type="text" name="college" id="college" />
+            </div>
+            <div class="form-grp">
+                <label for="cgpa">CGPA: </label>
+                <input type="number" name="cgpa" id="cgpa" min="1" max="10" step=".01" />
+            </div>
+            <div class="form-grp">
+                <label for="hsc">% HSC: </label>
+                <input type="number" name="hsc" id="hsc" min="1" max="100" step=".01" />
+            </div>
+            <div class="form-grp">
+                <label for="ssc">% SSC: </label>
+                <input type="number" name="ssc" id="ssc" min="1" max="100" step=".01" />
+            </div>
+            <div class="form-grp-radio">
+                <label for="domain">Domain:</label> <br>
+                {% for domain in data.domains %}
+                <label><input type="radio" name="domain" id="domain" value='{{domain}}' />
+                    {{domain}}</label>
+                <br>
+                {% endfor %}
+            </div>
+            <div class="form-grp">
+                <label for="resume">Resume: </label>
+                <input type="text" name="resume" id="resume" />
+            </div>
 
-        <label for="age">Age: </label>
-        <input type="number" name="age" id="age" min="15" max="100" />
-        <br /><br />
-
-        <label for="college">School/College: </label>
-        <input type="text" name="college" id="college" />
-        <br /><br />
-
-        <label for="cgpa">CGPA: </label>
-        <input type="number" name="cgpa" id="cgpa" min="1" max="10" step=".01" />
-        <br /><br />
-
-        <label for="hsc">% HSC: </label>
-        <input type="number" name="hsc" id="hsc" min="1" max="100" step=".01" />
-        <br /><br />
-
-        <label for="ssc">% SSC: </label>
-        <input type="number" name="ssc" id="ssc" min="1" max="100" step=".01" />
-        <br /><br />
-
-        <label for="domain">Domain: </label><br>
-
-        {% for domain in data.domains %}
-        <input type="radio" name="domain" id="domain" value={{domain}} />
-        <label for={{domain}}>{{domain}}</label>
-        <br>
-        {% endfor %}
-
-        <br>
-        <label for="resume">Resume: </label>
-        <input type="text" name="resume" id="resume">
-        <br><br>
-
-        <a href="{% url 'tform' data.fid %}">
-            <input type="submit" value="Submit">
-        </a>
-    </form>
+            <a href="{% url 'tform' data.fid %}">
+                <input type="submit" value="Submit" />
+            </a>
+        </form>
+    </div>
 </body>
 
 </html>
