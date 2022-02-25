@@ -1,20 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
     <title>Error</title>
-</head>
-<body>
-    <h1>{{msg}}</h1>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-    {% if list %}
-    <ol>
-        {% for email in list %}
-        <li>{{email}}</li>
-        {% endfor %}
-    </ol>
-    {% endif %}
+        body {
+            background-color: rgba(0, 0, 0, 0.3);
+            font-family: "Roboto Slab", serif;
+        }
+
+        .head-container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid white;
+            width: 80%;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            box-shadow: 0 4px 8px 1px hsl(234, 12%, 34%);
+        }
+
+        .head-container .head {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+            font-weight: 900;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head-container">
+        <p class="head">{{msg}}</p>
+
+        {% if list %}
+        <h4>Failed List: </h4>
+        <ol style="margin: 5px 15px;">
+            {% for email in list %}
+            <li>{{email}}</li>
+            {% endfor %}
+        </ol>
+        {% endif %}
+    </div>
+
 </body>
+
 </html>
