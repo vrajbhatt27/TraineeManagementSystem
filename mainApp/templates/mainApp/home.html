@@ -188,12 +188,17 @@
             <form method="POST" action="generateCertificate/">
                 {% csrf_token %}
                 <input type="hidden" name="certificate_utility" value="True" />
-                <label for="name">Name: </label>
-                <input type="text" name="name" id="name" placeholder="Trainee Name" />
-                <label for="domain">Domain: </label>
-                <input type="text" name="domain" id="domain" placeholder="Trainee Domain" />
-                <label for="email">Email: </label>
-                <input type="email" name="email" id="email" placeholder="Trainee Email" />
+                <div class="row-layout-sb">
+                    <div class="form-grp"><label for="name">Name: </label>
+                        <input type="text" name="name" id="name" placeholder="Trainee Name" />
+                    </div>
+                    <div class="form-grp"><label for="domain">Domain: </label>
+                        <input type="text" name="domain" id="domain" placeholder="Trainee Domain" />
+                    </div>
+                    <div class="form-grp"><label for="email">Email: </label>
+                        <input type="email" name="email" id="email" placeholder="Trainee Email" />
+                    </div>
+                </div>
                 <br>
                 <p style="text-align: center">-------- OR --------</p>
                 <br>
@@ -201,7 +206,7 @@
                 <span style="color: white;">
                     Send To All
                 </span>
-                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();" />
+                <input type="submit" value="Send" class="myBtn" onclick="spinLoader();" style="margin-top: 100px;" />
             </form>
         </div>
     </div>
