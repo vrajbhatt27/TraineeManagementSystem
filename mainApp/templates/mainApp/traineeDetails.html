@@ -9,9 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="{% static 'css/mainApp/tdetails.css' %}" />
     <title>Trainee Details</title>
+    <style>
+        .hide {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -25,18 +30,28 @@
 
     <div class="description">
         <h2>Description</h2>
-        <p style="margin-top: 10px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium provident
-            similique
-            sit
-            odit quasi hic,
-            excepturi molestias vel? Et deleniti id ea, fugit nostrum necessitatibus dicta quasi eaque officiis magnam!
+        <p style="margin-top: 10px">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
+            provident similique sit odit quasi hic, excepturi molestias vel? Et
+            deleniti id ea, fugit nostrum necessitatibus dicta quasi eaque officiis
+            magnam!
         </p>
+    </div>
+
+    <div class="filter">
+        <p>Groups: </p>
+        <select onchange="showFilteredData();" id="filter-options">
+            <option value="all">all</option>
+            {% for data in tdata %}
+            <option value="{{ data.tdomain }}">{{ data.tdomain }}</option>
+            {% endfor %}
+        </select>
     </div>
 
     <div id="table">
         <table class="trainee-table">
             <thead>
-                <tr>
+                <tr class="table-headings">
                     <th>Name</th>
                     <th>Email</th>
                     <th>Age</th>
@@ -51,7 +66,7 @@
             </thead>
             {% for data in tdata %}
             <tbody>
-                <tr>
+                <tr class="{{ data.tdomain }} table-content">
                     <td>{{ data.tname }}</td>
                     <td>{{ data.temail }}</td>
                     <td>{{ data.tage }}</td>
@@ -82,5 +97,38 @@
         </div>
     </div>
 </body>
+
+<script>
+    function showFilteredData()
+    {
+        domain = document.getElementById( "filter-options" );
+        rows = document.getElementsByClassName( "table-content" );
+
+
+        if ( domain.value == 'all' )
+        {
+            for ( let index = 0; index < rows.length; index++ )
+            {
+                rows[ index ].classList.remove( 'hide' )
+            }
+            return;
+        }
+
+        for ( let index = 0; index < rows.length; index++ )
+        {
+            if ( !rows[ index ].classList.contains( domain.value ) )
+            {
+                console.log( rows[ index ] );
+                rows[ index ].classList.add( "hide" );
+            } else
+            {
+                if ( rows[ index ].classList.contains( 'hide' ) )
+                {
+                    rows[ index ].classList.remove( "hide" );
+                }
+            }
+        }
+    }
+</script>
 
 </html>

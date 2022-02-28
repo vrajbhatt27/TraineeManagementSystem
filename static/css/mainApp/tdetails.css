@@ -40,6 +40,26 @@ i {
   padding: 10px;
 }
 
+.filter {
+  margin: 20px;
+  padding: 10px;
+}
+
+.filter p {
+  font-size: 20px;
+  display: inline;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.filter select {
+  width: 100px;
+  font-weight: 600;
+  font-size: 16px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
 .trainee-table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
