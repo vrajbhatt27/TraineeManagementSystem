@@ -1,5 +1,6 @@
 from ..models import Form, Trainee
 
+
 def getTraineeData(fid):
     data = []
     try:
@@ -22,6 +23,7 @@ def getTraineeData(fid):
 
     return data
 
+
 def getFormData(fid):
     data = []
     try:
@@ -31,12 +33,20 @@ def getFormData(fid):
             data.append({
                 'description': f.description,
                 'date': f.date,
+                'domains': f.domains,
             })
     except Exception as e:
         print("!!!!!!!!!!!!!!!!!!!>", "Can't get form data")
         print(e)
-    
+
+    if ' ' in data[0]['domains']:
+        data[0]['domains'] = data[0]['domains'].replace(' ', '-')
+
+    domains = data[0]['domains'].split('\r\n')
+    data[0]['domains'] = domains
+
     return data[0]
+
 
 def delete_trainee(temail, fid):
     res = False

@@ -9,6 +9,10 @@ def getDataForTform(fid):
             return -1
 
         domain_lst = form.domains.split('\r\n')
+        for i in range(len(domain_lst)):
+            if ' ' in domain_lst[i]:
+                domain_lst[i] = domain_lst[i].replace(' ', '-')
+
         data = {
             'description': form.description,
             'domains': domain_lst,

@@ -42,8 +42,8 @@
         <p>Groups: </p>
         <select onchange="showFilteredData();" id="filter-options">
             <option value="all">all</option>
-            {% for data in tdata %}
-            <option value="{{ data.tdomain }}">{{ data.tdomain }}</option>
+            {% for data in fdata.domains %}
+            <option value="{{ data }}">{{ data }}</option>
             {% endfor %}
         </select>
     </div>
