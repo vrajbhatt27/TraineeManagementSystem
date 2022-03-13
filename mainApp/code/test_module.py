@@ -1,4 +1,5 @@
 from datetime import datetime
+import json
 from ..models import Test
 import csv
 
@@ -26,3 +27,16 @@ def createTest(user, description, domain, file):
             'op4': row[4],
             'ans': row[5]
         })
+
+    json_data = json.dumps(questions)
+    # Saving Data
+    try:
+        test = Test(uid=user, test_id=test_id,
+                    domain=domain, description=description, questions=json_data, test_status=test_status)
+        test.save()
+        res = True
+    except Exception as e:
+        print("!!!!!!!!!!!")
+        print("Error in creating Form", e)
+
+    return res
