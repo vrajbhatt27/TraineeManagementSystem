@@ -97,7 +97,7 @@
         <div class="modal-content">
             <h2>Create New Test</h2>
             <span class="close" onclick="newTestModal.style.display = 'none'">&times;</span>
-            <form method="POST" action="">
+            <form method="POST" action="createTest/" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="newTest" value="True" />
                 <label for="name">Description: </label>

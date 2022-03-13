@@ -13,6 +13,7 @@ class Form(models.Model):
     def __str__(self):
         return self.fid
 
+
 class Trainee(models.Model):
     fid = models.CharField(max_length=50, null=True)
     trainee_name = models.CharField(max_length=50, null=True)
@@ -27,3 +28,12 @@ class Trainee(models.Model):
 
     def __str__(self):
         return self.trainee_email
+
+
+class Test(models.Model):
+    uid = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    test_id = models.CharField(max_length=50, null=True)
+    domain = models.CharField(max_length=50, null=True)
+    description = models.CharField(max_length=100, null=True)
+    questions = models.JSONField(null=True)
+    test_status = models.BooleanField()

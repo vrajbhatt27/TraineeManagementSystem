@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .models import Form
-from .code import newForm, tform_utils, tdetails_utils, email_utils, other_utils
+from .code import newForm, tform_utils, tdetails_utils, email_utils, other_utils, test_module
 from .code.hashid_utils import encrypt, decrypt
 from django.contrib import messages
 import csv
@@ -35,6 +35,25 @@ def home(request):
             'fid': form.fid,
         })
     return render(request, 'mainApp/home.html', {'forms': mylist})
+
+# ------------------------------
+
+
+@login_required(login_url='login')
+def createTest(request):
+    if request.method == 'POST':
+        if request.POST["newTest"] == "True":
+            description = request.POST.get('description')
+            domain = request.POST.get('domain')
+            csv_file = request.POST.get('csv_file')
+
+            if csv_file != '':
+                myFile = request.FILES.get('csv_file')
+                test_module.createTest(
+                    request.user, description, domain, myFile)
+
+    return redirect('home')
+# ------------------------------
 
 
 def tforms(request, fid):
@@ -232,6 +251,7 @@ def generateCertificate(request):
     return redirect('home')
 
 
+@login_required(login_url='login')
 def generateOfferLetter(request):
     if request.method == "POST":
         cname = request.POST.get("cname")
@@ -265,3 +285,5 @@ def generateOfferLetter(request):
                 return render(request, 'mainApp/error.html', {"msg": "Error in sending Offerletters.", "list": failed_list})
 
     return redirect('home')
+
+# Test Module Starts Here
