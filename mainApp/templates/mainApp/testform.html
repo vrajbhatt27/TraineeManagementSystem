@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/mainApp/form.css' %}" />
+    <title>T-Form</title>
+</head>
+
+<body>
+    <div class="head-container">
+        <h1>{{ data.domain }}</h1>
+        <p>{{ data.description }}</p>
+    </div>
+
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %} {% for key, q in data.questions.items %}
+            <div class="form-grp-radio">
+                <label for="question">{{q.question}}</label> <br />
+                <label><input type="radio" name="{{key}}" value="{{q.op1}}" />
+                    {{q.op1}}</label><br />
+                <label><input type="radio" name="{{key}}" value="{{q.op2}}" />
+                    {{q.op2}}</label><br />
+                <label><input type="radio" name="{{key}}" value="{{q.op3}}" />
+                    {{q.op3}}</label><br />
+                <label><input type="radio" name="{{key}}" value="{{q.op4}}" />
+                    {{q.op4}}</label>
+                <br />
+            </div>
+            {% endfor %}
+
+            <a href="{% url 'testForm' 'tid'%}">
+                <input type="submit" value="Submit" />
+            </a>
+        </form>
+    </div>
+</body>
+
+</html>

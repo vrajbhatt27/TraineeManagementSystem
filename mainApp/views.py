@@ -47,25 +47,6 @@ def home(request):
         })
     return render(request, 'mainApp/home.html', {'forms': mylist, 'tests': mylist2})
 
-# ------------------------------
-
-
-@login_required(login_url='login')
-def createTest(request):
-    if request.method == 'POST':
-        if request.POST["newTest"] == "True":
-            description = request.POST.get('description')
-            domain = request.POST.get('domain')
-            csv_file = request.POST.get('csv_file')
-
-            if csv_file != '':
-                myFile = request.FILES.get('csv_file')
-                test_module.createTest(
-                    request.user, description, domain, myFile)
-
-    return redirect('home')
-# ------------------------------
-
 
 def tforms(request, fid):
     if request.method == "GET":
@@ -101,14 +82,51 @@ def tforms(request, fid):
 
     return render(request, 'mainApp/tform.html', params)
 
+# ------------------------------
 
-@login_required(login_url='login')
+
+def test_form(request, tid):
+    if request.method == "GET":
+        data = test_module.getData(tid)
+        if(data == -1):
+            return render(request, 'mainApp/error.html', {'msg': 'Test is Closed'})
+
+        if(len(data) == 0):
+            return render(request, 'mainApp/error.html', {'msg': 'Test Does not Exist'})
+
+        params = {'data': data, 'tid': tid}
+
+    if request.method == "POST":
+        keys = test_module.getKeys(tid)
+        ans = []
+
+        for key in keys:
+            ans.append(request.POST.get(key))
+
+        test_module.saveData(ans, tid)
+
+        res = True
+        if res == -1:
+            return render(request, 'mainApp/error.html', {"msg": "Form Already Submitted"})
+
+        if res:
+            return render(request, 'mainApp/success.html', {"msg": "Form Submitted Successfully"})
+        else:
+            return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Form !!!"})
+
+    return render(request, 'mainApp/testform.html', params)
+
+
+# ------------------------------
+
+
+@ login_required(login_url='login')
 def toTdetails(request, fid):
     request.session['fid'] = fid
     return HttpResponseRedirect(reverse('tdetails'))
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def tdetails(request):
     tdata = tdetails_utils.getTraineeData(request.session["fid"])
     fdata = tdetails_utils.getFormData(request.session["fid"])
@@ -118,7 +136,7 @@ def tdetails(request):
     return render(request, 'mainApp/traineeDetails.html', {"tdata": tdata, "fdata": fdata})
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def delTrainee(request, temail):
     res = tdetails_utils.delete_trainee(temail, request.session["fid"])
     if not res:
@@ -127,13 +145,13 @@ def delTrainee(request, temail):
     return redirect('tdetails')
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def setSession(request, fid):
     request.session['fid_for_utility'] = fid
     return HttpResponse('')
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def sendEmail(request):
     if request.method == 'POST':
         email_head = request.POST.get('email_heading')
@@ -178,13 +196,13 @@ def sendEmail(request):
     return redirect('home')
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def urlStatusToogle(request, fid):
     newForm.toogleUrlStatus(fid)
     return HttpResponse('')
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def download_csv(request):
     data = tdetails_utils.getTraineeData(request.session["fid"])
 
@@ -219,7 +237,7 @@ def download_csv(request):
     return response
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def delForm(request, fid):
     res = newForm.deleteForm(fid)
     if not res:
@@ -228,7 +246,7 @@ def delForm(request, fid):
     return redirect('home')
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def generateCertificate(request):
     if request.method == 'POST':
         name = request.POST.get("name")
@@ -262,7 +280,7 @@ def generateCertificate(request):
     return redirect('home')
 
 
-@login_required(login_url='login')
+@ login_required(login_url='login')
 def generateOfferLetter(request):
     if request.method == "POST":
         cname = request.POST.get("cname")
@@ -298,3 +316,19 @@ def generateOfferLetter(request):
     return redirect('home')
 
 # Test Module Starts Here
+
+
+@ login_required(login_url='login')
+def createTest(request):
+    if request.method == 'POST':
+        if request.POST["newTest"] == "True":
+            description = request.POST.get('description')
+            domain = request.POST.get('domain')
+            csv_file = request.POST.get('csv_file')
+
+            if csv_file != '':
+                myFile = request.FILES.get('csv_file')
+                test_module.createTest(
+                    request.user, description, domain, myFile)
+
+    return redirect('home')

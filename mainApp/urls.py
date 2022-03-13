@@ -20,4 +20,5 @@ urlpatterns = [
 
     # Test Module urls:
     path('createTest/', views.createTest, name='createTest'),
+    path('tests/<tid>/', views.test_form, name="testForm"),
 ]
