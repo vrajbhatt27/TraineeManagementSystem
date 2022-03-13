@@ -1,280 +1,285 @@
 * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
-  --orange: #ff3c00;
-  --varyDarkBlue: hsl(234, 12%, 34%);
-  --grayishBlue: hsl(229, 6%, 66%);
-  --veryLightGray: hsl(0, 0%, 98%);
-  --weight1: 200;
-  --weight2: 400;
-  --weight3: 600;
-  --weight4: 800;
+    --orange: #ff3c00;
+    --varyDarkBlue: hsl(234, 12%, 34%);
+    --grayishBlue: hsl(229, 6%, 66%);
+    --veryLightGray: hsl(0, 0%, 98%);
+    --weight1: 200;
+    --weight2: 400;
+    --weight3: 600;
+    --weight4: 800;
 }
 
 body {
-  font-family: "Roboto Slab", serif;
-  background-color: var(--veryLightGray);
+    font-family: 'Roboto Slab', serif;
+    background-color: var(--veryLightGray);
 }
 /*! Curved Div Header------------------------------------------- */
 
 .curved-div {
-  background: #ff3c00;
-  color: #fff;
-  position: relative;
+    background: #ff3c00;
+    color: #fff;
+    position: relative;
 }
 
 .curved-div svg {
-  display: block;
+    display: block;
 }
 
 .curved-div .container {
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
 }
 
 #welcome {
-  align-self: center;
+    align-self: center;
 }
 
 #greet {
-  margin: 20px;
+    margin: 20px;
 }
 
 #logout {
-  width: 50px;
-  height: 50px;
-  margin: 20px;
-  font-size: 40px;
+    width: 50px;
+    height: 50px;
+    margin: 20px;
+    font-size: 40px;
 }
 
-.newFormButton {
-  background-color: blue;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 10px;
-  margin: 20px;
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
+.btn-container {
+    margin: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.newButton {
+    background-color: blue;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline;
 }
 /*!--------------------------------------------------  */
 /*! Internship Detail Card CSS  */
 .cards-container {
-  display: grid;
-  gap: 20px 30px;
-  grid-template-columns: 346px 346px 346px 346px;
+    display: grid;
+    gap: 20px 30px;
+    grid-template-columns: 346px 346px 346px 346px;
 }
 
 .card {
-  width: 300px;
-  height: 250px;
-  margin: 10px;
-  padding: 10px;
-  border-top: 4px solid var(--orange);
-  border-radius: 5px;
-  box-shadow: 0px 30px 40px -10px var(--grayishBlue);
+    width: 300px;
+    height: 250px;
+    margin: 10px;
+    padding: 10px;
+    border-top: 4px solid var(--orange);
+    border-radius: 5px;
+    box-shadow: 0px 30px 40px -10px var(--grayishBlue);
 }
 
 .card h3 {
-  color: var(--varyDarkBlue);
-  font-weight: var(--weight4);
-  font-size: 20px;
-  text-decoration: underline;
-  text-align: center;
+    color: var(--varyDarkBlue);
+    font-weight: var(--weight4);
+    font-size: 20px;
+    text-decoration: underline;
+    text-align: center;
 }
 
 .card p {
-  color: var(--varyDarkBlue);
-  font-weight: var(--weight3);
+    color: var(--varyDarkBlue);
+    font-weight: var(--weight3);
 }
 
 .card .card-data {
-  height: 100%;
-  margin: 5px;
-  padding: 10px;
-  position: relative;
+    height: 100%;
+    margin: 5px;
+    padding: 10px;
+    position: relative;
 }
 
 .card .card-data .card-data-grp {
-  display: flex;
-  justify-content: flex-start;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .card-data .menu-btn {
-  font-size: 25px;
-  position: absolute;
-  top: 0;
-  right: 0;
+    font-size: 25px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .card-data-grp input {
-  border: 2px solid var(--varyDarkBlue);
-  border-radius: 5px;
-  width: 100px;
-  font-weight: var(--weight3);
-  color: var(--varyDarkBlue);
+    border: 2px solid var(--varyDarkBlue);
+    border-radius: 5px;
+    width: 100px;
+    font-weight: var(--weight3);
+    color: var(--varyDarkBlue);
 }
 
 .card .card-utils {
-  display: none;
-  position: relative;
+    display: none;
+    position: relative;
 }
 
 .circle-btn {
-  width: 30px;
-  height: 30px;
-  background-color: blue;
-  color: white;
-  border-radius: 50%;
-  text-align: center;
-  padding: 5px;
-  font-size: 20px;
-  cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-color: blue;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    padding: 5px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .cb1 {
-  position: absolute;
-  top: 30px;
-  left: 126px;
+    position: absolute;
+    top: 30px;
+    left: 126px;
 }
 .cb2 {
-  position: absolute;
-  top: 100px;
-  left: 48px;
+    position: absolute;
+    top: 100px;
+    left: 48px;
 }
 .cb3 {
-  position: absolute;
-  top: 100px;
-  left: 212px;
+    position: absolute;
+    top: 100px;
+    left: 212px;
 }
 .cb4 {
-  position: absolute;
-  top: 170px;
-  left: 162px;
+    position: absolute;
+    top: 170px;
+    left: 162px;
 }
 
 .cb5 {
-  position: absolute;
-  top: 170px;
-  left: 88px;
+    position: absolute;
+    top: 170px;
+    left: 88px;
 }
 
 .cb6 {
-  position: absolute;
-  top: 100px;
-  left: 126px;
+    position: absolute;
+    top: 100px;
+    left: 126px;
 }
 
 /*!---------------------------------------------------  */
 
 /*! CSS For Toogle Switch starts------------------------- */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 25px;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 25px;
 }
 
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 25px;
-  width: 25px;
-  left: 1px;
-  /* bottom: 3px; */
-  background-color: snow;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+    position: absolute;
+    content: '';
+    height: 25px;
+    width: 25px;
+    left: 1px;
+    /* bottom: 3px; */
+    background-color: snow;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: blue;
+    background-color: blue;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px blue;
+    box-shadow: 0 0 1px blue;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(33px);
-  -ms-transform: translateX(33px);
-  transform: translateX(34px);
+    -webkit-transform: translateX(33px);
+    -ms-transform: translateX(33px);
+    transform: translateX(34px);
 }
 
 .slider.round {
-  border-radius: 34px;
+    border-radius: 34px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 /*!---------------------------------------------------  */
 
 /*! CSS for Copy Text starts here ---------------------------------- */
 .tooltip {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .tooltip .tooltiptext {
-  visibility: hidden;
-  width: 140px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 150%;
-  left: 50%;
-  margin-left: -75px;
-  opacity: 0;
-  transition: opacity 0.3s;
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 /*!-------------------------------------------------------------------- */

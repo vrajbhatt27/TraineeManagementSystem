@@ -29,8 +29,15 @@
             </a>
         </div>
 
-        <div class="newFormButton" onclick="newFormModal.style.display='block'">
-            New Form
+        <div class="btn-container">
+            <div class="newButton" onclick="newFormModal.style.display='block'">
+                New Form
+            </div>
+
+            <!-- New Test Btn -->
+            <div class="newButton" onclick="newTestModal.style.display='block'">
+                New Test
+            </div>
         </div>
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319">
@@ -78,6 +85,32 @@
 
                 <label for="domains">Domains: </label>
                 <textarea name="domains" id="domains" cols="40" rows="5"></textarea>
+
+                <input type="submit" value="Create" class="myBtn" />
+            </form>
+        </div>
+    </div>
+
+    <!-- The Modal for New Test -->
+    <div id="newTestModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <h2>Create New Test</h2>
+            <span class="close" onclick="newTestModal.style.display = 'none'">&times;</span>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="hidden" name="newTest" value="True" />
+                <label for="name">Description: </label>
+                <textarea name="description" id="description" cols="40" rows="5"></textarea>
+
+
+                <label for="domains">Domain: </label>
+                <input type="text" name="domain">
+
+                <div class="form-grp">
+                    <label for="csv_file">CSV File: </label>
+                    <input type="file" name="csv_file" id="csv_file" />
+                </div>
 
                 <input type="submit" value="Create" class="myBtn" />
             </form>
@@ -290,6 +323,7 @@
 <script type="text/javascript">
     // Get the modal
     var newFormModal = document.getElementById( "newFormModal" );
+    var newTestModal = document.getElementById( "newTestModal" );
     var emailModal = document.getElementById( "emailModal" );
     var offerletterModal = document.getElementById( "offerletterModal" );
     var certificateModal = document.getElementById( "certificateModal" );
