@@ -318,6 +318,49 @@
         {% endfor %}
     </div>
     <!--!----------------------------------------------------------- -->
+
+    <!--! Test Cards ----------------------------------------------- -->
+    <h1 class="m-10">Tests</h1>
+    <div class="cards-container">
+        {% for test in tests %}
+        <div class="card">
+            <h3>Test - {{ test.cnt }}</h3>
+            <p class="mt-20">Domain: {{ test.domain }}</p>
+            <div class="card-data-grp mt-40">
+                <p class="px-5">Test URL: </p>
+                <input type="text" value="{{test.url}}" id="{{test.tid}}" class="px-5" />
+                <div class="tooltip" class="px-5">
+                    <a onclick="copyText('{{test.tid}}');" onmouseout="outFunc();">
+                        <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+                        <i class="fa fa-clone" style="font-size: 24px; margin-left: 5px"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="card-data-grp mt-40">
+                <p class="px-5 mr-10">
+                    Test Status: {% if test.test_status == True %}
+                    <b>Open</b>
+                    {% else %}
+                    <b>Close</b>
+                    {% endif %}
+                </p>
+                <label class="switch mx-5">
+                    <!--! -Change here -->
+                    {% if test.test_status == True %}
+                    <input type="checkbox" name="url_status_cb" id="url_status_cb" checked
+                        onchange="toogleUrlStatus('{{form.fid}}');" />
+                    {% else %}
+                    <input type="checkbox" name="url_status_cb" id="url_status_cb"
+                        onchange="toogleUrlStatus('{{form.fid}}');" />
+                    {% endif %}
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!--!----------------------------------------------------------- -->
+
 </body>
 
 <script type="text/javascript">

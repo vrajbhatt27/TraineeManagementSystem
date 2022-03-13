@@ -110,7 +110,7 @@ body {
     position: relative;
 }
 
-.card .card-data .card-data-grp {
+.card .card-data-grp {
     display: flex;
     justify-content: flex-start;
 }

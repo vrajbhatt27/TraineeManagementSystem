@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from .models import Form
+from .models import Form, Test
 from .code import newForm, tform_utils, tdetails_utils, email_utils, other_utils, test_module
 from .code.hashid_utils import encrypt, decrypt
 from django.contrib import messages
@@ -34,7 +34,18 @@ def home(request):
             'form_status': form.form_status,
             'fid': form.fid,
         })
-    return render(request, 'mainApp/home.html', {'forms': mylist})
+
+    testList = Test.objects.filter(uid=request.user)
+    mylist2 = []
+    for cnt, test in enumerate(testList, 1):
+        mylist2.append({
+            'cnt': cnt,
+            'domain': test.domain,
+            'url': encrypt(test.test_id),
+            'test_status': test.test_status,
+            'tid': test.test_id,
+        })
+    return render(request, 'mainApp/home.html', {'forms': mylist, 'tests': mylist2})
 
 # ------------------------------
 

@@ -1,62 +1,66 @@
 :root {
-  --orange: #ff3c00;
-  --varyDarkBlue: hsl(234, 12%, 34%);
-  --grayishBlue: hsl(229, 6%, 66%);
-  --veryLightGray: hsl(0, 0%, 98%);
-  --weight1: 200;
-  --weight2: 400;
-  --weight3: 600;
+    --orange: #ff3c00;
+    --varyDarkBlue: hsl(234, 12%, 34%);
+    --grayishBlue: hsl(229, 6%, 66%);
+    --veryLightGray: hsl(0, 0%, 98%);
+    --weight1: 200;
+    --weight2: 400;
+    --weight3: 600;
+}
+
+.m-10 {
+    margin: 10px;
 }
 
 .my-30 {
-  margin: 30px 0;
+    margin: 30px 0;
 }
 
 .mt-40 {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
 .mt-20 {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .px-5 {
-  padding: 0 5px;
+    padding: 0 5px;
 }
 
 .mr-10 {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .a-btn-white {
-  text-decoration: none;
-  color: white;
+    text-decoration: none;
+    color: white;
 }
 
 .a-btn-black {
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
 }
 
 i {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .btn {
-  padding: 10px;
-  background-color: blue;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
+    padding: 10px;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .row-layout-sb {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .row-layout {
-  display: flex;
-  justify-content: flex-start;
+    display: flex;
+    justify-content: flex-start;
 }
