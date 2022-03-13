@@ -21,6 +21,10 @@
 
     <div class="form-container">
         <form method="post">
+            <div class="form-grp">
+                <label for="email">Email: </label>
+                <input type="email" name="email" id="email" />
+            </div>
             {% csrf_token %} {% for key, q in data.questions.items %}
             <div class="form-grp-radio">
                 <label for="question">{{q.question}}</label> <br />

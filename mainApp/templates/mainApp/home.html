@@ -320,7 +320,9 @@
     <!--!----------------------------------------------------------- -->
 
     <!--! Test Cards ----------------------------------------------- -->
+    {% if tests %}
     <h1 class="m-10">Tests</h1>
+    {% endif %}
     <div class="cards-container">
         {% for test in tests %}
         <div class="card">

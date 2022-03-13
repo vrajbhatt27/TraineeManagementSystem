@@ -25,6 +25,7 @@ class Trainee(models.Model):
     trainee_ssc = models.FloatField(null=True)
     trainee_domain = models.CharField(max_length=50, null=True)
     trainee_resume = models.CharField(max_length=1000, null=True)
+    trainee_score = models.IntegerField(null=True)
 
     def __str__(self):
         return self.trainee_email

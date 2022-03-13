@@ -1,6 +1,6 @@
 from datetime import datetime
 import json
-from ..models import Test
+from ..models import Form, Test, Trainee
 import csv
 from .hashid_utils import encrypt, decrypt
 
@@ -79,7 +79,8 @@ def getKeys(tid):
 # Score and other processes
 
 
-def saveData(ans, tid):
+def saveData(email, ans, tid):
+    res = False
     questions = getData(tid)
     questions = questions['questions']
     if questions == -1 or len(questions) == 0:
@@ -91,3 +92,23 @@ def saveData(ans, tid):
         key = 'q' + str(i+1)
         if questions[key]['ans'] == ans[i]:
             score += 1
+
+    # generating date:
+    d = datetime.now()
+    date = str(d.month) + "/" + str(d.year)
+
+    # Adding score to database
+    try:
+        fid = (Form.objects.get(date=date)).fid
+        trainee = Trainee.objects.get(trainee_email=email, fid=fid)
+        if trainee.trainee_score != None:
+            return -1
+
+        trainee.trainee_score = score
+        trainee.save()
+
+        res = True
+    except Exception as e:
+        print("--Something went wrong while subitting the test", e)
+
+    return res

@@ -97,22 +97,22 @@ def test_form(request, tid):
         params = {'data': data, 'tid': tid}
 
     if request.method == "POST":
+        email = request.POST.get('email')
         keys = test_module.getKeys(tid)
         ans = []
 
         for key in keys:
             ans.append(request.POST.get(key))
 
-        test_module.saveData(ans, tid)
+        res = test_module.saveData(email, ans, tid)
 
-        res = True
         if res == -1:
-            return render(request, 'mainApp/error.html', {"msg": "Form Already Submitted"})
+            return render(request, 'mainApp/error.html', {"msg": "Test Already Submitted"})
 
         if res:
-            return render(request, 'mainApp/success.html', {"msg": "Form Submitted Successfully"})
+            return render(request, 'mainApp/success.html', {"msg": "Test Submitted Successfully"})
         else:
-            return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Form !!!"})
+            return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Test !!!"})
 
     return render(request, 'mainApp/testform.html', params)
 

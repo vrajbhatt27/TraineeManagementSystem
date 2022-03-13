@@ -61,6 +61,7 @@
                     <th>SSC</th>
                     <th>Domain</th>
                     <th>Resume</th>
+                    <th>Score</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -80,6 +81,14 @@
                     {% else %}
                     <td><a href="{{ data.tresume }}">Link</a></td>
                     {% endif %}
+
+                    {% if data.tscore == None%}
+                    <td>-</td>
+                    {% else %}
+                    <td>{{ data.tscore }}</td>
+                    {% endif %}
+
+
                     <td class="delete">
                         <a href="{% url 'delTrainee' data.temail %}">
                             <i class="fa fa-trash"></i>
