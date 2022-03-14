@@ -1,94 +1,118 @@
 * {
-  margin: 0;
-  padding: 0;
-  font-family: "Roboto Slab", serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto Slab', serif;
 }
 
 a {
-  color: blue;
+    color: blue;
 }
 
 i {
-  color: black;
+    color: black;
 }
 
 .head-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
 }
 
 .head-container h1 {
-  margin: 20px;
-  font-size: 40px;
-  text-decoration: underline;
+    margin: 20px;
+    font-size: 40px;
+    text-decoration: underline;
 }
 
 .myBtn {
-  padding: 10px;
-  margin: 20px;
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: blue;
-  color: white;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: blue;
+    color: white;
 }
 
 .description {
-  margin: 20px;
-  padding: 10px;
+    margin: 20px;
+    padding: 10px;
 }
 
 .filter {
-  margin: 20px;
-  padding: 10px;
+    margin: 20px;
+    padding: 10px;
 }
 
 .filter p {
-  font-size: 20px;
-  display: inline;
-  margin-right: 10px;
-  font-weight: bold;
+    font-size: 22px;
+    display: inline;
+    margin-right: 10px;
+    font-weight: bold;
 }
 
 .filter select {
-  font-weight: 600;
-  font-size: 16px;
-  border: 2px solid black;
-  border-radius: 5px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.filter button {
+    padding: 2px 10px;
+    margin: 10px;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.filter label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.filter input[type='number'] {
+    width: 70px;
+    border-radius: 5px;
+    padding: 2px 5px;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .trainee-table {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 90%;
-  margin: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 30px;
 }
 
 .trainee-table td,
 .trainee-table th {
-  border: 1px solid #ddd;
-  padding: 8px;
+    border: 1px solid #ddd;
+    padding: 8px;
 }
 
 .trainee-table tr:hover {
-  background-color: #ddd;
+    background-color: #ddd;
 }
 
 .trainee-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #ff3c00;
-  color: white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #ff3c00;
+    color: white;
 }
 
 .trainee-table .delete {
-  text-align: center;
+    text-align: center;
 }
 
 .btn-container {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
 }

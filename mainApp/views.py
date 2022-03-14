@@ -85,38 +85,6 @@ def tforms(request, fid):
 # ------------------------------
 
 
-def test_form(request, tid):
-    if request.method == "GET":
-        data = test_module.getData(tid)
-        if(data == -1):
-            return render(request, 'mainApp/error.html', {'msg': 'Test is Closed'})
-
-        if(len(data) == 0):
-            return render(request, 'mainApp/error.html', {'msg': 'Test Does not Exist'})
-
-        params = {'data': data, 'tid': tid}
-
-    if request.method == "POST":
-        email = request.POST.get('email')
-        keys = test_module.getKeys(tid)
-        ans = []
-
-        for key in keys:
-            ans.append(request.POST.get(key))
-
-        res = test_module.saveData(email, ans, tid)
-
-        if res == -1:
-            return render(request, 'mainApp/error.html', {"msg": "Test Already Submitted"})
-
-        if res:
-            return render(request, 'mainApp/success.html', {"msg": "Test Submitted Successfully"})
-        else:
-            return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Test !!!"})
-
-    return render(request, 'mainApp/testform.html', params)
-
-
 # ------------------------------
 
 
@@ -332,3 +300,42 @@ def createTest(request):
                     request.user, description, domain, myFile)
 
     return redirect('home')
+
+
+def test_form(request, tid):
+    if request.method == "GET":
+        data = test_module.getData(tid)
+        if(data == -1):
+            return render(request, 'mainApp/error.html', {'msg': 'Test is Closed'})
+
+        if(len(data) == 0):
+            return render(request, 'mainApp/error.html', {'msg': 'Test Does not Exist'})
+
+        params = {'data': data, 'tid': tid}
+
+    if request.method == "POST":
+        email = request.POST.get('email')
+        keys = test_module.getKeys(tid)
+        ans = []
+
+        for key in keys:
+            ans.append(request.POST.get(key))
+
+        res = test_module.saveData(email, ans, tid)
+
+        if res == -1:
+            return render(request, 'mainApp/error.html', {"msg": "Test Already Submitted"})
+
+        if res:
+            return render(request, 'mainApp/success.html', {"msg": "Test Submitted Successfully"})
+        else:
+            return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Test !!!"})
+
+    return render(request, 'mainApp/testform.html', params)
+
+
+def filterTrainee(request):
+    if request.method == 'POST':
+        score = request.POST.get('score')
+        test_module.filterTrainee(score)
+    return redirect('tdetails')

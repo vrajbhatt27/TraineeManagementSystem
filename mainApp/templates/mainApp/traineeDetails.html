@@ -31,21 +31,32 @@
     <div class="description">
         <h2>Description</h2>
         <p style="margin-top: 10px">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            provident similique sit odit quasi hic, excepturi molestias vel? Et
-            deleniti id ea, fugit nostrum necessitatibus dicta quasi eaque officiis
-            magnam!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Accusantium provident similique sit odit quasi hic, excepturi
+            molestias vel? Et deleniti id ea, fugit nostrum necessitatibus
+            dicta quasi eaque officiis magnam!
         </p>
     </div>
 
     <div class="filter">
-        <p>Groups: </p>
+        <p>Groups:</p>
         <select onchange="showFilteredData();" id="filter-options">
             <option value="all">all</option>
             {% for data in fdata.domains %}
             <option value="{{ data }}">{{ data }}</option>
             {% endfor %}
         </select>
+    </div>
+
+    <div class="filter">
+        <p>Filter:</p>
+        <br />
+        <form action="{% url 'filterTrainee' %}" method="POST">
+            {% csrf_token %}
+            <label>Score &#60; </label>
+            <input type="number" min="0" name="score" />
+            <button>Delete</button>
+        </form>
     </div>
 
     <div id="table">
@@ -80,14 +91,11 @@
                     <td></td>
                     {% else %}
                     <td><a href="{{ data.tresume }}">Link</a></td>
-                    {% endif %}
-
-                    {% if data.tscore == None%}
+                    {% endif %} {% if data.tscore == None%}
                     <td>-</td>
                     {% else %}
                     <td>{{ data.tscore }}</td>
                     {% endif %}
-
 
                     <td class="delete">
                         <a href="{% url 'delTrainee' data.temail %}">
@@ -110,15 +118,14 @@
 <script>
     function showFilteredData()
     {
-        domain = document.getElementById( "filter-options" );
-        rows = document.getElementsByClassName( "table-content" );
-
+        domain = document.getElementById( 'filter-options' );
+        rows = document.getElementsByClassName( 'table-content' );
 
         if ( domain.value == 'all' )
         {
             for ( let index = 0; index < rows.length; index++ )
             {
-                rows[ index ].classList.remove( 'hide' )
+                rows[ index ].classList.remove( 'hide' );
             }
             return;
         }
@@ -128,12 +135,12 @@
             if ( !rows[ index ].classList.contains( domain.value ) )
             {
                 console.log( rows[ index ] );
-                rows[ index ].classList.add( "hide" );
+                rows[ index ].classList.add( 'hide' );
             } else
             {
                 if ( rows[ index ].classList.contains( 'hide' ) )
                 {
-                    rows[ index ].classList.remove( "hide" );
+                    rows[ index ].classList.remove( 'hide' );
                 }
             }
         }
