@@ -339,3 +339,8 @@ def filterTrainee(request):
         score = request.POST.get('score')
         test_module.filterTrainee(score)
     return redirect('tdetails')
+
+
+def toogleTestStatus(request, tid):
+    test_module.toogleTestStatus(tid)
+    return HttpResponse('')

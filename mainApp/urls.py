@@ -22,4 +22,6 @@ urlpatterns = [
     path('createTest/', views.createTest, name='createTest'),
     path('tests/<tid>/', views.test_form, name="testForm"),
     path('filterTrainee/', views.filterTrainee, name="filterTrainee"),
+    path('toogleTestStatus/<tid>/',
+         views.toogleTestStatus, name="testStatusToogle"),
 ]

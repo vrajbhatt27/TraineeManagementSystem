@@ -124,3 +124,11 @@ def filterTrainee(score):
 
     except Exception as e:
         print("Error in deleting trainee", e)
+
+# Toogle Test Status:
+
+
+def toogleTestStatus(tid):
+    test = Test.objects.get(test_id=tid)
+    test.test_status = not test.test_status
+    test.save()

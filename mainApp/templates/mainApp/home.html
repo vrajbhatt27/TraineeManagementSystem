@@ -347,13 +347,12 @@
                     {% endif %}
                 </p>
                 <label class="switch mx-5">
-                    <!--! -Change here -->
                     {% if test.test_status == True %}
                     <input type="checkbox" name="url_status_cb" id="url_status_cb" checked
-                        onchange="toogleUrlStatus('{{form.fid}}');" />
+                        onchange="toogleTestStatus('{{test.tid}}');" />
                     {% else %}
                     <input type="checkbox" name="url_status_cb" id="url_status_cb"
-                        onchange="toogleUrlStatus('{{form.fid}}');" />
+                        onchange="toogleTestStatus('{{test.tid}}');" />
                     {% endif %}
                     <span class="slider round"></span>
                 </label>
@@ -407,6 +406,14 @@
     function toogleUrlStatus( fid )
     {
         $.get( "toogleUrlStatus/" + fid + "/", function ( data )
+        {
+            location.reload();
+        } );
+    }
+
+    function toogleTestStatus( tid )
+    {
+        $.get( "toogleTestStatus/" + tid + "/", function ( data )
         {
             location.reload();
         } );
