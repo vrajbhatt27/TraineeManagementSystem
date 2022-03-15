@@ -289,10 +289,13 @@ def createTest(request):
             domain = request.POST.get('domain')
             csv_file = request.POST.get('csv_file')
 
-            if csv_file != '':
+            if csv_file != '' and domain != '' and description != '':
                 myFile = request.FILES.get('csv_file')
-                test_module.createTest(
+                res = test_module.createTest(
                     request.user, description, domain, myFile)
+
+                if not res:
+                    return render(request, 'mainApp/error.html', {'msg': 'Something Went Wrong !!!'})
 
     return redirect('home')
 
