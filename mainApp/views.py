@@ -82,11 +82,6 @@ def tforms(request, fid):
 
     return render(request, 'mainApp/tform.html', params)
 
-# ------------------------------
-
-
-# ------------------------------
-
 
 @ login_required(login_url='login')
 def toTdetails(request, fid):
@@ -334,6 +329,7 @@ def test_form(request, tid):
     return render(request, 'mainApp/testform.html', params)
 
 
+@ login_required(login_url='login')
 def filterTrainee(request):
     if request.method == 'POST':
         score = request.POST.get('score')
@@ -341,6 +337,16 @@ def filterTrainee(request):
     return redirect('tdetails')
 
 
+@ login_required(login_url='login')
 def toogleTestStatus(request, tid):
     test_module.toogleTestStatus(tid)
     return HttpResponse('')
+
+
+@ login_required(login_url='login')
+def delTest(request, tid):
+    res = test_module.deleteTest(tid)
+    if not res:
+        return render(request, 'mainApp/error.html', {"msg": "Error in Deleting Form"})
+
+    return redirect('home')

@@ -24,4 +24,5 @@ urlpatterns = [
     path('filterTrainee/', views.filterTrainee, name="filterTrainee"),
     path('toogleTestStatus/<tid>/',
          views.toogleTestStatus, name="testStatusToogle"),
+    path('delTest/<tid>/', views.delTest, name='delTest'),
 ]

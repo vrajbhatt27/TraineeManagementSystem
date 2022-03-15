@@ -115,7 +115,7 @@ body {
     justify-content: flex-start;
 }
 
-.card-data .menu-btn {
+.menu-btn {
     font-size: 25px;
     position: absolute;
     top: 0;
@@ -283,3 +283,7 @@ input:checked + .slider:before {
 }
 
 /*!-------------------------------------------------------------------- */
+
+.testcard {
+    position: relative;
+}

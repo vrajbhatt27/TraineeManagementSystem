@@ -132,3 +132,18 @@ def toogleTestStatus(tid):
     test = Test.objects.get(test_id=tid)
     test.test_status = not test.test_status
     test.save()
+
+# Delete Test:
+
+
+def deleteTest(tid):
+    res = False
+    try:
+        test = Test.objects.get(test_id=tid)
+        test.delete()
+        res = True
+    except Exception as e:
+        print(">>>>>>>>>>>>>>>>Error In Deleting Form")
+        print(e)
+
+    return res

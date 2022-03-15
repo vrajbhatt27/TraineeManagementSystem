@@ -325,7 +325,7 @@
     {% endif %}
     <div class="cards-container">
         {% for test in tests %}
-        <div class="card">
+        <div class="card testcard">
             <h3>Test - {{ test.cnt }}</h3>
             <p class="mt-20">Domain: {{ test.domain }}</p>
             <div class="card-data-grp mt-40">
@@ -356,7 +356,14 @@
                     {% endif %}
                     <span class="slider round"></span>
                 </label>
+                <!-- Delete Test btn-->
+                <a href="{% url 'delTest' test.tid %}" class="a-btn-black">
+                    <div class="menu-btn" style="margin: 10px 20px;">
+                        <i class=" fa fa-trash" aria-hidden="true"></i>
+                    </div>
+                </a>
             </div>
+
         </div>
         {% endfor %}
     </div>
