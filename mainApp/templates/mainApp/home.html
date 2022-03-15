@@ -132,7 +132,15 @@
                         <input type="text" name="email_heading" id="email_heading" placeholder="Subject" />
 
                         <label for="email_body">Email Body: </label>
-                        <textarea name="email_body" id="email_body" cols="30" rows="10"></textarea>
+                        <textarea name="email_body" id="email_body" cols="30" rows="8"></textarea>
+
+                        <div class="tooltip px-5 mt-20">
+                            <a onclick="copyPaymentLink('Hello');" onmouseout="outFunc();">
+                                <span class="tooltiptext" id="myTooltip2">Copy to clipboard</span>
+                                <span style="text-decoration: underline; cursor: pointer;">Copy Payment Link</span>
+                            </a>
+                        </div>
+
                     </div>
 
                     <div class="send-options">
@@ -437,10 +445,21 @@
         tooltip.innerHTML = "Copied";
     }
 
+    function copyPaymentLink( text )
+    {
+        navigator.clipboard.writeText( text );
+
+        var tooltip = document.getElementById( "myTooltip2" );
+        tooltip.innerHTML = "Copied";
+    }
+
     function outFunc()
     {
         var tooltip = document.getElementById( "myTooltip" );
         tooltip.innerHTML = "Copy to clipboard";
+
+        var tooltip2 = document.getElementById( "myTooltip2" );
+        tooltip2.innerHTML = "Copy to clipboard";
     }
 </script>
 
