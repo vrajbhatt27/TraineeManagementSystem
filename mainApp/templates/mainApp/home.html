@@ -138,7 +138,7 @@
                         <textarea name="email_body" id="email_body" cols="30" rows="8"></textarea>
 
                         <div class="tooltip px-5 mt-20">
-                            <a onclick="copyPaymentLink('Hello');" onmouseout="outFunc();">
+                            <a onclick="copyPaymentLink()" onmouseout="outFunc();">
                                 <span class="tooltiptext" id="myTooltip2">Copy to clipboard</span>
                                 <span style="text-decoration: underline; cursor: pointer;">Copy Payment Link</span>
                             </a>
@@ -303,7 +303,8 @@
                     </div>
                 </a>
 
-                <div class="circle-btn cb2" onclick="emailModal.style.display='block';session('{{ form.fid }}');">
+                <div class="circle-btn cb2"
+                    onclick="emailModal.style.display='block';session('{{ form.fid }}');setEfid('{{form.payment_url}}');">
                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                 </div>
 
@@ -390,6 +391,7 @@
     var offerletterModal = document.getElementById( "offerletterModal" );
     var certificateModal = document.getElementById( "certificateModal" );
     var alertModal = document.getElementById( "alertModal" );
+    let efid;
 
     // Function for changing internship details card content.
     function toogle( fid )
@@ -448,9 +450,9 @@
         tooltip.innerHTML = "Copied";
     }
 
-    function copyPaymentLink( text )
+    function copyPaymentLink()
     {
-        navigator.clipboard.writeText( text );
+        navigator.clipboard.writeText( efid );
 
         var tooltip = document.getElementById( "myTooltip2" );
         tooltip.innerHTML = "Copied";
@@ -463,6 +465,11 @@
 
         var tooltip2 = document.getElementById( "myTooltip2" );
         tooltip2.innerHTML = "Copy to clipboard";
+    }
+
+    function setEfid( val )
+    {
+        efid = val;
     }
 </script>
 

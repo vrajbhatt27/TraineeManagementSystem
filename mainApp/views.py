@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from .models import Form, Test
-from .code import newForm, tform_utils, tdetails_utils, email_utils, other_utils, test_module
+from .code import newForm, payment_module, tform_utils, tdetails_utils, email_utils, other_utils, test_module
 from .code.hashid_utils import encrypt, decrypt
 from django.contrib import messages
 import csv
@@ -35,6 +35,7 @@ def home(request):
             'url': encrypt(form.fid),
             'form_status': form.form_status,
             'fid': form.fid,
+            'payment_url': encrypt(form.fid),
         })
 
     testList = Test.objects.filter(uid=request.user)
@@ -355,3 +356,27 @@ def delTest(request, tid):
         return render(request, 'mainApp/error.html', {"msg": "Error in Deleting Form"})
 
     return redirect('home')
+
+
+def payment(request, fid):
+    if request.method == "GET":
+        data = payment_module.getPaymentDetails(fid)
+
+        if(len(data) == 0):
+            return render(request, 'mainApp/error.html', {'msg': 'Error in Getting payment details'})
+
+        params = {'data': data}
+
+    if request.method == "POST":
+        email = request.POST.get('email')
+        print(email)
+        res = True
+        if res == -1:
+            return render(request, 'mainApp/error.html', {"msg": "Form Already Submitted"})
+
+        if res:
+            return render(request, 'mainApp/success.html', {"msg": "Form Submitted Successfully"})
+        else:
+            return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Form !!!"})
+
+    return render(request, 'mainApp/payment.html', params)

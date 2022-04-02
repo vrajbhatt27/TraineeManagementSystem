@@ -25,4 +25,7 @@ urlpatterns = [
     path('toogleTestStatus/<tid>/',
          views.toogleTestStatus, name="testStatusToogle"),
     path('delTest/<tid>/', views.delTest, name='delTest'),
+
+    # Payment Module urls:
+    path('payment/<fid>/', views.payment, name='payment'),
 ]
