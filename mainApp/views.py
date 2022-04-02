@@ -18,7 +18,9 @@ def home(request):
         if request.POST["newForm"] == "True":
             description = request.POST.get('description')
             domains = request.POST.get('domains')
-            res = newForm.setBaseForm(request.user, description, domains)
+            fee_amount = request.POST.get('payment')
+            res = newForm.setBaseForm(
+                request.user, description, domains, fee_amount)
             if res:
                 return redirect('home')
             else:

@@ -67,7 +67,8 @@
 
 .modal-content input[type='text'],
 input[type='email'],
-input[type='submit'] {
+input[type='submit'],
+input[type='number'] {
     display: block;
     width: 60%;
     padding: 0 10px;
@@ -77,6 +78,10 @@ input[type='submit'] {
     font-size: 16px;
     font-weight: 300;
     margin-top: 10px;
+}
+
+.modal-content input[type='number'] {
+    width: 40%;
 }
 
 .modal-content textarea {

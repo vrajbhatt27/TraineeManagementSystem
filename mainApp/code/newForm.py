@@ -3,12 +3,13 @@ from datetime import datetime
 from ..models import Form
 
 
-def setBaseForm(user, description, domains):
+def setBaseForm(user, description, domains, fee_amount):
     res = False
     userId = user.id
     fid = None
     date = None
     form_status = True
+    fee_amount = int(fee_amount)
 
     d = datetime.now()
 
@@ -20,7 +21,7 @@ def setBaseForm(user, description, domains):
 
     try:
         form = Form(uid=user, fid=fid, date=date, description=description,
-                    domains=domains, form_status=form_status)
+                    domains=domains, form_status=form_status, fee_amount=fee_amount)
         form.save()
         res = True
     except:
@@ -34,6 +35,7 @@ def toogleUrlStatus(fid):
     form = Form.objects.get(fid=fid)
     form.form_status = not form.form_status
     form.save()
+
 
 def deleteForm(fid):
     res = False
