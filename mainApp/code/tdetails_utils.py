@@ -1,10 +1,15 @@
 from ..models import Form, Trainee
 
 
-def getTraineeData(fid):
+def getTraineeData(fid, domain=''):
     data = []
     try:
-        trainee_list = Trainee.objects.filter(fid=fid)
+        if domain == '':
+            trainee_list = Trainee.objects.filter(fid=fid)
+        else:
+            trainee_list = Trainee.objects.filter(
+                fid=fid, trainee_domain=domain)
+
         for t in trainee_list:
             data.append({
                 'tname': t.trainee_name,

@@ -173,13 +173,18 @@ def urlStatusToogle(request, fid):
 
 @ login_required(login_url='login')
 def download_csv(request):
-    data = tdetails_utils.getTraineeData(request.session["fid"])
+    domain = request.GET.get('domain', '')
+
+    if domain != 'all':
+        data = tdetails_utils.getTraineeData(request.session["fid"], domain)
+    else:
+        data = tdetails_utils.getTraineeData(request.session["fid"])
 
     if len(data) == 0:
         return render(request, 'mainApp/error.html', {"msg": "No Trainee Present."})
 
     fields = ['Name', 'Email', 'Age', 'College',
-              'CGPA', 'HSC', 'SSC', 'Domain', 'Resume']
+              'CGPA', 'HSC', 'SSC', 'Domain', 'Resume', 'Score', 'Payment']
     rows = []
 
     for t in data:
@@ -193,6 +198,8 @@ def download_csv(request):
             t['tssc'],
             t['tdomain'],
             t['tresume'],
+            t['tscore'],
+            t['tpaymentStatus'],
         ])
 
     # Create the HttpResponse object with the appropriate CSV header.

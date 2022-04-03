@@ -117,7 +117,8 @@
 
     <div class="btn-container">
         <div class="download-button">
-            <a href="{% url 'gcsv' %}"><button class="myBtn">Download</button></a>
+            <!-- <a href="{% url 'gcsv' %}"><button class="myBtn">Download</button></a> -->
+            <button class="myBtn" id="download_csv">Download</button>
         </div>
     </div>
 </body>
@@ -152,6 +153,12 @@
             }
         }
     }
+
+    document.getElementById( 'download_csv' ).addEventListener( 'click', function ()
+    {
+        const domain = document.getElementById( 'filter-options' );
+        location.href = '/tms/gcsv/?domain=' + domain.value;
+    } );
 </script>
 
 </html>
