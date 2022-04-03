@@ -73,6 +73,7 @@
                     <th>Domain</th>
                     <th>Resume</th>
                     <th>Score</th>
+                    <th>Payment</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -95,6 +96,12 @@
                     <td>-</td>
                     {% else %}
                     <td>{{ data.tscore }}</td>
+                    {% endif %}
+
+                    {% if data.tpaymentStatus == True%}
+                    <td>Done</td>
+                    {% else %}
+                    <td>Left</td>
                     {% endif %}
 
                     <td class="delete">

@@ -391,10 +391,6 @@ def makePayment(request):
 
         params = {'data': data}
 
-        print("/////////////////////////")
-        print(params)
-        print("/////////////////////////")
-
     return render(request, 'mainApp/payment.html', params)
 
 
@@ -414,7 +410,7 @@ def paymentHandler(request):
             # verify the payment signature.
             result = razorpay_client.utility.verify_payment_signature(
                 params_dict)
-            print(result)
+
             if result == True:
                 res = payment_module.savePaymentStatus(razorpay_order_id)
                 return render(request, 'mainApp/success.html', {"msg": "Payment Successfully"})
