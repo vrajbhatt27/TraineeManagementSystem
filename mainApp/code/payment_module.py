@@ -93,9 +93,6 @@ def savePaymentStatus(order_id):
     res = False
     try:
         trainee = Trainee.objects.get(trainee_paymentId=order_id)
-        print("-----------------")
-        print(trainee)
-        print("-----------------")
         trainee.trainee_paymentStatus = True
         trainee.save()
         res = True

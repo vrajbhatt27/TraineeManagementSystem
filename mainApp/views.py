@@ -381,7 +381,6 @@ def makePayment(request):
     if request.method == "POST":
         email = request.POST.get('email')
         fid = request.POST.get('fid')
-        print("---", fid)
         data = payment_module.setUpPayment(fid, email, razorpay_client)
 
         if data == -1:
@@ -396,16 +395,13 @@ def makePayment(request):
         print(params)
         print("/////////////////////////")
 
-    return render(request, 'mainApp/makePayment.html', params)
+    return render(request, 'mainApp/payment.html', params)
 
 
 @ csrf_exempt
 def paymentHandler(request):
-    print("0. Here ------------")
     if request.method == "POST":
-        print("1. Here ------------")
         try:
-            print("2. Here ------------")
             # get the required parameters from post request.
             payment_id = request.POST.get('razorpay_payment_id', '')
             razorpay_order_id = request.POST.get('razorpay_order_id', '')
@@ -415,7 +411,6 @@ def paymentHandler(request):
                 'razorpay_payment_id': payment_id,
                 'razorpay_signature': signature
             }
-            print(params_dict)
             # verify the payment signature.
             result = razorpay_client.utility.verify_payment_signature(
                 params_dict)

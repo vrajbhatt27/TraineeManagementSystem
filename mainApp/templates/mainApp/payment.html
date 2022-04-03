@@ -20,9 +20,32 @@
         <input type="submit" value="Ok" />
     </form>
 
-    <!-- {% if data.ok %}
-   
-    {% endif %} -->
+    {% if data.ok %}
+    <button id="rzp-button1">Pay</button>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            "key": "{{ data.key_id }}", // Enter the Key ID generated from the Dashboard
+            "amount": "{{ data.amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "{{ data.company }}",
+            "description": "Internship Fee",
+            "order_id": "{{ data.order_id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "callback_url": "{{ data.callback_url }}",
+            "prefill": {
+                "name": "{{ data.name }}",
+                "email": "{{ data.email }}",
+            },
+        };
+        var rzp1 = new Razorpay( options );
+
+        document.getElementById( 'rzp-button1' ).onclick = function ( e )
+        {
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+    {% endif %}
 </body>
 
 </html>
