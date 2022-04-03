@@ -296,7 +296,7 @@
                 </div>
             </div>
             <div class="card-utils" id="card-utils-{{form.fid}}">
-                <a href="{% url 'toTdetails' form.fid %}" class="a-btn-white">
+                <a class="a-btn-white" onclick="goToUrl(`{% url 'toTdetails' form.fid %}`)">
                     <div class="circle-btn cb1">
                         <i class="fa fa-info" aria-hidden="true"></i>
 
@@ -316,7 +316,7 @@
                     <i class="fa fa-address-card-o" aria-hidden="true"></i>
                 </div>
 
-                <a href="{% url 'delForm' form.fid %}" class="a-btn-white">
+                <a class="a-btn-white" onclick="goToUrl(`{% url 'delForm' form.fid %}`)">
                     <div class="circle-btn cb5">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </div>
@@ -470,6 +470,11 @@
     function setEfid( val )
     {
         efid = val;
+    }
+
+    function goToUrl( url )
+    {
+        location.href = url;
     }
 </script>
 
