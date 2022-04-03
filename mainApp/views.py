@@ -1,6 +1,6 @@
 from distutils.command.upload import upload
 from turtle import pen
-from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -10,6 +10,9 @@ from .code import newForm, payment_module, tform_utils, tdetails_utils, email_ut
 from .code.hashid_utils import encrypt, decrypt
 from django.contrib import messages
 import csv
+from django.views.decorators.csrf import csrf_exempt
+import razorpay
+from django.conf import settings
 
 
 @login_required(login_url='login')
@@ -358,25 +361,74 @@ def delTest(request, tid):
     return redirect('home')
 
 
+# Payment Module
+razorpay_client = razorpay.Client(
+    auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+
 def payment(request, fid):
     if request.method == "GET":
         data = payment_module.getPaymentDetails(fid)
-
         if(len(data) == 0):
             return render(request, 'mainApp/error.html', {'msg': 'Error in Getting payment details'})
 
         params = {'data': data}
 
+    return render(request, 'mainApp/payment.html', params)
+
+
+def makePayment(request):
     if request.method == "POST":
         email = request.POST.get('email')
-        print(email)
-        res = True
-        if res == -1:
-            return render(request, 'mainApp/error.html', {"msg": "Form Already Submitted"})
+        fid = request.POST.get('fid')
+        print("---", fid)
+        data = payment_module.setUpPayment(fid, email, razorpay_client)
 
-        if res:
-            return render(request, 'mainApp/success.html', {"msg": "Form Submitted Successfully"})
-        else:
-            return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Form !!!"})
+        if data == -1:
+            return render(request, 'mainApp/error.html', {'msg': 'User Doesn\'t Exist'})
 
-    return render(request, 'mainApp/payment.html', params)
+        if data == -2:
+            return render(request, 'mainApp/error.html', {'msg': 'Something Went Wrong'})
+
+        params = {'data': data}
+
+        print("/////////////////////////")
+        print(params)
+        print("/////////////////////////")
+
+    return render(request, 'mainApp/makePayment.html', params)
+
+
+@ csrf_exempt
+def paymentHandler(request):
+    print("0. Here ------------")
+    if request.method == "POST":
+        print("1. Here ------------")
+        try:
+            print("2. Here ------------")
+            # get the required parameters from post request.
+            payment_id = request.POST.get('razorpay_payment_id', '')
+            razorpay_order_id = request.POST.get('razorpay_order_id', '')
+            signature = request.POST.get('razorpay_signature', '')
+            params_dict = {
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': signature
+            }
+            print(params_dict)
+            # verify the payment signature.
+            result = razorpay_client.utility.verify_payment_signature(
+                params_dict)
+            print(result)
+            if result == True:
+                res = payment_module.savePaymentStatus(razorpay_order_id)
+                return render(request, 'mainApp/success.html', {"msg": "Payment Successfully"})
+            else:
+                # if signature verification fails.
+                return render(request, 'mainApp/error.html', {"msg": "Payment Failed!!!"})
+        except Exception as e:
+            return render(request, 'mainApp/error.html', {"msg": "Payment Failed!!!"})
+
+    else:
+       # if other than POST request is made.
+        return HttpResponseBadRequest()

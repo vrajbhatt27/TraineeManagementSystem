@@ -27,6 +27,8 @@ class Trainee(models.Model):
     trainee_domain = models.CharField(max_length=50, null=True)
     trainee_resume = models.CharField(max_length=1000, null=True)
     trainee_score = models.IntegerField(null=True)
+    trainee_paymentId = models.CharField(max_length=50, null=True)
+    trainee_paymentStatus = models.BooleanField(null=True, default=False)
 
     def __str__(self):
         return self.trainee_email

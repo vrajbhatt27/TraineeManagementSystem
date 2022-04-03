@@ -131,6 +131,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = "augustproject10@gmail.com"
 EMAIL_HOST_PASSWORD = "August@1234"
 
+RAZORPAY_KEY_ID = 'rzp_test_weIZocD9olHyDJ'
+RAZORPAY_KEY_SECRET = 'CEro8iBxXbSyPuG6fvUASJqm'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

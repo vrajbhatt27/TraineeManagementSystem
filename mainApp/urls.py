@@ -28,4 +28,7 @@ urlpatterns = [
 
     # Payment Module urls:
     path('payment/<fid>/', views.payment, name='payment'),
+    path('makePayment/', views.makePayment, name="makePayment"),
+    path('makePayment/paymentHandler/',
+         views.paymentHandler, name='paymentHandler'),
 ]

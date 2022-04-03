@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Payment</title>
 </head>
 
@@ -12,12 +12,17 @@
     <h1>Payment Module</h1>
     <h2>{{ data.company }}</h2>
     <h2>{{ data.fee_amount }}</h2>
-    <form action="{% url 'payment' data.fid %}" method="post">
+    <form action="{% url 'makePayment' %}" method="post">
         {% csrf_token %}
         <label for="email">Email: </label>
-        <input type="email" name="email">
-        <input type="submit" value="Submit">
+        <input type="email" name="email" />
+        <input type="hidden" name="fid" value="{{ data.fid }}">
+        <input type="submit" value="Ok" />
     </form>
+
+    <!-- {% if data.ok %}
+   
+    {% endif %} -->
 </body>
 
 </html>
