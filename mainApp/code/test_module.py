@@ -99,7 +99,8 @@ def saveData(email, ans, tid):
 
     # Adding score to database
     try:
-        fid = (Form.objects.get(date=date)).fid
+        fid = (Form.objects.filter(date=date))
+        fid = (fid[len(fid)-1]).fid
         trainee = Trainee.objects.get(trainee_email=email, fid=fid)
         if trainee.trainee_score != None:
             return -1
