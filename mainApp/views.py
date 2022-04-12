@@ -263,16 +263,15 @@ def generateCertificate(request):
 @ login_required(login_url='login')
 def generateOfferLetter(request):
     if request.method == "POST":
-        cname = request.POST.get("cname")
-        hr = request.POST.get('hrName')
         name = request.POST.get("name")
         domain = request.POST.get('domain')
         email = request.POST.get('email')
+        file = request.FILES.get('offer_letter')
         send_to_all = request.POST.get('all')
 
         if name != '':
             res = other_utils.offerletter_utility(
-                request.session["fid_for_utility"], cname, hr, name, domain, email)
+                request.session["fid_for_utility"], file, name, domain, email)
 
             if len(res) == 0:
                 messages.success(
@@ -282,7 +281,7 @@ def generateOfferLetter(request):
 
         if send_to_all != None:
             failed_list = other_utils.offerletter_utility(
-                request.session["fid_for_utility"], cname, hr, all=True)
+                request.session["fid_for_utility"], file, all=True)
 
             if failed_list == -1:
                 return render(request, 'mainApp/error.html', {"msg": "Error in retrieving trainee details"})

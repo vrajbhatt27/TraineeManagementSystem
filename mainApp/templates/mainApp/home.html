@@ -177,18 +177,14 @@
         <div class="modal-content">
             <h2>Offer Letters</h2>
             <span class="close" onclick="offerletterModal.style.display = 'none'">&times;</span>
-            <form method="POST" action="generateOfferLetter/">
+            <form method="POST" action="generateOfferLetter/" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="offerletter_utility" value="True" />
 
                 <div class="row-layout">
                     <div class="form-grp">
-                        <label for="cname">Company Name: </label>
-                        <input type="text" name="cname" id="cname" placeholder="Company Name" />
-                    </div>
-                    <div class="form-grp">
-                        <label for="hrName">HR Name: </label>
-                        <input type="text" name="hrName" id="hrName" placeholder="HR Name" />
+                        <label for="offer_letter">Upload: </label>
+                        <input type="file" name="offer_letter" id="offer_letter" />
                     </div>
                 </div>
 
