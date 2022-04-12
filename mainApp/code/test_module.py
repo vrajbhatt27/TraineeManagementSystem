@@ -115,17 +115,6 @@ def saveData(email, ans, tid):
     return res
 
 
-# Filter Trainee
-
-def filterTrainee(score):
-    try:
-        trainee_list = Trainee.objects.filter(trainee_score__lt=score)
-        for trainee in trainee_list:
-            trainee.delete()
-
-    except Exception as e:
-        print("Error in deleting trainee", e)
-
 # Toogle Test Status:
 
 

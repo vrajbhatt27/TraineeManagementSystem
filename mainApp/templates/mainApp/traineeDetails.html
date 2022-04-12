@@ -55,6 +55,12 @@
             {% csrf_token %}
             <label>Score &#60; </label>
             <input type="number" min="0" name="score" />
+            <br>
+            <p style="font-weight: 100; font-size: 18px; margin: 5px 30px ;">---OR---</p>
+            <br>
+            <input type="checkbox" name="filter_payment" id="filter_payment" value="True">
+            <label style="margin: 5px;">If payment is left</label>
+            <br>
             <button>Delete</button>
         </form>
     </div>

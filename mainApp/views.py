@@ -106,6 +106,21 @@ def tdetails(request):
 
 
 @ login_required(login_url='login')
+def filterTrainee(request):
+    if request.method == 'POST':
+        score = request.POST.get('score', '')
+        payment = request.POST.get('filter_payment')
+
+        if payment:
+            tdetails_utils.filterTrainee(request.session['fid'], payment=True)
+
+        if score != '':
+            tdetails_utils.filterTrainee(request.session['fid'], score=score)
+
+    return redirect('tdetails')
+
+
+@ login_required(login_url='login')
 def delTrainee(request, temail):
     res = tdetails_utils.delete_trainee(temail, request.session["fid"])
     if not res:
@@ -346,14 +361,6 @@ def test_form(request, tid):
             return render(request, 'mainApp/error.html', {"msg": "Error In Submitting Test !!!"})
 
     return render(request, 'mainApp/testform.html', params)
-
-
-@ login_required(login_url='login')
-def filterTrainee(request):
-    if request.method == 'POST':
-        score = request.POST.get('score')
-        test_module.filterTrainee(score)
-    return redirect('tdetails')
 
 
 @ login_required(login_url='login')

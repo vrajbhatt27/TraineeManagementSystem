@@ -66,3 +66,21 @@ def delete_trainee(temail, fid):
         print(e)
 
     return res
+
+# Filter Trainee
+
+
+def filterTrainee(fid, score=0, payment=False):
+    try:
+        if payment:
+            trainee_list = Trainee.objects.filter(
+                fid=fid, trainee_paymentStatus=False)
+        else:
+            trainee_list = Trainee.objects.filter(
+                fid=fid, trainee_score__lt=score)
+
+        for trainee in trainee_list:
+            trainee.delete()
+
+    except Exception as e:
+        print("Error in deleting trainee", e)
