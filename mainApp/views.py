@@ -228,11 +228,12 @@ def generateCertificate(request):
         name = request.POST.get("name")
         domain = request.POST.get('domain')
         email = request.POST.get('email')
+        file = request.FILES.get('certi')
         send_to_all = request.POST.get('all')
 
         if name != '':
             res = other_utils.certificate_utility(
-                request.session["fid_for_utility"], name, domain, email)
+                request.session["fid_for_utility"], file, name, domain, email)
 
             if len(res) == 0:
                 messages.success(
@@ -242,10 +243,13 @@ def generateCertificate(request):
 
         if send_to_all != None:
             failed_list = other_utils.certificate_utility(
-                request.session["fid_for_utility"], all=True)
+                request.session["fid_for_utility"], file, all=True)
 
             if failed_list == -1:
                 return render(request, 'mainApp/error.html', {"msg": "Error in retrieving trainee details"})
+
+            if failed_list == -2:
+                return render(request, 'mainApp/error.html', {"msg": "Something Went Wrong !!!"})
 
             if len(failed_list) == 0:
                 messages.success(

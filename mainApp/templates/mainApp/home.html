@@ -229,9 +229,23 @@
         <div class="modal-content">
             <h2>Certificate</h2>
             <span class="close" onclick="certificateModal.style.display = 'none'">&times;</span>
-            <form method="POST" action="generateCertificate/">
+            <form method="POST" action="generateCertificate/" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" name="certificate_utility" value="True" />
+
+
+                <div class="row-layout">
+                    <div class="form-grp">
+                        <label for="certi">Upload: </label>
+                        <input type="file" name="certi" id="certi" />
+                    </div>
+                </div>
+
+                <div class="hline">
+                    <hr />
+                </div>
+
+
                 <div class="row-layout-sb">
                     <div class="form-grp"><label for="name">Name: </label>
                         <input type="text" name="name" id="name" placeholder="Trainee Name" />

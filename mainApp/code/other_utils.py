@@ -1,13 +1,9 @@
 import os
 import shutil
-from django.contrib.staticfiles.storage import staticfiles_storage
 from django.conf import settings
 from django.core.mail import EmailMessage
-from PIL import Image, ImageDraw, ImageFont
-from datetime import datetime
-import img2pdf
 from fpdf import FPDF
-
+from docx import Document
 
 from mainApp.models import Trainee
 
@@ -34,6 +30,8 @@ class PDF(FPDF):
     def footer(self):
         self.set_fill_color(265, 165, 0)
         self.rect(0, 260, 250, 20, style='F')
+
+# Offerletter Utility
 
 
 def offerletter_utility(fid, cname, hr, name='', domain='', to='', all=False):
@@ -119,16 +117,28 @@ def generateLetter(path, cname, hr, name, domain):
     pdf.output(pdf_path)
     return pdf_path
 
+# Certificate Utility
 
-def certificate_utility(fid, name='', domain='', to='', all=False):
+
+def certificate_utility(fid, file, name='', domain='', to='', all=False):
     path = os.path.join(settings.BASE_DIR, 'media', fid)
     failed_list = []
 
     try:
-        os.mkdir(path)
+        os.makedirs(path, exist_ok=True)
     except Exception as e:
         print("Error while creating directory")
         print(e)
+
+    # Saving Uploaded file
+
+    try:
+        with open(os.path.join(path, 'certi.docx'), 'wb+') as destination:
+            for chunk in file.chunks():
+                destination.write(chunk)
+    except:
+        print(e)
+        return -2
 
     if all:
         data = []
@@ -141,30 +151,53 @@ def certificate_utility(fid, name='', domain='', to='', all=False):
                     'email': trainee.trainee_email,
                 })
         except Exception as e:
-            ("!!!!!!!!!!!!>Error In getting data for sending certificate to all")
+            print(
+                "!!!!!!!!!!!!>Error In getting data for sending certificate to all")
             print(e)
             return -1
 
         for d in data:
-            pdf = generateCerti(path, d['name'])
+            doc_path = generateCerti(path, d['name'], d['domain'])
+
+            with open(doc_path, 'rb') as f:
+                doc = f.read()
+
             res = sendEmailWithAttachment('Internship Certificate',
-                                          f'The certificate for your {d["domain"]} internship is attached with this mail.', d['email'], pdf, 'certificate.pdf')
+                                          f'The certificate for your {d["domain"]} internship is attached with this mail.', d['email'], doc, 'certificate.docx')
             if not res:
                 failed_list.append(d['email'])
-
     else:
         # Generating
-        pdf = generateCerti(path, name)
+        doc_path = generateCerti(path, name, domain)
 
+        with open(doc_path, 'rb') as f:
+            doc = f.read()
         # sending email
         res = sendEmailWithAttachment('Internship Certificate',
-                                      f'The certificate for your {domain} internship is attached with this mail.', to, pdf, 'certificate.pdf')
+                                      f'The certificate for your {domain} internship is attached with this mail.', to, doc, 'certificate.docx')
 
         if not res:
             failed_list.append(to)
 
     shutil.rmtree(path)
     return failed_list
+
+
+def generateCerti(path, name, domain):
+    document = Document(os.path.join(path, 'certi.docx'))
+
+    # print(document)
+    for p in document.paragraphs:
+        if '*name*' in p.text:
+            para = p.text
+            para = para.replace('*name*', name)
+            para = para.replace('*domain*', domain)
+            p.text = para
+
+    document.save(os.path.join(path, f'{name}.docx'))
+    return os.path.join(path, f'{name}.docx')
+
+# Send Email with attachment.
 
 
 def sendEmailWithAttachment(subject, body, to, file, file_name):
@@ -177,7 +210,8 @@ def sendEmailWithAttachment(subject, body, to, file, file_name):
             [to],
         )
 
-        email.attach(file_name, file, 'application/pdf')
+        email.attach(
+            file_name, file, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
         email.send()
         res = True
     except Exception as e:
@@ -185,28 +219,3 @@ def sendEmailWithAttachment(subject, body, to, file, file_name):
         print(e)
 
     return res
-
-
-def generateCerti(path, name):
-    url = staticfiles_storage.path('certificate.jpg')
-    img_path = os.path.join(path, '{}.jpg'.format(name))
-
-    # generating certi
-    font = ImageFont.truetype('arial.ttf', 60)
-    font2 = ImageFont.truetype('arial.ttf', 40)
-
-    img = Image.open(url)
-    today = datetime.now()
-    fdate = today.strftime("%d-%m-%Y")
-    draw = ImageDraw.Draw(img)
-    draw.text(xy=(725, 760), text=name, fill=(0, 0, 0), font=font)
-    draw.text(xy=(300, 1250), text=str(fdate), fill=(0, 0, 0), font=font2)
-    img.save(img_path)
-    img.close()
-
-    # Converting to pdf
-    img = Image.open(img_path)
-    pdf = img2pdf.convert(img.filename)
-
-    img.close()
-    return pdf
