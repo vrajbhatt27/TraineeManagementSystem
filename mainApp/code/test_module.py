@@ -99,7 +99,7 @@ def saveData(email, ans, tid):
 
     # Adding score to database
     try:
-        fid = (Form.objects.filter(date=date))
+        fid = Form.objects.filter(uid=int(str(decrypt(tid))[0]))
         fid = (fid[len(fid)-1]).fid
         trainee = Trainee.objects.get(trainee_email=email, fid=fid)
         if trainee.trainee_score != None:
@@ -110,7 +110,7 @@ def saveData(email, ans, tid):
 
         res = True
     except Exception as e:
-        print("--Something went wrong while subitting the test", e)
+        print("--Something went wrong while submitting the test", e)
 
     return res
 
