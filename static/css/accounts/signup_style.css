@@ -109,3 +109,31 @@ input {
   background: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
 }
+
+/* Responsive */
+@media only screen and (max-width: 600px) {
+  form {
+    height: 470px;
+    width: 330px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  form {
+    height: 450px;
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  form {
+    height: 390px;
+    width: 250px;
+  }
+}
+
+@media only screen and (max-height: 1000px) {
+  form {
+    height: 550px;
+  }
+}
