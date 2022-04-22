@@ -23,9 +23,6 @@
     <div class="head-container">
         <div></div>
         <h1>Trainee Details For Batch of : {{ fdata.date }}</h1>
-        <div class="logout-button">
-            <a href="{% url 'home' %}"><button class="myBtn">Back</button></a>
-        </div>
     </div>
 
     <div class="description">
@@ -125,6 +122,10 @@
         <div class="download-button">
             <!-- <a href="{% url 'gcsv' %}"><button class="myBtn">Download</button></a> -->
             <button class="myBtn" id="download_csv">Download</button>
+        </div>
+
+        <div class="logout-button">
+            <a href="{% url 'home' %}"><button class="myBtn">Back</button></a>
         </div>
     </div>
 </body>

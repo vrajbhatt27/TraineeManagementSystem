@@ -14,7 +14,7 @@ i {
 
 .head-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 30px;
 }
 
@@ -83,11 +83,15 @@ i {
     font-size: 16px;
 }
 
+#table {
+    overflow: auto;
+    margin: 30px;
+}
+
 .trainee-table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 90%;
-    margin: 30px;
 }
 
 .trainee-table td,
@@ -115,4 +119,28 @@ i {
 .btn-container {
     display: flex;
     justify-content: center;
+}
+
+@media only screen and (max-width: 850px) {
+    .head-container h1 {
+        font-size: 32px;
+    }
+
+    .myBtn {
+      font-size: 18px;  
+    }
+
+    .description p {
+        text-align: justify;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .head-container h1 {
+        font-size: 28px;
+    }
+
+    .myBtn {
+      font-size: 16px;  
+    }
 }
