@@ -61,14 +61,15 @@ body {
 }
 
 .btn-container {
-    margin: 20px;
-    position: absolute;
+    margin:10px 0 20px 30px;
+    /* position: absolute;
     bottom: 0;
-    left: 0;
+    left: 0; */
 }
 
 .newButton {
     background-color: blue;
+    color: white;
     padding: 10px;
     margin: 10px;
     border-radius: 10px;
@@ -320,3 +321,135 @@ input:checked + .slider:before {
     border-radius: 50px;
     overflow: hidden;
 }
+
+/*!-------------------------------------------------------------------- */
+
+/*! RESPONSIVE UI------------------------------------------------------ */
+
+@media only screen and (max-width: 1200px) {
+    #welcome {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .curved-div svg {
+        display: none;
+    }
+
+    .curved-div {
+        width: 100vw;
+        height: 100px;
+        margin-bottom: 30px;
+    }
+
+    .curved-div .container {
+        margin-top: 20px;
+    }
+
+    .newButton {
+        font-size: 18px;
+    } 
+}
+
+@media only screen and (max-width: 500px) {
+    #welcome {
+        width: 200px;
+        height: 200px;
+    }
+
+    .curved-div .container span {
+        display: none;
+    }
+
+    .curved-div .container .fa {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .curved-div {
+        height: 80px;
+    }
+
+    .curved-div .container {
+        margin-top: 0;
+    }
+
+    #welcome {
+        /* width: 100px;
+        height: 100px; */
+        margin-top: 30px;
+    }
+
+    .newButton {
+        font-size: 14px;
+        margin-left: 10px;
+    }
+    
+    .cards-container {
+        margin-left: 10px;
+    }
+    .card {
+        width: 230px;
+        height: 250px;
+    }
+
+    .menu-btn {
+        right: 25px;
+    }
+
+    .card h3 {
+        text-align: start;
+    }
+
+    .switch {
+        width: 40px;
+        height: 20px;
+    }
+
+    .slider:before {
+        width: 20px;
+        height: 20px;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(20px);
+        -ms-transform: translateX(20px);
+        transform: translateX(20px);
+    }
+
+    .cb1 {
+        left: 105px;
+    }
+
+    .cb2 {
+        left: 25px
+    }
+
+    .cb3 {
+        left: 185px;
+    }
+
+    .cb4 {
+        left: 150px;
+    }
+
+    .cb5 {
+        left: 65px;
+    }
+
+    .cb6 {
+        left: 105px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    #welcome {
+        width: 130px;
+        height: 130px;
+        margin-top: 30px;
+    }
+}
+/*!-------------------------------------------------------------------- */

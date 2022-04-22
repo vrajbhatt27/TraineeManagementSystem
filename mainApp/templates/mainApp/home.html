@@ -33,16 +33,7 @@
             </a>
         </div>
 
-        <div class="btn-container">
-            <div class="newButton" onclick="newFormModal.style.display='block'">
-                New Form
-            </div>
 
-            <!-- New Test Btn -->
-            <div class="newButton" onclick="newTestModal.style.display='block'">
-                New Test
-            </div>
-        </div>
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319">
             <path fill="#fafafa" fill-opacity="1"
@@ -51,6 +42,17 @@
         </svg>
     </div>
     <!--!------------------------------------------------------------  -->
+
+    <div class="btn-container">
+        <div class="newButton" onclick="newFormModal.style.display='block'">
+            New Form
+        </div>
+
+        <!-- New Test Btn -->
+        <div class="newButton" onclick="newTestModal.style.display='block'">
+            New Test
+        </div>
+    </div>
 
     <!--! MODAL SECTION---------------------------------------------- -->
     {% if messages %} {% for message in messages %}
