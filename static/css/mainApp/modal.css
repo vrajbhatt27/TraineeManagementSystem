@@ -293,19 +293,19 @@ input[type='number'] {
 
 /*! CSS For scroll bar -------------------------------- */
 /* width */
-::-webkit-scrollbar {
+.modal ::-webkit-scrollbar {
     width: 10px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+.modal ::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.13);
     border-radius: 50px;
     overflow: hidden;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+.modal ::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 100px;
     overflow: hidden;

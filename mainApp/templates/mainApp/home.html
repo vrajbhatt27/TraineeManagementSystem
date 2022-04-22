@@ -22,8 +22,12 @@
     <!--! Curved Header Section------------------------------------- -->
     <div class="curved-div">
         <div class="container">
-            <h1 id="greet">Hello, <span style="text-transform: capitalize;">{{request.user}}</span></h1>
-            <h1 id="welcome">Welcome To TMS</h1>
+            <h1 id="greet"><i class="fa fa-user" aria-hidden="true"></i> <span
+                    style="text-transform: capitalize;">{{request.user}}</span></h1>
+            <!-- <h1 id="welcome">Welcome To TMS</h1> -->
+
+            <div id="welcome"></div>
+
             <a href="{% url 'logout' %}" class="a-btn-white">
                 <div id="logout"><i class='fa fa-sign-out'></i></div>
             </a>
@@ -343,7 +347,7 @@
 
     <!--! Test Cards ----------------------------------------------- -->
     {% if tests %}
-    <h1 class="m-10">Tests</h1>
+    <h1 style="margin: 20px 10px 10px 30px; ">Tests</h1>
     {% endif %}
     <div class="cards-container">
         {% for test in tests %}

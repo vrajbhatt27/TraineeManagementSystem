@@ -41,6 +41,11 @@ body {
 }
 
 #welcome {
+    width: 350px;
+    height: 350px;
+    background-image: url("logo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
     align-self: center;
 }
 
@@ -75,15 +80,22 @@ body {
 /*!--------------------------------------------------  */
 /*! Internship Detail Card CSS  */
 .cards-container {
-    display: grid;
+    /* display: grid;
     gap: 20px 30px;
-    grid-template-columns: 346px 346px 346px 346px;
+    grid-template-columns: 346px 346px 346px 346px; */
+    height: 320px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y:hidden;
+    margin: 10px 30px;
 }
 
 .card {
+    flex: 0 0 auto;
     width: 300px;
     height: 250px;
-    margin: 10px;
+    margin: 20px 18px 10px 10px;
     padding: 10px;
     border-top: 4px solid var(--orange);
     border-radius: 5px;
@@ -286,4 +298,25 @@ input:checked + .slider:before {
 
 .testcard {
     position: relative;
+}
+
+/*! Scrollbar-------------------------------------------------------------------- */
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.13);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50px;
+    overflow: hidden;
 }
