@@ -84,3 +84,46 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: rgba(0, 0, 0, 0.7);
 }
+
+/* !Responsive CSS */
+@media only screen and (max-width: 900px) {
+  .form-container{
+    width: 60%;
+  }
+
+  input[type="text"],
+  select,
+  input[type="email"] {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  input[type="text"],
+  select,
+  input[type="email"]
+  {
+    width: 90%;
+  }
+
+  input[type="submit"] {
+    width: 100px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .form-container {
+    width: 80%;
+  }
+
+  input[type="text"],
+  select,
+  input[type="email"]
+  {
+    width: 90%;
+  }
+
+  input[type="number"]{
+    width: 50%;
+  }
+}
