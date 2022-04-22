@@ -130,14 +130,14 @@ input[type='number'] {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 25%;
+    width: 400px;
 }
 
 #newTestModal .modal-content {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 25%;
+    width: 400px;
 }
 
 /* Modal Content for email utility*/
@@ -145,7 +145,11 @@ input[type='number'] {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 40%;
+    width: 600px;
+}
+
+#emailModal .hline {
+    display: none;
 }
 
 /* Modal Content for offerletter utility*/
@@ -310,4 +314,91 @@ input[type='number'] {
     border-radius: 100px;
     overflow: hidden;
 }
+/* !------------------------------------------------------ */
+
+/*! RESPONSIVE CSS -------------------------------- */
+@media only screen and (max-width: 700px) {
+    #emailModal .modal-content {
+        width: 70%;
+    }
+
+    #emailModal .hline {
+        display: block;
+    }
+
+    .modal-content .form-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .row-layout-sb {
+        flex-direction: column;
+    }
+
+    #offerletterModal .modal-content {
+        width: 70%;
+    }
+    
+    #certificateModal .modal-content {
+        width: 70%;
+    }
+    
+    .modal-content input[type='text'],
+    input[type='email'],
+    input[type='submit'],
+    input[type='number'] {
+        width: 80%;
+    }
+    
+}
+
+
+@media only screen and (max-width: 550px) {
+    .modal-content textarea {
+        width: 80%;
+    }
+
+    #newFormModal .modal-content {
+        width: 300px;
+    }
+
+    #newTestModal .modal-content {
+        width: 300px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .modal-content textarea {
+        width: 80%;
+    }
+    
+    #newFormModal .modal-content {
+        width: 250px;
+    }
+
+    #newTestModal .modal-content {
+        width: 250px;
+    }
+
+    #spinModal .loader {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .modal-content textarea {
+        width: 90%;
+    }
+
+    #newFormModal .modal-content {
+        width: 200px;
+    }
+
+    #newTestModal .modal-content {
+        width: 200px;
+    }
+}
+
 /* !------------------------------------------------------ */
