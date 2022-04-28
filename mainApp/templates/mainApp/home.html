@@ -286,7 +286,7 @@
                     <p class="px-5">URL: </p>
                     <input type="text" value="{{form.url}}" id="{{form.fid}}" class="px-5" />
                     <div class="tooltip" class="px-5">
-                        <a onclick="copyText('{{form.fid}}');" onmouseout="outFunc();">
+                        <a onclick="copyText('{{form.fid}}', 'form');" onmouseout="outFunc();">
                             <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
                             <i class="fa fa-clone" style="font-size: 24px; margin-left: 5px"></i>
                         </a>
@@ -364,7 +364,7 @@
                 <p class="px-5">Test URL: </p>
                 <input type="text" value="{{test.url}}" id="{{test.tid}}" class="px-5" />
                 <div class="tooltip" class="px-5">
-                    <a onclick="copyText('{{test.tid}}');" onmouseout="outFunc();">
+                    <a onclick="copyText('{{test.tid}}', 'test');" onmouseout="outFunc();">
                         <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
                         <i class="fa fa-clone" style="font-size: 24px; margin-left: 5px"></i>
                     </a>
@@ -459,12 +459,23 @@
         } );
     }
 
-    function copyText( inpId )
+    function copyText( inpId, type )
     {
         var copyText = document.getElementById( inpId );
         copyText.select();
         copyText.setSelectionRange( 0, 99999 );
-        navigator.clipboard.writeText( copyText.value );
+
+        // ! After this line, it generates the url
+        let url = '';
+        if ( type === 'form' )
+        {
+            url = window.location.href + 'forms/' + copyText.value;
+        } else if ( type === 'test' )
+        {
+            url = window.location.href + 'tests/' + copyText.value
+        }
+
+        navigator.clipboard.writeText( url );
 
         var tooltip = document.getElementById( "myTooltip" );
         tooltip.innerHTML = "Copied";
@@ -472,7 +483,9 @@
 
     function copyPaymentLink()
     {
-        navigator.clipboard.writeText( efid );
+        //! This line generates the url.
+        let url = window.location.href + 'payment/' + efid.toString()
+        navigator.clipboard.writeText( url );
 
         var tooltip = document.getElementById( "myTooltip2" );
         tooltip.innerHTML = "Copied";
