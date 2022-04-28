@@ -477,8 +477,11 @@
 
         navigator.clipboard.writeText( url );
 
-        var tooltip = document.getElementById( "myTooltip" );
-        tooltip.innerHTML = "Copied";
+        // var tooltip = document.getElementById( "myTooltip" );
+        // tooltip.innerHTML = "Copied";
+
+        let tooltips = document.querySelectorAll( "#myTooltip" )
+        tooltips.forEach( ( tooltip ) => tooltip.innerHTML = "Copied" )
     }
 
     function copyPaymentLink()
@@ -493,8 +496,11 @@
 
     function outFunc()
     {
-        var tooltip = document.getElementById( "myTooltip" );
-        tooltip.innerHTML = "Copy to clipboard";
+        // var tooltip = document.getElementById( "myTooltip" );
+        // tooltip.innerHTML = "Copy to clipboard";
+
+        let tooltips = document.querySelectorAll( "#myTooltip" );
+        tooltips.forEach( ( tooltip ) => tooltip.innerHTML = "Copy To clipboard" )
 
         var tooltip2 = document.getElementById( "myTooltip2" );
         tooltip2.innerHTML = "Copy to clipboard";
